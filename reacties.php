@@ -80,7 +80,9 @@ $(document).ready(function() {
 	  $idbabykaart;
 	  $opdracht = "SELECT * FROM babykaartjes WHERE id='$idbabykaart'";
 	  $opdracht2 = "INSERT INTO reacties (babyid, bericht, datumreactie, gebruikersnaam) VALUES ('$idbabykaart', '$reactie', '$datumreactie', '$gebruikersnaam')";
-
+	  if(mysql_error){
+		  echo mysql_error;
+		  }
   }else{
   ?>
   <form action="info2.php" method="post">
@@ -90,15 +92,14 @@ $(document).ready(function() {
   <input name="reageer" value="Reageer" type="submit">
   </form>
   <? } ?>
-  </div>
-  <div class="blauwelijn"></div>
+  </div>  
   <div id="footer">
+  <div class="blauwelijn"></div>
     <div id="footer_content">
       <div id="footer_socialmedia_iconen">
         <a href="http://www.google.nl" target="_blank"><img src="img/google.png" /></a>&nbsp;
         <a href="http://www.facebook.com" target="_blank"><img src="img/facebook.png" /></a>&nbsp;
         <a href="http://www.twitter.com" target="_blank"><img src="img/twitter.png" /></a>&nbsp;
-        <a href="http://www.flickr.com" target="_blank"><img src="img/flickr.png" /></a>
       </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>

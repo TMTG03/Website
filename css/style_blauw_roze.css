@@ -106,7 +106,7 @@ body {
 	height: 3px;
 	width: 100%;
 	display: block;
-	background: #BA599F;
+	background: #1B8CCC;
 }
 /* SLIDER */
 
@@ -155,10 +155,10 @@ body {
 	cursor: pointer;
 }
 .themaslider .slide-navs li.current-slide {
-	background: url("../scripts/image/slide-actief_roze.png") no-repeat scroll 0 0 transparent;
+	background: url("../scripts/image/slide-actief.png") no-repeat scroll 0 0 transparent;
 }
 .themaslider .slide-desc {
-	background: url("../scripts/image/achtergrond_roze.png") no-repeat scroll 0 0 transparent;
+	background: url("../scripts/image/achtergrond.png") no-repeat scroll 0 0 transparent;
 	left: 100px;
 	padding: 6px 25px 10px 15px;
 	position: absolute;
@@ -514,7 +514,7 @@ body {
 	transition: background-color 0.1s;
 }
 #menu ul ul a:hover {
-	background-color: #F0B3CA;
+	background-color: #67B2E8;
 }
 #menu ul ul ul {
 	visibility: hidden;
@@ -543,17 +543,17 @@ body {
 	visibility: visible;
 }
 #menu ul ul a:hover {
-	background-color: #F0B3CA;
+	background-color: #67B2E8;
 	color: #f0f0f0;
 }
 .menulijnhome {
-	border-right: 2px solid #BA599F;
+	border-right: 2px solid #1B8CCC;
 	line-height: 15px;
 	padding-right: 25px;
 	margin-left: -25px;
 }
 .menulijn {
-	border-right: 2px solid #BA599F;
+	border-right: 2px solid #1B8CCC;
 	line-height: 15px;
 	padding-right: 25px;
 	margin-left: -25px;
@@ -616,7 +616,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .buttonzoek {
 	color: #ffffff;
-	background: #F0B3CA;
+	background: #67B2E8;
 	display: inline-block;
 	-webkit-transition: all 0.2s ease-out;
 	-moz-transition: all 0.2s ease-out;
@@ -637,7 +637,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .buttonzoek:hover {
 	background-color: #FFF;
-	color: #F0B3CA;
+	color: #67B2E8;
 	border: 2px solid #E6E6E6;
 }
 input:focus, select:focus, textarea:focus, button:focus {
@@ -700,7 +700,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 .carouselkoptekst {
 	font-family: OpenSans-Bold;
 	font-size: 15px;
-	color: #F0B3CA;
+	color: #67B2E8;
 }
 .carouselonder_koptekst {
 	font-family: OpenSans-Bold;

@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <title>.: Index :.</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
-<link rel="alternate stylesheet" type="text/css" href="css/style_roze.css" title="alternate" />
+<link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
+<link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="scripts/themaslider.min.js"></script>
@@ -19,8 +20,6 @@ jQuery(document).ready(function(){
 $(document).ready(function() {
 	$("#datepicker").datepicker();
 });
-$("#MVselect").prepend(new Option('', '', true, true));
-$("#MVselect option:first").attr("selected", "selected");
 </script>
 </head>
 
@@ -54,8 +53,8 @@ $("#MVselect option:first").attr("selected", "selected");
         </ul>
         <div id="styleswitchen">
           <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20px" width="20px" /></a></div>
-          <div id="styleswitchvak2"><a href="#" onclick="setActiveStyleSheet('alternate'); return false;"><img src="img/clear.png" height="20px" width="20px" /></a></div>
-          <div id="styleswitchvak3"></div>
+          <div id="styleswitchvak2"><a href="#" onclick="setActiveStyleSheet('roze'); return false;"><img src="img/clear.png" height="20px" width="20px" /></a></div>
+          <div id="styleswitchvak3"><a href="#" onclick="setActiveStyleSheet('blauwroze'); return false;"><img src="img/clear.png" height="20px" width="20px" /></div>
         </div>
       </div>
     </div>
