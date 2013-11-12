@@ -8,15 +8,17 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="scripts/themaslider.min.js"></script>
 <script type="text/javascript">
-jQuery(document).ready(function(){
-	jQuery('#demo').themaslider({'delay':5000, 'fadeSpeed': 2000,'showNextPrev':true,'showPlayButton':true,'autoStart':true});
-	jQuery('#demo1').themaslider({'delay':5000, 'fadeSpeed': 2000,'autoStart':true,'pauseOnHover':true});
-});
+		jQuery(document).ready(function(){
+			jQuery('#demo').themaslider({'delay':5000, 'fadeSpeed': 2000,'showNextPrev':true,'showPlayButton':true,'autoStart':true});
+			jQuery('#demo1').themaslider({'delay':5000, 'fadeSpeed': 2000,'autoStart':true,'pauseOnHover':true});
+		});
 </script>
 <script>
 $(document).ready(function() {
 	$("#datepicker").datepicker();
 });
+$("#MVselect").prepend(new Option('', '', true, true));
+$("#MVselect option:first").attr("selected", "selected");
 </script>
 </head>
 
@@ -159,9 +161,9 @@ $(document).ready(function() {
   <div id="footer">
     <div id="footer_content">
       <div id="footer_socialmedia_iconen">
-        <a href="http://www.google.nl" target="_blank"><img src="img/google.png" /></a>&nbsp;
-        <a href="http://www.facebook.com" target="_blank"><img src="img/facebook.png" /></a>&nbsp;
-        <a href="http://www.twitter.com" target="_blank"><img src="img/twitter.png" /></a>&nbsp;
+        <a href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" /></a>&nbsp;
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" /></a>&nbsp;
+        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" /></a>&nbsp;
         <a href="http://www.flickr.com" target="_blank"><img src="img/flickr.png" /></a>
       </div>
       <div id="footer_copyright">
