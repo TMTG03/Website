@@ -8,10 +8,10 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="scripts/themaslider.min.js"></script>
 <script type="text/javascript">
-		jQuery(document).ready(function(){
-			jQuery('#demo').themaslider({'delay':5000, 'fadeSpeed': 2000,'showNextPrev':true,'showPlayButton':true,'autoStart':true});
-			jQuery('#demo1').themaslider({'delay':5000, 'fadeSpeed': 2000,'autoStart':true,'pauseOnHover':true});
-		});
+jQuery(document).ready(function(){
+	jQuery('#demo').themaslider({'delay':5000, 'fadeSpeed': 2000,'showNextPrev':true,'showPlayButton':true,'autoStart':true});
+	jQuery('#demo1').themaslider({'delay':5000, 'fadeSpeed': 2000,'autoStart':true,'pauseOnHover':true});
+});
 </script>
 <script>
 $(document).ready(function() {
@@ -124,8 +124,7 @@ $(document).ready(function() {
           <input type="date" name="#" class="dropdownkalender">
         </div>
         <div id="zoekbar_rechts_vak4_onder">
-          <select>
-            <option></option>
+          <select id="MVselect">
             <option value="man">M</option>
             <option value="vrouw">V</option>
           </select>
