@@ -1,19 +1,7 @@
 @charset "utf-8";
 /* TMTG03 CSS */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -21,9 +9,11 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
+}
+html {
+	height: 100%;
 }
 body {
 	line-height: 1;
@@ -34,8 +24,7 @@ ol, ul {
 blockquote, q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before, blockquote:after, q:before, q:after {
 	content: '';
 	content: none;
 }
@@ -43,7 +32,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
 /* FONT OPENSANS + IEFIX & CHROME */
 
 @font-face {
@@ -95,8 +83,10 @@ body {
 }
 #container {
 	width: 100%;
+	min-height: 100%;
+	height: auto !important;
 	height: 100%;
-	margin: auto;
+	margin: 0 auto;
 }
 #headercolor {
 	width: 100%;
@@ -240,7 +230,8 @@ body {
 	width: 960px;
 	overflow: hidden;
 	margin: 0 auto;
-	min-height: 400px;
+	min-height: 80%;
+	padding-bottom: 60px;
 }
 #zoekbar {
 	width: 960px;
@@ -385,9 +376,13 @@ body {
 #footer {
 	bottom: 0;
 	width: 100%;
-	height: 47px;
+	height: 50px;
 	margin: 0 auto;
 	background-color: #67B2E8;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
 }
 #footer_content {
 	width: 960px;
@@ -544,19 +539,17 @@ body {
 	background-color: #67B2E8;
 	color: #f0f0f0;
 }
-
 .menulijnhome {
 	border-right: 2px solid #1B8CCC;
 	line-height: 15px;
 	padding-right: 25px;
-	margin-left: -25px; 
+	margin-left: -25px;
 }
-
 .menulijn {
 	border-right: 2px solid #1B8CCC;
 	line-height: 15px;
 	padding-right: 25px;
-	margin-left: -25px; 
+	margin-left: -25px;
 }
 
 /* FORM Restylen */
@@ -577,11 +570,11 @@ input[type="text"]:focus {
 	box-shadow: 0 0 2px #FFFE00;
 }
 input[type=date]::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	display: none;
+ -webkit-appearance: none;
+ display: none;
 }
 input[type=date]::-webkit-calendar-picker-indicator {
-	color: none;
+ color: none;
 }
 #zoekbar_rechts_vak2_onder select {
 	background: transparent;
@@ -707,7 +700,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 	font-size: 15px;
 	color: #000000;
 }
-
 /* STYLE SWITCHER */
 
 #styleswitchen {
@@ -716,7 +708,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 	float: right;
 	margin-top: -90px;
 }
-
 #styleswitchvak1 {
 	width: 20px;
 	height: 20px;
@@ -727,7 +718,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 	margin-right: 5px;
 	margin-top: 12px;
 }
-
 #styleswitchvak2 {
 	width: 20px;
 	height: 20px;
@@ -738,7 +728,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 	margin-right: 5px;
 	margin-top: 8px;
 }
-
 #styleswitchvak3 {
 	width: 20px;
 	height: 20px;
@@ -749,11 +738,10 @@ input:focus, select:focus, textarea:focus, button:focus {
 	margin-right: 5px;
 	margin-top: 8px;
 	background: #67B2E8;
-    background: -moz-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#67B2E8), color-stop(50%,#67B2E8), color-stop(50%,#F0B3CA), color-stop(100%,#F0B3CA));
-    background: -webkit-linear-gradient(top, #67B2E8 0%,#67B2E8 50%,#F0B3CA 50%,#F0B3CA 100%);
-    background: -o-linear-gradient(top, #67B2E8 0%,#67B2E8 50%,#F0B3CA 50%,#F0B3CA 100%);
-    background: -ms-linear-gradient(top, #67B2E8 0%,#67B2E8 50%,#F0B3CA 50%,#F0B3CA 100%);
-    background: linear-gradient(top, #67B2E8 0%,#67B2E8 50%,#F0B3CA 50%,#F0B3CA 100%);
+	background: -moz-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #67B2E8), color-stop(50%, #67B2E8), color-stop(50%, #F0B3CA), color-stop(100%, #F0B3CA));
+	background: -webkit-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: -o-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: -ms-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
 }
-

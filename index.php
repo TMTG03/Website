@@ -157,14 +157,13 @@ $("#MVselect option:first").attr("selected", "selected");
       <p class="carouselonder_koptekst">Hier komt een quote</p>
     </div>
   </div>
-  <div class="blauwelijn"></div>
   <div id="footer">
+    <div class="blauwelijn"></div>
     <div id="footer_content">
       <div id="footer_socialmedia_iconen">
         <a href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" /></a>&nbsp;
         <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" /></a>&nbsp;
-        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" /></a>&nbsp;
-        <a href="http://www.flickr.com" target="_blank"><img src="img/flickr.png" /></a>
+        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" /></a>
       </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
