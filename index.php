@@ -27,7 +27,7 @@ $(document).ready(function() {
 <div id="container">
   <div id="headercolor">
     <div id="container_breedte">
-      <div id="logo_plek"><a href="index.php" id="logo"><img width="333px" src="img/logo.png" /></a></div>
+      <div id="logo_plek"><a href="index.php" id="logo"><img width="333" src="img/logo.png" alt="" /></a></div>
       <div id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
@@ -52,9 +52,9 @@ $(document).ready(function() {
           <li class='last'><a href='#'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
-          <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20px" width="20px" /></a></div>
-          <div id="styleswitchvak2"><a href="#" onclick="setActiveStyleSheet('roze'); return false;"><img src="img/clear.png" height="20px" width="20px" /></a></div>
-          <div id="styleswitchvak3"><a href="#" onclick="setActiveStyleSheet('blauwroze'); return false;"><img src="img/clear.png" height="20px" width="20px" /></div>
+          <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
+          <div id="styleswitchvak2"><a href="#" onclick="setActiveStyleSheet('roze'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
+          <div id="styleswitchvak3"><a href="#" onclick="setActiveStyleSheet('blauwroze'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
         </div>
       </div>
     </div>
@@ -63,19 +63,19 @@ $(document).ready(function() {
   <div id="slider">
     <div id="demo" class="themaslider">
       <ul>
-        <li> <img src="img/slides/1.jpg" />
+        <li> <img src="img/slides/1.jpg" alt="" />
           <div class="slide-desc">
             <h2>Baby 1</h2>
             <p>Beschrijving</p>
           </div>
         </li>
-        <li><img src="img/slides/2.jpg" />
+        <li><img src="img/slides/2.jpg" alt="" />
           <div class="slide-desc">
             <h2>Baby 2</h2>
             <p>Beschrijving</p>
           </div>
         </li>
-        <li><img src="img/slides/3.jpg" />
+        <li><img src="img/slides/3.jpg" alt="" />
           <div class="slide-desc">
             <h2>Baby 3</h2>
             <p>Beschrijving</p>
@@ -163,9 +163,9 @@ $(document).ready(function() {
     <div class="blauwelijn"></div>
     <div id="footer_content">
       <div id="footer_socialmedia_iconen">
-        <a href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" /></a>&nbsp;
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" /></a>&nbsp;
-        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" /></a>
+        <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp;
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp;
+        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a>
       </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
