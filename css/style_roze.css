@@ -91,7 +91,7 @@ body {
 #headercolor {
 	width: 100%;
 	height: 110px;
-	background-color: #67B2E8;
+	background-color: #F0B3CA;
 	margin-top: 0px;
 	z-index: 1;
 }
@@ -106,7 +106,7 @@ body {
 	height: 3px;
 	width: 100%;
 	display: block;
-	background: #1B8CCC;
+	background: #BA599F;
 }
 /* SLIDER */
 
@@ -155,10 +155,10 @@ body {
 	cursor: pointer;
 }
 .themaslider .slide-navs li.current-slide {
-	background: url("../scripts/image/slide-actief.png") no-repeat scroll 0 0 transparent;
+	background: url("../scripts/image/slide-actief_roze.png") no-repeat scroll 0 0 transparent;
 }
 .themaslider .slide-desc {
-	background: url("../scripts/image/achtergrond.png") no-repeat scroll 0 0 transparent;
+	background: url("../scripts/image/achtergrond_roze.png") no-repeat scroll 0 0 transparent;
 	left: 100px;
 	padding: 6px 25px 10px 15px;
 	position: absolute;
@@ -181,7 +181,7 @@ body {
 	margin-top: 13px;
 }
 .themaslider a.prev {
-	background: url("../scripts/image/links.png") no-repeat scroll 0 0 transparent;
+	background: url("../scripts/image/links_roze.png") no-repeat scroll 0 0 transparent;
 	width: 35px;
 	height: 35px;
 	display: block;
@@ -191,7 +191,7 @@ body {
 	left: 2%;
 }
 .themaslider a.next {
-	background: url("../scripts/image/rechts.png") no-repeat scroll 0 0 transparent;
+	background: url("../scripts/image/rechts_roze.png") no-repeat scroll 0 0 transparent;
 	width: 35px;
 	height: 35px;
 	display: block;
@@ -385,7 +385,7 @@ body {
 	width: 100%;
 	height: 50px;
 	margin: 0 auto;
-	background-color: #67B2E8;
+	background-color: #F0B3CA;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -514,7 +514,7 @@ body {
 	transition: background-color 0.1s;
 }
 #menu ul ul a:hover {
-	background-color: #67B2E8;
+	background-color: #F0B3CA;
 }
 #menu ul ul ul {
 	visibility: hidden;
@@ -543,17 +543,17 @@ body {
 	visibility: visible;
 }
 #menu ul ul a:hover {
-	background-color: #67B2E8;
+	background-color: #F0B3CA;
 	color: #f0f0f0;
 }
 .menulijnhome {
-	border-right: 2px solid #1B8CCC;
+	border-right: 2px solid #BA599F;
 	line-height: 15px;
 	padding-right: 25px;
 	margin-left: -25px;
 }
 .menulijn {
-	border-right: 2px solid #1B8CCC;
+	border-right: 2px solid #BA599F;
 	line-height: 15px;
 	padding-right: 25px;
 	margin-left: -25px;
@@ -616,7 +616,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .buttonzoek {
 	color: #ffffff;
-	background: #67B2E8;
+	background: #F0B3CA;
 	display: inline-block;
 	-webkit-transition: all 0.2s ease-out;
 	-moz-transition: all 0.2s ease-out;
@@ -637,7 +637,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .buttonzoek:hover {
 	background-color: #FFF;
-	color: #67B2E8;
+	color: #F0B3CA;
 	border: 2px solid #E6E6E6;
 }
 input:focus, select:focus, textarea:focus, button:focus {
@@ -700,7 +700,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 .carouselkoptekst {
 	font-family: OpenSans-Bold;
 	font-size: 15px;
-	color: #67B2E8;
+	color: #F0B3CA;
 }
 .carouselonder_koptekst {
 	font-family: OpenSans-Bold;
@@ -719,7 +719,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 	width: 20px;
 	height: 20px;
 	float: right;
-	background-color: #67B2E8;
+	background-color: #F0B3CA;
 	border: 2px solid #ffffff;
 	margin-left: 15px;
 	margin-right: 5px;
@@ -739,16 +739,16 @@ input:focus, select:focus, textarea:focus, button:focus {
 	width: 20px;
 	height: 20px;
 	float: right;
-	background-color: #67B2E8;
+	background-color: #F0B3CA;
 	border: 2px solid #ffffff;
 	margin-left: 15px;
 	margin-right: 5px;
 	margin-top: 8px;
-	background: #67B2E8;
-	background: -moz-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #67B2E8), color-stop(50%, #67B2E8), color-stop(50%, #F0B3CA), color-stop(100%, #F0B3CA));
-	background: -webkit-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
-	background: -o-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
-	background: -ms-linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
-	background: linear-gradient(top, #67B2E8 0%, #67B2E8 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: #F0B3CA;
+	background: -moz-linear-gradient(top, #F0B3CA 0%, #F0B3CA 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F0B3CA), color-stop(50%, #F0B3CA), color-stop(50%, #F0B3CA), color-stop(100%, #F0B3CA));
+	background: -webkit-linear-gradient(top, #F0B3CA 0%, #F0B3CA 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: -o-linear-gradient(top, #F0B3CA 0%, #F0B3CA 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: -ms-linear-gradient(top, #F0B3CA 0%, #F0B3CA 50%, #F0B3CA 50%, #F0B3CA 100%);
+	background: linear-gradient(top, #F0B3CA 0%, #F0B3CA 50%, #F0B3CA 50%, #F0B3CA 100%);
 }

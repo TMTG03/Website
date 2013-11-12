@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <title>.: Index :.</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css" title="default">
+<link rel="alternate stylesheet" type="text/css" href="css/style_roze.css" title="alternate" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="scripts/themaslider.min.js"></script>
+<script src="scripts/switcher.js"></script>
 <script type="text/javascript">
-		jQuery(document).ready(function(){
-			jQuery('#demo').themaslider({'delay':5000, 'fadeSpeed': 2000,'showNextPrev':true,'showPlayButton':true,'autoStart':true});
-			jQuery('#demo1').themaslider({'delay':5000, 'fadeSpeed': 2000,'autoStart':true,'pauseOnHover':true});
-		});
+jQuery(document).ready(function(){
+	jQuery('#demo').themaslider({'delay':5000, 'fadeSpeed': 2000,'showNextPrev':true,'showPlayButton':true,'autoStart':true});
+	jQuery('#demo1').themaslider({'delay':5000, 'fadeSpeed': 2000,'autoStart':true,'pauseOnHover':true});
+});
 </script>
 <script>
 $(document).ready(function() {
@@ -51,8 +53,8 @@ $("#MVselect option:first").attr("selected", "selected");
           <li class='last'><a href='#'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
-          <div id="styleswitchvak1"></div>
-          <div id="styleswitchvak2"></div>
+          <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20px" width="20px" /></a></div>
+          <div id="styleswitchvak2"><a href="#" onclick="setActiveStyleSheet('alternate'); return false;"><img src="img/clear.png" height="20px" width="20px" /></a></div>
           <div id="styleswitchvak3"></div>
         </div>
       </div>
@@ -83,6 +85,7 @@ $("#MVselect option:first").attr("selected", "selected");
       </ul>
     </div>
   </div>
+  <div class="blauwelijn"></div>
   <div id="zoekbar">
     <div id="zoekbar_links">
       <h2 class="zoekbar_links_header">Zoeken</h2>
