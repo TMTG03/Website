@@ -24,10 +24,10 @@
 <div id="container">
   <div id="headercolor">
     <div id="container_breedte">
-      <div id="logo_plek"><a href="index.html" id="logo"><img width="333px" src="img/logo.png" border="0"></a></div>
+      <div id="logo_plek"><a href="index.php" id="logo"><img width="333px" src="img/logo.png" border="0"></a></div>
       <div id="menu">
         <ul>
-          <li class='active'><a href='index.html'><span>Home</span></a></li>
+          <li class='active'><a href='index.php'><span>Home</span></a></li>
           <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
             <ul>
               <li class='has-sub'><a href='#'><span>tekst</span></a>
