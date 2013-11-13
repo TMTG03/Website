@@ -27,8 +27,8 @@ $(document).ready(function() {
 <div id="container">
   <div id="headercolor">
     <div id="container_breedte">
-      <div id="logo_plek"><a href="index.php" id="logo"><img width="333" src="img/logo.png" alt="" /></a></div>
-      <div id="menu">
+      <header id="logo_plek"><a href="index.php" id="logo"><img width="333" src="img/logo.png" alt="" /></a></header>
+      <nav id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
           <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
@@ -56,7 +56,7 @@ $(document).ready(function() {
           <div id="styleswitchvak2"><a href="#" onclick="setActiveStyleSheet('roze'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
           <div id="styleswitchvak3"><a href="#" onclick="setActiveStyleSheet('blauwroze'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
         </div>
-      </div>
+      </nav>
     </div>
   </div>
   <div class="blauwelijn"></div>
@@ -159,7 +159,7 @@ $(document).ready(function() {
       <p class="carouselonder_koptekst">Hier komt een quote</p>
     </div>
   </div>
-  <div id="footer">
+  <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
       <div id="footer_socialmedia_iconen">
@@ -171,7 +171,7 @@ $(document).ready(function() {
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
       </div>
     </div>
-  </div>
+  </footer>
 </div>
 </body>
 </html>
