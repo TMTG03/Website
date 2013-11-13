@@ -85,9 +85,8 @@ $(document).ready(function() {
       </ul>
     </div>
   </div>
-  <div class="blauwelijn"></div>
+  <div class="grijzelijn_dun"></div>
   <div id="zoekbar">
-    <form id="form_zoek" class="form_zoek" method="post">
     <div id="zoekbar_links">
       <h2 class="zoekbar_links_header">Zoeken</h2>
       <h4 class="zoekbar_links_summary">Zoek een geboortekaartje</h4>
@@ -100,6 +99,7 @@ $(document).ready(function() {
         <div id="zoekbar_rechts_vak4">M/V</div>
       </div>
       <div id="zoekbar_rechts_input">
+       <form id="form_zoek" class="form_zoek" method="post">
         <div id="zoekbar_rechts_vak1_onder">
           <input type="text" name="#" />
         </div>
