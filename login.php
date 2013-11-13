@@ -54,7 +54,7 @@
     } 
 ?>
 <!doctype html>
-<html>
+<html manifest="thema.appcache">
 <head>
 <meta charset="utf-8">
 <title>.: Inloggen :.</title>

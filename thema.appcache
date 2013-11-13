@@ -1,0 +1,23 @@
+CACHE MANIFEST
+
+CACHE:
+/index.php
+/info.php
+/contact.php
+/css/*
+/img/*
+/fonts/*
+/scripts/*
+/scripts/image/*
+http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
+http://code.jquery.com/jquery.js
+
+
+NETWORK:
+*
+
+FALLBACK:
+/login.php /offline.php
+/registreren.php /offline.php
+/activation.php /offline.php
+/activation_mail.php /offline.php

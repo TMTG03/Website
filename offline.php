@@ -1,59 +1,8 @@
-<?
-	require_once("connection.php");
-	
-	if(empty($_GET['email']) || 
-	  empty($_GET['gebruiker'])) {
-	  $fout = true;
-	}
-	
-	function spamcheck($field){
-	  $field=filter_var($field, FILTER_SANITIZE_EMAIL);
-	  if(filter_var($field, FILTER_VALIDATE_EMAIL)) {
-		return TRUE;
-	  } else {
-		return FALSE;
-	  }
-	}
-	if (isset($_GET['email'])) {
-	  $mailcheck = spamcheck($_GET['email']);
-	  if ($mailcheck == FALSE){
-		$email_fout = true;
-	  } else if (!$fout) {
-		  $name = $_GET['gebruiker']; 
-		  $to = $_GET['email'];
-		  $email_subject = "Activatie mail: $name";
-	
-		  $datum = date('d/m/Y H:i:s');
-		  
-		  $headers = 'From: Babyberichten.nl <noreply@ict-lab.nl>';
-					 
-		  $headers = stripslashes($headers);
-		  $headers = str_replace('\n', '', $headers); // Verwijder \n
-		  $headers = str_replace('\r', '', $headers); // Verwijder \r
-		  $headers = str_replace("\"", "\\\"", str_replace("\\", "\\\\", $headers)); // Slashes van quotes
-						
-		  $inhoud_mail = "===================================================\n";
-		  $inhoud_mail .= "Activatie mail " . $_SERVER['HTTP_HOST'] . "\n";
-		  $inhoud_mail .= "===================================================\n\n";
-					  
-		  $inhoud_mail .= "Naam: " . htmlspecialchars($_GET['gebruiker']) . "\n";
-		  $inhoud_mail .= "E-mail adres: " . htmlspecialchars($_GET['email']) . "\n\n";
-		  $inhoud_mail .= "Klik op de Onderstaande link om uw account te activeren \n\n";
-		  $inhoud_mail .= "http://tmtg03.ict-lab.nl/website/activation.php?gebruiker=" . htmlspecialchars($_GET['gebruiker']) . "&email=" . htmlspecialchars($_GET['email']) . "\n\n";
-						
-		  $inhoud_mail .= "Verstuurd op " . $datum . "\n\n";
-						
-		  $inhoud_mail .= "===================================================\n\n";
-		  mail($to,$email_subject,$inhoud_mail,$headers);
-		  $verstuurd = true;
-		}
-	}
-?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
 <meta charset="utf-8">
-<title>.: Registreren :.</title>
+<title>.: Inloggen :.</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
 <link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
 <link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
@@ -99,20 +48,10 @@
     </div>
   </div>
   <div class="blauwelijn"></div>
-  <div id="titel">Registreren</div>
+  <div id="titel">Offline</div>
   <div id="container_content">
-	<? if ($verstuurd) { 
-         if (isset($_GET['registreren'])) {
-          header("Location: registreren.php?registreren=true"); 
-          die("doorlinken naar registreren.php");
-         }
-    ?>
-      De activatie email is succesvol opnieuw naar uw email adres verzonden<br /><br />
-      <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
-    <? } else { ?>
-      De activatie email kon niet worden verzonden<br />
-      probeer het later nog eens<br />
-    <? } ?>
+    U kunt deze pagina zonder internet verbinding niet bekijken
+  </div>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
