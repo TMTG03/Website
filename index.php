@@ -1,3 +1,4 @@
+<? require_once('connection.php') ?>
 <!doctype html>
 <html>
 <head>
@@ -47,8 +48,8 @@ $(document).ready(function() {
               </li>
             </ul>
           </li>
-          <li><a href='#'><span>Informatie</span></a></li>
-          <li><a href='#'><span>Inloggen</span></a></li>
+          <li><a href='info.php'><span>Informatie</span></a></li>
+          <li><a href='login.php'><span>Inloggen</span></a></li>
           <li class='last'><a href='#'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -86,6 +87,7 @@ $(document).ready(function() {
   </div>
   <div class="blauwelijn"></div>
   <div id="zoekbar">
+    <form id="form_zoek" class="form_zoek" method="post">
     <div id="zoekbar_links">
       <h2 class="zoekbar_links_header">Zoeken</h2>
       <h4 class="zoekbar_links_summary">Zoek een geboortekaartje</h4>
@@ -99,33 +101,33 @@ $(document).ready(function() {
       </div>
       <div id="zoekbar_rechts_input">
         <div id="zoekbar_rechts_vak1_onder">
-          <input type="text" name="#">
+          <input type="text" name="#" />
         </div>
         <div id="zoekbar_rechts_vak2_onder" class="dropdownpijl">
           <select>
             <option style="color: #cccccc;">Selecteer provincie</option>
             <optgroup label="Noord Nederland">
-            <option value="groningen">Groningen</option>
-            <option value="friesland">Friesland</option>
-            <option value="drenthe">Drenthe</option>
-            <option value="nholland">Noord-Holland</option>
+            <option value="Groningen">Groningen</option>
+            <option value="Friesland">Friesland</option>
+            <option value="Drenthe">Drenthe</option>
+            <option value="Noord-Holland">Noord-Holland</option>
             </optgroup>
             <optgroup label="Midden Nederland">
-            <option value="overijsel">Overijsel</option>
-            <option value="gelderland">Gelderland</option>
-            <option value="utrecht">Utrecht</option>
-            <option value="zholland">Zuid-Holland</option>
-            <option value="flevoland">Flevoland</option>
+            <option value="Overijsel">Overijsel</option>
+            <option value="Gelderland">Gelderland</option>
+            <option value="Utrecht">Utrecht</option>
+            <option value="Zuid-Holland">Zuid-Holland</option>
+            <option value="Flevoland">Flevoland</option>
             </optgroup>
             <optgroup label="Zuid Nederland">
-            <option value="zeeland">Zeeland</option>
-            <option value="nbrabant">Noord-Brabant</option>
-            <option value="limburg">Limburg</option>
+            <option value="Zeeland">Zeeland</option>
+            <option value="Noord-Brabant">Noord-Brabant</option>
+            <option value="Limburg">Limburg</option>
             </optgroup>
           </select>
         </div>
         <div id="zoekbar_rechts_vak3_onder">
-          <input type="date" name="#" class="dropdownkalender">
+          <input type="text" name="#" class="dropdownkalender" placeholder="dd-mm-YYYY" />
         </div>
         <div id="zoekbar_rechts_vak4_onder">
           <select id="MVselect">
@@ -138,6 +140,7 @@ $(document).ready(function() {
         </div>
       </div>
     </div>
+    </form>
   </div>
   <div id="container_content">
     <div id="carousel_vak1"></div>

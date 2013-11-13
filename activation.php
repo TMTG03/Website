@@ -1,9 +1,34 @@
-<? require_once('connection.php') ?>
+<? require_once("connection.php"); 
+
+$query = " 
+	UPDATE 
+		users
+	SET
+		active=1
+	WHERE 
+		gebruikersnaam = :username
+	AND
+		email = :email
+";
+$query_params = array(
+	':username' => $_GET['gebruiker'],
+	':email' => $_GET['email']
+); 
+ 
+try {
+	$stmt = $db->prepare($query); 
+	$result = $stmt->execute($query_params);
+	$active = "true";
+} catch(PDOException $ex) {
+	die("FOUT: " . $ex->getMessage()); 
+}
+
+?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>.: Info :.</title>
+<title>.: Inloggen :.</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
 <link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
 <link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
@@ -49,18 +74,19 @@
     </div>
   </div>
   <div class="blauwelijn"></div>
-  <div id="titel">Informatie</div>
+  <div id="titel">Inloggen</div>
   <div id="container_content">
-  <? require_once('lorum.txt') ?>
-  </div>
+	<? if ($active == "true") { ?>
+      Uw account is succesvol geactiveerd<br /><br />
+      <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
+    <? } else { ?>
+      Uw account kon niet worden geactiveerd<br />
+      Probeer het later nog eens<br />
+    <? } ?>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
-      <div id="footer_socialmedia_iconen">
-        <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp;
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp;
-        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a>
-      </div>
+      <div id="footer_socialmedia_iconen"> <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp; <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a> </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
       </div>
