@@ -120,6 +120,8 @@
 <head>
 <meta charset="utf-8">
 <title>.: Registreren :.</title>
+<link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
 <link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
 <link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
@@ -154,7 +156,7 @@
           </li>
           <li><a href='info.php'><span>Informatie</span></a></li>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <li class='last'><a href='#'><span>Contact</span></a></li>
+          <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
           <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
@@ -165,7 +167,11 @@
     </div>
   </div>
   <div class="blauwelijn"></div>
-  <div id="titel">Registreren</div>
+  <div id="tussen_balk"></div>
+  <div id="titelbalk">Registreren</div>
+  <hr class="schaduw_lijn"></hr>
+  <br/>
+  <br/>
   <div id="container_content">
   	<? if (isset($_GET['registreren'])) { ?>
        U bent succesvol geregistreerd!<br /><br />
@@ -246,7 +252,7 @@
           <input type="password" name="password2" id="password2" value=""  class="requiredField password2" required />
         </li>
         <li>
-          <button class='buttonzoek' style="width: 125px; text-align: center;" type="submit">Registreren</button>
+          <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit">Registreren</button>
         </li>
       </ul>
     </form>
@@ -255,7 +261,7 @@
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
-      <div id="footer_socialmedia_iconen"> <a href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp; <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a> </div>
+      <div id="footer_socialmedia_iconen"> <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp; <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a> </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
       </div>

@@ -47,7 +47,7 @@ $(document).ready(function() {
           </li>
           <li><a href='#'><span>Informatie</span></a></li>
           <li><a href='#'><span>Inloggen</span></a></li>
-          <li class='last'><a href='#'><span>Contact</span></a></li>
+          <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
           <div id="styleswitchvak1"></div>

@@ -667,6 +667,18 @@ input[type=date]::-webkit-inner-spin-button {
 input[type=date]::-webkit-calendar-picker-indicator {
  color: none;
 }
+textarea {
+	 width: 166px;
+	 min-height: 100px;
+	 max-width: 500px;
+	 max-height: 250px;
+	 padding: 5px;
+	 border: 2px solid #E6E6E6;
+	 -moz-border-radius: 5px;
+	 -webkit-border-radius: 5px;
+	 border-radius: 5px;
+	 outline: none;
+}
 #zoekbar_rechts_vak2_onder select {
 	background: transparent;
 	width: 166px;
@@ -939,4 +951,20 @@ input:focus, select:focus, textarea:focus, button:focus {
 	text-align: center;
 	padding-left: 10px;
 	padding-right: 20px;
+}
+
+/*GOOGLE MAPS API*/
+
+#googlemaps {
+	height: 310px;
+	margin-bottom: 20px;
+}
+
+#map {
+	border-bottom: 1px solid #c5c3c0;
+	border-top: 1px solid #c5c3c0;
+	height: 310px;
+	margin: 0 0 0 0;
+	position: relative;
+	width: 100%;
 }

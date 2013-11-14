@@ -3,31 +3,20 @@
 <head>
 <meta charset="utf-8">
 <title>.: Index :.</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="css/style.css" title="default">
+<link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
+<link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="scripts/themaslider.min.js"></script>
+<script src="scripts/switcher.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function(){
 	jQuery('#demo').themaslider({'delay':5000, 'fadeSpeed': 2000,'showNextPrev':true,'showPlayButton':true,'autoStart':true});
 	jQuery('#demo1').themaslider({'delay':5000, 'fadeSpeed': 2000,'autoStart':true,'pauseOnHover':true});
 });
-</script>
-<script>
-$(document).ready(function() {
-	$("#datepicker").datepicker();
-});
-
-var uur = new Date().getHours();
-if (uur >= 18)
-document.write('Goedenavond ')
-else if (uur >= 12)
-document.write('Goedemiddag ')
-else if (uur >= 6)
-document.write('Goedemorgen ')
-else
-document.write('Goedenacht ');
-
 </script>
 </head>
 
@@ -55,21 +44,47 @@ document.write('Goedenacht ');
               </li>
             </ul>
           </li>
-          <li><a href='#'><span>Informatie</span></a></li>
-          <li><a href='#'><span>Inloggen</span></a></li>
-          <li class='last'><a href='#'><span>Contact</span></a></li>
+          <li><a href='info.php'><span>Informatie</span></a></li>
+          <li><a href='login.php'><span>Inloggen</span></a></li>
+          <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
-          <div id="styleswitchvak1"></div>
-          <div id="styleswitchvak2"></div>
-          <div id="styleswitchvak3"></div>
+          <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
+          <div id="styleswitchvak2"><a href="#" onclick="setActiveStyleSheet('roze'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
+          <div id="styleswitchvak3"><a href="#" onclick="setActiveStyleSheet('blauwroze'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
         </div>
       </div>
     </div>
   </div>
   <div class="blauwelijn"></div>
-  <div id="titel">Informatie</div>
+  <div id="tussen_balk"></div>
+  <div id="titelbalk">Contact</div>
+  <hr class="schaduw_lijn"></hr>
   <div id="container_content">
+    <div id="googlemaps"> <br/>
+  	<section id="map"> </section>
+  </div>
+  <br/>
+  <br/>
+	<script>
+    $(document).ready(function() {
+        $("#datepicker").datepicker();
+    });
+    
+    var uur = new Date().getHours();
+    if (uur >= 18)
+    document.write('Goedenavond, hier kunt u contact met ons opnemen.')
+    else if (uur >= 12)
+    document.write('Goedemiddag, hier kunt u contact met ons opnemen.')
+    else if (uur >= 6)
+    document.write('Goedemorgen, hier kunt u contact met ons opnemen.')
+    else
+    document.write('Goedenacht, hier kunt u contact met ons opnemen.');
+    
+    </script>
+	<br/>
+	<br/>
+	<br/>
  <? if ($ok) { ?>
             Heeft u vragen of suggesties? U kunt gerust met ons contact opnemen.<br/>
             Wij horen graag van u, door middel van het onderstaande formulier kunt u een berichtje naar ons versturen.<br/><br/>
@@ -130,7 +145,7 @@ document.write('Goedenacht ');
                     <textarea id="bericht" name="bericht" rows="8" style="width: 400px;" required>' . (isset($_POST['bericht']) ? htmlspecialchars($_POST['bericht']) : '') . '</textarea>
                     </li>
 					<li>
-					<button name="submit" id="submit" class="submit" type="submit">Versturen</button>
+					<button name="submit" id="submit" class="buttonzoek" type="submit" style="width: 125px; line-height: 10px">Versturen</button>
 					</li>
 					</ul>
                 </form>';
@@ -191,5 +206,8 @@ document.write('Goedenacht ');
     </div>
   </div>
 </div>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript" src="scripts/jquery.gmap.min.js"></script> 
+<script type="text/javascript" src="scripts/maps.js"></script>
 </body>
 </html>

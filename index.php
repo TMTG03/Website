@@ -4,7 +4,9 @@
 <head>
 <meta charset="utf-8">
 <title>.: Index :.</title>
-<link rel="stylesheet" type="text/css" href="css/style.css" title="default">
+<link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="css/style.css" title="default"/>
 <link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
 <link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
