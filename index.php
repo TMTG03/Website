@@ -101,12 +101,12 @@ $(document).ready(function() {
         <div id="zoekbar_rechts_vak4">M/V</div>
       </div>
       <div id="zoekbar_rechts_input">
-       <form id="form_zoek" class="form_zoek" method="post">
+       <form id="form_zoek" class="form_zoek" method="post" action="zoeken.php">
         <div id="zoekbar_rechts_vak1_onder">
-          <input type="text" name="#" />
+          <input type="text" name="naam" />
         </div>
         <div id="zoekbar_rechts_vak2_onder" class="dropdownpijl">
-          <select>
+          <select name="provincie">
             <option style="color: #cccccc;">Selecteer provincie</option>
             <optgroup label="Noord Nederland">
             <option value="Groningen">Groningen</option>
@@ -129,16 +129,17 @@ $(document).ready(function() {
           </select>
         </div>
         <div id="zoekbar_rechts_vak3_onder">
-          <input type="text" name="#" class="dropdownkalender" placeholder="dd-mm-YYYY" />
+          <input type="text" name="datum" class="dropdownkalender" placeholder="dd-mm-YYYY" />
         </div>
         <div id="zoekbar_rechts_vak4_onder">
-          <select id="MVselect">
+          <select id="MVselect" name="geslacht">
             <option value="man">M</option>
             <option value="vrouw">V</option>
           </select>
         </div>
         <div id="zoekbar_rechts_vak5_onder">
-          <p class='buttonzoek' style='float: left; width: 125px; text-align: center'>ZOEK</p>
+           <button class='buttonzoek' style="width: 125px; height: 36px; float: left; text-align: center; " type="submit">Zoeken</button>
+          
         </div>
       </div>
     </div>
