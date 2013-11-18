@@ -1,3 +1,4 @@
+<? require_once("connection.php"); ?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
