@@ -66,25 +66,6 @@ jQuery(document).ready(function(){
   </div>
   <br/>
   <br/>
-	<script>
-    $(document).ready(function() {
-        $("#datepicker").datepicker();
-    });
-    
-    var uur = new Date().getHours();
-    if (uur >= 18)
-    document.write('Goedenavond, hier kunt u contact met ons opnemen.')
-    else if (uur >= 12)
-    document.write('Goedemiddag, hier kunt u contact met ons opnemen.')
-    else if (uur >= 6)
-    document.write('Goedemorgen, hier kunt u contact met ons opnemen.')
-    else
-    document.write('Goedenacht, hier kunt u contact met ons opnemen.');
-    
-    </script>
-	<br/>
-	<br/>
-	<br/>
  <? if ($ok) { ?>
             Heeft u vragen of suggesties? U kunt gerust met ons contact opnemen.<br/>
             Wij horen graag van u, door middel van het onderstaande formulier kunt u een berichtje naar ons versturen.<br/><br/>
@@ -110,7 +91,6 @@ jQuery(document).ready(function(){
                           $antiflood = 1;
                   }
               }
-                
               // Kijk of alle velden zijn ingevuld en correct zijn ingevuld
               if (($_SERVER['REQUEST_METHOD'] == 'POST' && (!empty($antiflood) || empty($_POST['naam']) || !empty($naam_fout) || empty($_POST['mail']) || !empty($email_fout) || empty($_POST['bericht']) || empty($_POST['onderwerp']))) || $_SERVER['REQUEST_METHOD'] == 'GET') {
                   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -123,6 +103,28 @@ jQuery(document).ready(function(){
                       else
                           echo '<p>U bent uw naam, e-mailadres, onderwerp of bericht vergeten in te vullen.</p>';
                   }
+				  
+				  ?>
+			      <script>
+			      $(document).ready(function() {
+ 			         $("#datepicker").datepicker();
+			      });
+    
+			      var uur = new Date().getHours();
+   			   	  if (uur >= 18)
+    			  	document.write('Goedenavond, hier kunt u contact met ons opnemen.')
+    			  else if (uur >= 12)
+    			  	document.write('Goedemiddag, hier kunt u contact met ons opnemen.')
+    			  else if (uur >= 6)
+    			  	document.write('Goedemorgen, hier kunt u contact met ons opnemen.')
+    			  else
+   			      	document.write('Goedenacht, hier kunt u contact met ons opnemen.');
+    
+    			  </script>
+				  <br/>
+				  <br/>
+				  <br/>
+                  <?
                         
                 // e-mail formlier
                 echo '<form id="form" class="form" method="post">
