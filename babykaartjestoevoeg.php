@@ -20,6 +20,9 @@
 		} if(empty($_POST['geboorteplaats'])) {
             $fout_geboorteplaats = true;
 			$sucess = false;
+		} if(empty($_POST['provincie'])) {
+            $fout_provincie = true;
+			$sucess = false;
 		} if(empty($_POST['geslacht'])) {
            $fout_geslacht = true;
 			$sucess = false;
@@ -41,32 +44,6 @@
 		}
 			
 		if (!$sucess) {
-
-			$query = " 
-				SELECT 
-					1 
-				FROM babykaartjes 
-				WHERE 
-					naam = :username 
-			";
-			
-			$query_params = array( 
-				':naam' => $_POST['naam'] 
-			); 
-			 
-			try { 
-				$stmt = $db->prepare($query); 
-				$result = $stmt->execute($query_params); 
-			} catch(PDOException $ex) {
-				die("FOUT: " . $ex->getMessage()); 
-				$PDOException = true;
-			} 
-			
-			$row = $stmt->fetch(); 
-			
-			if($row) { 
-				$double_username = true;
-			}
 			
 			$query = " 
 				INSERT INTO babykaartjes ( 
@@ -76,6 +53,7 @@
 					roepnaam,
 					geboortedatum,
 					geboorteplaats,
+					provincie,
 					geslacht,
 					bericht,
 					quote,
@@ -89,6 +67,7 @@
 					:roepnaam,
 					:geboortedatum,
 					:geboorteplaats,
+					:provincie,
 					:geslacht,
 					:bericht,
 					:quote,
@@ -98,16 +77,22 @@
 				) 
 			";
 			
-			$dob = date("Y-m-d", strtotime($_POST['dob']));
+			$dob = date("Y-m-d", strtotime($_POST['geboortedatum']));
 			 
 			$query_params = array(
-				':name' => $_POST['name'],
-				':username' => $_POST['username'], 
-				':password' => $password,
-				':dob' => $dob,
-				':email' => $_POST['email'],
-				':provincie' => $_POST['provincieSelect'],
-				':geslacht' => $_POST['MVselect']
+				':naam' => $_POST['naam'],
+				':tussenvoegsel' => $_POST['tussenvoegsel'],
+				':achternaam' => $_POST['achternaam'],
+				':roepnaam' => $_POST['roepnaam'],
+				':geboortedatum' => $dob,
+				':geboorteplaats' => $_POST['geboorteplaats'],
+				':provincie' => $_POST['provincieSelect'], 
+				':geslacht' => $_POST['MVselect'],
+				':bericht' => $_POST['bericht'],
+				':quote' => $_POST['quote'],
+				':plaatje' => $_POST['plaatje'],
+				':vader' => $_POST['vader'],
+				':moeder' => $_POST['moeder']
 			);
 			 
 			try {
@@ -119,8 +104,6 @@
 			}
 			if (!$PDOException) {
 				$sucess = true;
-				header("Location: activation_mail.php?registreren=true&gebruiker=" . htmlspecialchars($_POST['username']) . "&email=" . htmlspecialchars($_POST['email'])); 
-                die("doorlinken naar activation_mail.php");
 			}
 		}
 	}
@@ -129,7 +112,7 @@
 <html manifest="thema.appcache">
 <head>
 <meta charset="utf-8">
-<title>.: Registreren :.</title>
+<title>.: Babykaartje Toevoegen :.</title>
 <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
@@ -178,15 +161,13 @@
   </div>
   <div class="blauwelijn"></div>
   <div id="tussen_balk"></div>
-  <div id="titelbalk">Registreren</div>
+  <div id="titelbalk">Babykaartje Toevoegen</div>
   <hr class="schaduw_lijn"></hr>
   <br/>
   <br/>
   <div id="container_content">
-  	<? if (isset($_GET['registreren'])) { ?>
-       U bent succesvol geregistreerd!<br /><br />
-       U ontvangt binnen enkele minuten een bevestegings email<br /><br />
-       <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br /><br />
+  	<? if (isset($_GET['uploaden'])) { ?>
+       U heeft succesvol een babykaartje geupload!<br /><br />
     <? } else if (!$sucess) {
        if ($fout_naam) { ?>
     U hebt geen naam in gevuld <br />
@@ -198,6 +179,8 @@
     U hebt geen roepnaam in gevuld <br />
     <? } if ($fout_geboorteplaats) { ?>
     U hebt geen geldige geboorteplaats in gevuld <br />
+    <? } if ($fout_provincie) { ?>
+    U hebt geen provincie ingevuld <br />
     <? } if ($double_username) { ?>
     Deze naam is al in gebruik <br />
     <? } if ($fout_geboortedatum) { ?>
@@ -216,23 +199,29 @@
     <form id="form" class="form" method="post">
       <ul>
         <li>
-          <label for="name">Volledige naam:</label>
-          <input type="text" name="name" id="name" class="requiredField name" value="<? echo htmlentities($_POST['name'], ENT_QUOTES, 'UTF-8'); ?>" required />
+          <label for="naam">Naam:</label>
+          <input type="text" name="naam" id="naam" class="requiredField naam" value="<? echo htmlentities($_POST['naam'], ENT_QUOTES, 'UTF-8'); ?>" required />
         </li>
         <li>
-          <label for="email">E-mail adres:</label>
-          <input type="email" name="email" id="email" class="requiredField email" value="<? echo htmlentities($_POST['email'], ENT_QUOTES, 'UTF-8'); ?>" required />
-          <span class="form_hint">Formaat "naam@voorbeeld.nl"</span> </li>
+          <label for="tussenvoegsel">Tussenvoegsel:</label>
+          <input type="text" name="tussenvoegsel" id="tussenvoegsel" class="requiredField tussenvoegsel" value="<? echo htmlentities($_POST['tussenvoegsel'], ENT_QUOTES, 'UTF-8'); ?>" required />
+        </li>
+                <li>
+          <label for="achternaam">Achternaam:</label>
+          <input type="text" name="achternaam" id="achternaam" class="requiredField achternaam" value="<? echo htmlentities($_POST['achternaam'], ENT_QUOTES, 'UTF-8'); ?>" required />
+        </li>
         <li>
-          <label for="dob">Geboortedatum:</label>
-          <input type="text" name="dob" id="dob" class="requiredField dob" value="<? echo htmlentities($_POST['dob'], ENT_QUOTES, 'UTF-8'); ?>" required />
-          <span class="form_hint">Formaat "dd-mm-YYYY"</span> </li>
+          <label for="roepnaam">Roepnaam:</label>
+          <input type="text" name="roepnaam" id="roepnaam" class="requiredField roepnaam" value="<? echo htmlentities($_POST['roepnaam'], ENT_QUOTES, 'UTF-8'); ?>" required />
+        </li>
         <li>
-          <label for="MVselect">Geslacht:</label>
-          <select id="MVselect" name="MVselect" class="requiredField MVselect" required>
-            <option value="man">M</option>
-            <option value="vrouw">V</option>
-          </select>
+          <label for="geboortedatum">Geboortedatum:</label>
+          <input type="text" name="geboortedatum" id="geboortedatum" class="requiredField geboortedatum" value="<? echo htmlentities($_POST['geboortedatum'], ENT_QUOTES, 'UTF-8'); ?>" required />
+          <span class="form_hint">Formaat "dd-mm-YYYY"</span> 
+        </li>
+        <li>
+          <label for="geboorteplaats">Geboorteplaats:</label>
+          <input type="text" name="geboorteplaats" id="geboorteplaats" class="requiredField geboorteplaats" value="<? echo htmlentities($_POST['geboorteplaats'], ENT_QUOTES, 'UTF-8'); ?>" required />
         </li>
         <li>
           <label for="provincieSelect">Provincie:</label>
@@ -258,19 +247,34 @@
           </select>
         </li>
         <li>
-          <label for="username">Gebruikersnaam:</label>
-          <input type="text" name="username" id="username" class="requiredField username" value="<? echo htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8'); ?>" required />
+          <label for="MVselect">Geslacht:</label>
+          <select id="MVselect" name="MVselect" class="requiredField MVselect" required>
+            <option value="jongen">Jongen</option>
+            <option value="meisje">Meisje</option>
+          </select>
+        </li>
+		<li>
+          <label for="bericht">Bericht:</label>
+          <input type="text" style="width: 400px; height: 200px;" name="bericht" id="bericht" class="requiredField bericht" value="<? echo htmlentities($_POST['bericht'], ENT_QUOTES, 'UTF-8'); ?>" required />
+        </li>
+                <li>
+          <label for="quote">Quote:</label>
+          <input type="text" style="width: 400px; height: 100px" name="quote" id="quote" class="requiredField quote" value="<? echo htmlentities($_POST['quote'], ENT_QUOTES, 'UTF-8'); ?>" required />
+        </li>
+         <li>
+          <label for="plaatje">Plaatje:</label>
+          <input type="file" name="plaatje" id="plaatje" class="requiredField plaatje" value="<? echo htmlentities($_POST['plaatje'], ENT_QUOTES, 'UTF-8'); ?>" required />
         </li>
         <li>
-          <label for="password">Wachtwoord:</label>
-          <input type="password" name="password" id="password" value=""  class="requiredField password" required />
+          <label for="vader">Vader:</label>
+          <input type="text" name="vader" id="vader" class="vader" value="<? echo htmlentities($_POST['vader'], ENT_QUOTES, 'UTF-8'); ?>" />
         </li>
         <li>
-          <label for="password2">Herhaal wachtwoord:</label>
-          <input type="password" name="password2" id="password2" value=""  class="requiredField password2" required />
+          <label for="moeder">Moeder:</label>
+          <input type="text" name="moeder" id="moeder" class="moeder" value="<? echo htmlentities($_POST['moeder'], ENT_QUOTES, 'UTF-8'); ?>" />
         </li>
         <li>
-          <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit">Registreren</button>
+          <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit" name="uploaden">Uploaden</button>
         </li>
       </ul>
     </form>
