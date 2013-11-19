@@ -1,10 +1,10 @@
 <? require_once("connection.php"); 
 
 $query = " 
-	UPDATE 
+	SELECT
+		active
+	FROM 
 		users
-	SET
-		active=1
 	WHERE 
 		gebruikersnaam = :username
 	AND
@@ -18,9 +18,37 @@ $query_params = array(
 try {
 	$stmt = $db->prepare($query); 
 	$result = $stmt->execute($query_params);
-	$active = "true";
 } catch(PDOException $ex) {
 	die("FOUT: " . $ex->getMessage()); 
+}
+
+$row = $stmt->fetch(); 
+
+if ($row['active'] == 0) {
+	$query = " 
+		UPDATE 
+			users
+		SET
+			active=1
+		WHERE 
+			gebruikersnaam = :username
+		AND
+			email = :email
+	";
+	$query_params = array(
+		':username' => $_GET['gebruiker'],
+		':email' => $_GET['email']
+	); 
+	 
+	try {
+		$stmt = $db->prepare($query); 
+		$result = $stmt->execute($query_params);
+		$active = "true";
+	} catch(PDOException $ex) {
+		die("FOUT: " . $ex->getMessage()); 
+	}
+} else {
+	$was_actief = true;
 }
 
 ?>
@@ -76,12 +104,15 @@ try {
   <div class="blauwelijn"></div>
   <div id="titel">Inloggen</div>
   <div id="container_content">
-	<? if ($active == "true") { ?>
-      Uw account is succesvol geactiveerd<br /><br />
-      <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
+    <? if ($was_actief == true) { ?>
+       Uw account is al geactiveerd<br /><br />
+       <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
+	<? } else if ($active == "true") { ?>
+       Uw account is succesvol geactiveerd<br /><br />
+       <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
     <? } else { ?>
-      Uw account kon niet worden geactiveerd<br />
-      Probeer het later nog eens<br />
+       Uw account kon niet worden geactiveerd<br />
+       Probeer het later nog eens<br />
     <? } ?>
   <footer id="footer">
     <div class="blauwelijn"></div>
