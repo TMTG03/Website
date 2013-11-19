@@ -1,6 +1,6 @@
 <?
 	require_once("connection.php");
-	
+	// email en gebruiker ophalen
 	if(empty($_GET['email']) || 
 	  empty($_GET['gebruiker'])) {
 	  $fout = true;
@@ -24,14 +24,14 @@
 		  $email_subject = "Activatie mail: $name";
 	
 		  $datum = date('d/m/Y H:i:s');
-		  
+		  // email headers defineren
 		  $headers = 'From: Babyberichten.nl <noreply@ict-lab.nl>';
 					 
 		  $headers = stripslashes($headers);
 		  $headers = str_replace('\n', '', $headers); // Verwijder \n
 		  $headers = str_replace('\r', '', $headers); // Verwijder \r
 		  $headers = str_replace("\"", "\\\"", str_replace("\\", "\\\\", $headers)); // Slashes van quotes
-						
+		  // inhoudt van de mail defineren	
 		  $inhoud_mail = "===================================================\n";
 		  $inhoud_mail .= "Activatie mail " . $_SERVER['HTTP_HOST'] . "\n";
 		  $inhoud_mail .= "===================================================\n\n";
@@ -44,6 +44,7 @@
 		  $inhoud_mail .= "Verstuurd op " . $datum . "\n\n";
 						
 		  $inhoud_mail .= "===================================================\n\n";
+		  // email verzenden
 		  mail($to,$email_subject,$inhoud_mail,$headers);
 		  $verstuurd = true;
 		}
@@ -107,13 +108,16 @@
   <div id="container_content">
 	<? if ($verstuurd) { 
          if (isset($_GET['registreren'])) {
+		  // terug linken naar registreren.php
           header("Location: registreren.php?registreren=true"); 
           die("doorlinken naar registreren.php");
          }
     ?>
+      <!-- weergeven als de activatie email nogmaals verstuurd is -->
       De activatie email is succesvol opnieuw naar uw email adres verzonden<br /><br />
       <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
     <? } else { ?>
+      <!-- weergeven als er wat verkeerds is gegaan -->
       De activatie email kon niet worden verzonden<br />
       probeer het later nog eens<br />
     <? } ?>

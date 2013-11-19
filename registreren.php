@@ -2,6 +2,7 @@
     require_once("connection.php");
 
     if(!empty($_POST)) {
+		// nakijken of alle velden zijn ingevuld (HTML5 kijkt dit al na maar voor de zekerheid nog een keer)
         if(empty($_POST['username'])) {
             $fout_username = true;
 			$sucess = false;
@@ -23,6 +24,7 @@
 		} if(empty($_POST['provincieSelect'])) {
             $fout_provincie = true;
 			$sucess = false;
+		// kijk of het email adress geldig is
 		} if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) { 
             $fout_ongeldig_email = true; 
 			$sucess = false;
@@ -40,25 +42,26 @@
 				WHERE 
 					gebruikersnaam = :username 
 			";
-			
+			// PDO variable koppelen
 			$query_params = array( 
 				':username' => $_POST['username'] 
 			); 
-			 
+			// query uitvoeren
 			try { 
 				$stmt = $db->prepare($query); 
 				$result = $stmt->execute($query_params); 
 			} catch(PDOException $ex) {
+				// TODO: verwijder de 'die' op uiteindelijke website
 				die("FOUT: " . $ex->getMessage()); 
 				$PDOException = true;
 			} 
 			
 			$row = $stmt->fetch(); 
-			
+			// filteren of de username al bestaat of niet
 			if($row) { 
 				$double_username = true;
 			}
-			
+			// insert query
 			$query = " 
 				INSERT INTO users ( 
 					gebruikersnaam,
@@ -80,15 +83,15 @@
 					:email
 				) 
 			";
-			
+			// random salt generen en password encrypten
 			$salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647)); 
 			$password = hash('sha256', $_POST['password'] . $salt);
 			for($round = 0; $round < 65536; $round++) { 
 				$password = hash('sha256', $password . $salt); 
 			}
-			
+			// geboorte datum omgooien naar database formaat
 			$dob = date("Y-m-d", strtotime($_POST['dob']));
-			 
+			// PDO variable koppelen
 			$query_params = array(
 				':name' => $_POST['name'],
 				':username' => $_POST['username'], 
@@ -99,16 +102,18 @@
 				':provincie' => $_POST['provincieSelect'],
 				':geslacht' => $_POST['MVselect']
 			);
-			 
+			// query uitvoeren
 			try {
 				$stmt = $db->prepare($query); 
 				$result = $stmt->execute($query_params);
 			} catch(PDOException $ex) {
+				// TODO: verwijder de 'die' op uiteindelijke website
 				die("FOUT: " . $ex->getMessage()); 
 				$PDOException = true;
 			}
 			if (!$PDOException) {
 				$sucess = true;
+				// doorlinken naar het script dat de activatie email verstuurd
 				header("Location: activation_mail.php?registreren=true&gebruiker=" . htmlspecialchars($_POST['username']) . "&email=" . htmlspecialchars($_POST['email'])); 
                 die("doorlinken naar activation_mail.php");
 			}

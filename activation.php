@@ -1,5 +1,5 @@
 <? require_once("connection.php"); 
-
+// nakijken of de account al geactiveerd was of niet
 $query = " 
 	SELECT
 		active
@@ -10,20 +10,22 @@ $query = "
 	AND
 		email = :email
 ";
+// PDO variable koppelen
 $query_params = array(
 	':username' => $_GET['gebruiker'],
 	':email' => $_GET['email']
 ); 
- 
+// query uitvoeren
 try {
 	$stmt = $db->prepare($query); 
 	$result = $stmt->execute($query_params);
 } catch(PDOException $ex) {
+	// TODO: verwijder de 'die' op uiteindelijke website
 	die("FOUT: " . $ex->getMessage()); 
 }
 
 $row = $stmt->fetch(); 
-
+// uitvoeren als de accoutn nog niet geactiveerd was
 if ($row['active'] == 0) {
 	$query = " 
 		UPDATE 
@@ -35,19 +37,23 @@ if ($row['active'] == 0) {
 		AND
 			email = :email
 	";
+	// PDO variable koppelen
 	$query_params = array(
 		':username' => $_GET['gebruiker'],
 		':email' => $_GET['email']
 	); 
-	 
+	
+	// query uitvoeren
 	try {
 		$stmt = $db->prepare($query); 
 		$result = $stmt->execute($query_params);
 		$active = "true";
 	} catch(PDOException $ex) {
+		// TODO: verwijder de 'die' op uiteindelijke website
 		die("FOUT: " . $ex->getMessage()); 
 	}
 } else {
+	// opslaan als de accoutn al geactiveerd was
 	$was_actief = true;
 }
 
@@ -108,9 +114,11 @@ if ($row['active'] == 0) {
   <div class="blauwelijn"></div>
   <div id="titel">Inloggen</div>
   <div id="container_content">
+    <!-- weergeven als de account al was geactiveerd-->
     <? if ($was_actief == true) { ?>
        Uw account is al geactiveerd<br /><br />
        <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
+    <!-- weergeven of de account is geactiveerd of niet -->
 	<? } else if ($active == "true") { ?>
        Uw account is succesvol geactiveerd<br /><br />
        <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />

@@ -1,10 +1,12 @@
 <? 
     require_once("connection.php");
+	// als de sessie bestaat is er al ingelogd -> door verwijzen naar ingelogd.php
     if(!empty($_SESSION['user'])) { 
         header("Location: ingelogd.php"); 
         die("Doorlinken naar ingelogd.php"); 
 	}
     $submitted_username = '';
+	// Selecteer alles van de gebruiker om in een sessie te plaatsen
 	if(!empty($_POST)) {
         $query = " 
             SELECT 
@@ -13,18 +15,23 @@
             WHERE 
                 gebruikersnaam = :username 
         ";
+		
+		// PDO variable koppelen
         $query_params = array( 
             ':username' => $_POST['username'] 
         ); 
-         
+        
+		// query uitvoeren
         try {
             $stmt = $db->prepare($query); 
             $result = $stmt->execute($query_params); 
         } catch(PDOException $ex) {
+			// TODO: verwijder de 'die' op uiteindelijke website
             die("FOUT: " . $ex->getMessage()); 
         }
         $login_ok = false;
-        $row = $stmt->fetch(); 
+        $row = $stmt->fetch();
+		// wachtwoord check
         if($row) {
             $check_password = hash('sha256', $_POST['password'] . $row['salt']); 
             for($round = 0; $round < 65536; $round++) { 
@@ -40,15 +47,18 @@
             }
         }
         if($login_ok) {
-			
+			// salt en wachtwoord legen zodat deze niet in de sessie komen
             unset($row['salt']); 
             unset($row['password']);
             $_SESSION['user'] = $row;
+			// doorlinken naar ungelogd.php
 			header("Location: ingelogd.php"); 
             die("Doorlinken naar: ingelogd.php");
         } else {
+			// filteren voor geactiveerde account
 			if ($active != 1)
             $fout = 1;
+			// ingevulde username defineren voor in de form
             $submitted_username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8'); 
         } 
     } 
@@ -115,14 +125,18 @@
   <br/>
   <br/>
   <div id="container_content">
+    <!-- filteren of er op uitloggen is geklikt-->
 	<? if (!empty($_GET['logout'])) { ?>
     U bent sucessvol uitgelogd <br /><br />
+    <!-- weergeven als er niet ingelogd kon worden -->
     <? } if ($fout == 1) { ?>
     Incorrecte gebruikersnaam en / of wachtwoord! <br /><br />
+    <!-- weergeven als de account nog niet is geactiveerd -->
     <? } else if ($active == 1) { ?>
     U hebt uw account nog niet geactiveerd<br />
     Klik op de link in uw e-mail inbox om uw account te activeren <br />
     <br />
+    <!-- activatie mail link -->
     <? $link = "activation_mail.php?gebruiker=" . htmlspecialchars($_POST['username']) . "&email=" . htmlspecialchars($row['email']) ?>
     <a href=<? echo $link ?>>Klik hier</a> om de activatie e-mail nogmaals te versturen<br />
     <? } ?>
