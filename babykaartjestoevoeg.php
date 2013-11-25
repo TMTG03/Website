@@ -120,10 +120,26 @@
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
 <link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
+<link href="css/autocomplete.css" rel="stylesheet" type="text/css" />
 <link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 <script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="scripts/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui-1.9.0.custom.min.js"></script>
 <script src="scripts/switcher.js"></script>
+<script type="text/javascript">
+	// start deze jQuery code als het document geladen is ("document ready")
+	$(document).ready(function() 
+	{
+		// activeer autocomplete voor het veld met ID "stad"
+		$("#geboorteplaats").autocomplete({
+			// geef aan welk bestand als bron voor de lijst dient
+			source: "geboorteplaats.php",
+			// geef aan vanf hoeveel ingetypte letters de autocomplete actief moet worden
+			minLength: 2
+		});
+	});
+	</script>
 </head>
 
 <body>
