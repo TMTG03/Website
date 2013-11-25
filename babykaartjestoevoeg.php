@@ -53,6 +53,7 @@
 					roepnaam,
 					geboortedatum,
 					adres,
+					postcode,
 					geboorteplaats,
 					provincie,
 					geslacht,
@@ -68,6 +69,7 @@
 					:roepnaam,
 					:geboortedatum,
 					:adres,
+					:postcode,
 					:geboorteplaats,
 					:provincie,
 					:geslacht,
@@ -88,6 +90,7 @@
 				':roepnaam' => $_POST['roepnaam'],
 				':geboortedatum' => $dob,
 				':adres' => $_POST['adres'],
+				':postcode' => $_POST['postcode'],
 				':geboorteplaats' => $_POST['geboorteplaats'],
 				':provincie' => $_POST['provincieSelect'], 
 				':geslacht' => $_POST['MVselect'],
@@ -200,6 +203,8 @@
     U hebt geen geldige geboorteplaats in gevuld <br />
     <? } if ($fout_adres) { ?>
     U hebt geen / geldig adres ingevoerd <br />
+    <? } if ($fout_postcode) { ?>
+    U hebt geen / geldig postcode ingevoerd <br />
     <? } if ($fout_provincie) { ?>
     U hebt geen provincie ingevuld <br />
     <? } if ($double_username) { ?>
@@ -243,6 +248,10 @@
         <li>
           <label for="adres">Adres:</label>
           <input type="text" name="adres" id="adres" class="requiredField adres" value="<? echo htmlentities($_POST['adres'], ENT_QUOTES, 'UTF-8'); ?>" required />
+        </li>
+        <li>
+          <label for="postcode">Postcode:</label>
+          <input type="text" name="postcode" id="postcode" class="requiredField postcode" value="<? echo htmlentities($_POST['postcode'], ENT_QUOTES, 'UTF-8'); ?>" required />
         </li>
         <li>
           <label for="geboorteplaats">Geboorteplaats:</label>
