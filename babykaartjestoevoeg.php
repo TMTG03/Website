@@ -52,6 +52,7 @@
 					achternaam, 
 					roepnaam,
 					geboortedatum,
+					adres,
 					geboorteplaats,
 					provincie,
 					geslacht,
@@ -66,6 +67,7 @@
 					:achternaam, 
 					:roepnaam,
 					:geboortedatum,
+					:adres,
 					:geboorteplaats,
 					:provincie,
 					:geslacht,
@@ -85,6 +87,7 @@
 				':achternaam' => $_POST['achternaam'],
 				':roepnaam' => $_POST['roepnaam'],
 				':geboortedatum' => $dob,
+				':adres' => $_POST['adres'],
 				':geboorteplaats' => $_POST['geboorteplaats'],
 				':provincie' => $_POST['provincieSelect'], 
 				':geslacht' => $_POST['MVselect'],
@@ -179,6 +182,8 @@
     U hebt geen roepnaam in gevuld <br />
     <? } if ($fout_geboorteplaats) { ?>
     U hebt geen geldige geboorteplaats in gevuld <br />
+    <? } if ($fout_adres) { ?>
+    U hebt geen / geldig adres ingevoerd <br />
     <? } if ($fout_provincie) { ?>
     U hebt geen provincie ingevuld <br />
     <? } if ($double_username) { ?>
@@ -218,6 +223,10 @@
           <label for="geboortedatum">Geboortedatum:</label>
           <input type="text" name="geboortedatum" id="geboortedatum" class="requiredField geboortedatum" value="<? echo htmlentities($_POST['geboortedatum'], ENT_QUOTES, 'UTF-8'); ?>" required />
           <span class="form_hint">Formaat "dd-mm-YYYY"</span> 
+        </li>
+        <li>
+          <label for="adres">Adres:</label>
+          <input type="text" name="adres" id="adres" class="requiredField adres" value="<? echo htmlentities($_POST['adres'], ENT_QUOTES, 'UTF-8'); ?>" required />
         </li>
         <li>
           <label for="geboorteplaats">Geboorteplaats:</label>
