@@ -68,6 +68,20 @@ echo mysql_error();
 		?>
 			var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
 			
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+			
+			var contentString = '<div id="content">'+
+			'<div id="siteNotice">'+
+			'</div>'+
+			'<h1 id="firstHeading" class="firstHeading"><? echo $rij["roepnaam"]; ?></h1>'+
+			'<div id="bodyContent">'+
+			'<p>Geboortedatum: <? echo $rij["geboortedatum"]; ?></p>'+
+			'<p>Quote: <? echo $rij["quote"]; ?></p>'+
+			'</div>'+
+			'</div>';
+			
 			var marker<? echo $rij[id];?> = new google.maps.Marker({
 				position: getLatlng,
 				map: map,
@@ -75,7 +89,12 @@ echo mysql_error();
 				title: 'Baby Berichten'
 			});
 			
+			google.maps.event.addListener(marker<? echo $rij[id];?>, 'click', function() {
+				infowindow.open(map,marker<? echo $rij[id];?>);
+			});
+			
 		<? } ?>
+	
 	}
 	
 google.maps.event.addDomListener(window, 'load', initialize);
