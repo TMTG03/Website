@@ -12,35 +12,24 @@
       }
     </style>
 <?
-$id = $_GET["id"];
 
-//require_once("connection.php");
-//$opdracht = "SELECT adres FROM babykaartjes WHERE id='$id'";
-//$result = mysql_query($opdracht);
-//$rij = mysql_fetch_array($result);
-//$adres = "$rij[adres]";
-
-$adres = "van brugstraat 27";
-
-$adres = str_replace(" ", "+", $adres);
-
-$url='http://maps.googleapis.com/maps/api/geocode/json?address='.$adres.'+Netherlands+NL&sensor=false';
-$source = file_get_contents($url);
-$obj = json_decode($source);
-$lat = $obj->results[0]->geometry->location->lat;
-$long = $obj->results[0]->geometry->location->lng;
-?></br><?
-echo $lat;
-?></br><?
-echo $long;
-?></br><?
-echo $url;
+require_once("connection.php");
+$opdracht = "SELECT * FROM babykaartjes";
+try {
+        $stmt = $db->prepare($opdracht); 
+        $result = $stmt->execute();
+} catch(PDOException $ex) {
+        // TODO: verwijder de 'die' op uiteindelijke website
+        die("FOUT: " . $ex->getMessage()); 
+}
+$rij = $stmt->fetch();
+echo mysql_error();
 ?>
+
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
 function initialize() {
   var SchoolLatlng = new google.maps.LatLng(51.9274743,4.4782271);
-  var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
   var meisje = 'location of image';
   var jongen = 'location of image';
   var mapOptions = {
@@ -50,7 +39,7 @@ function initialize() {
 	mapTypeControl: false,
 	overviewMapControl: false,
     zoom: 14,
-    center: myLatlng
+    center: SchoolLatlng
   }
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
@@ -60,18 +49,30 @@ function initialize() {
       title: 'Hello World!'
 	
   });
-  
-  var marker2 = new google.maps.Marker({
+  <? while ($rij = $stmt->fetch()){ 
+	$adres = "$rij[adres]";
+	$adres = str_replace(" ", "+", $adres);
+	$url='http://maps.googleapis.com/maps/api/geocode/json?address='.$adres.'+Netherlands+NL&sensor=false';
+	$source = file_get_contents($url);
+	$obj = json_decode($source);
+	$lat = $obj->results[0]->geometry->location->lat;
+	$long = $obj->results[0]->geometry->location->lng;
+	
+  ?>
+  var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
+  var marker<? echo $rij[id];?> = new google.maps.Marker({
       position: getLatlng,
       map: map,
-      title: 'Hello World!'
+      title: 'Baby Berichten'
 	  });
+  <? } ?>
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
   <body>
+  <? echo $rij; ?>
     <div id="map-canvas"></div>
   </body>
 </html>

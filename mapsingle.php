@@ -16,9 +16,20 @@ $id = $_GET["id"];
 
 require_once("connection.php");
 $opdracht = "SELECT adres FROM babykaartjes WHERE id='$id'";
-$result = mysql_query($opdracht);
-$rij = mysql_fetch_array($result);
+try {
+        $stmt = $db->prepare($opdracht); 
+        $result = $stmt->execute();
+} catch(PDOException $ex) {
+        // TODO: verwijder de 'die' op uiteindelijke website
+        die("FOUT: " . $ex->getMessage()); 
+}
+$rij = $stmt->fetch();
 $adres = "$rij[adres]";
+
+echo mysql_error() . "<br />";
+echo $opdracht . "<br />";
+echo $rij . "<br />";
+echo $result . "<br />";
 
 $adres = str_replace(" ", "+", $adres);
 
@@ -47,17 +58,10 @@ function initialize() {
 	zoomControl: false,
 	mapTypeControl: false,
 	overviewMapControl: false,
-    zoom: 14,
-    center: myLatlng
+    zoom: 16,
+    center: getLatlng
   }
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-  var marker = new google.maps.Marker({
-      position: SchoolLatlng,
-      map: map,
-      title: 'Hello World!'
-	
-  });
   
   var marker2 = new google.maps.Marker({
       position: getLatlng,
