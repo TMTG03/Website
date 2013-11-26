@@ -1,4 +1,6 @@
-<? require_once('connection.php') ?>
+<? require_once('connection.php') 
+/* http://www.zwangerschapsinformatie.nl/zwanger-worden/ */
+?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
@@ -64,29 +66,45 @@
   <br/>
   <br/>
   <h1 class="info_knop">Welkom op de informatie pagina van babyberichten.nl!</h1>
-  Hier vind u de volgende informatie:<p>
-  <a href="info_zwangerschap.php">De zwangerschap</a><p>
-  <a href="info_opvoeding.php">Opvoeding</a><p>
-  <a href="info_webshops.php">Webshops</a><p><br>
-  <div id="idElement1">
-     <h1 class="info_knop">Over de website</h1>
-     <p>
-     Welkom op de website van babyberichten.nl, hier kunt u de volgende dingen doen:<p><br>
-     -	Informatie over de zwangerschap opzoeken.<p>
-     -	Geboortekaartjes zoeken die gefilterd kunnen worden per provincie.<p>
-     -	Zelf Geboortekaartjes uploaden.<p>
-     - 	Aanmelden voor de automatische nieuwsbrief.<p>
-     -	En een kaart bekijken met alle geboortekaartjes erop.<p><br>
-     
-     <h1 class="info_knop">Werking van de site</h1>
+  Hier vind u de volgende informatie:
+  <div id="nav-list">
+  <a href="#idElement1">Vruchtbaarheid</a><p>
+  <a href="#idElement2">Onvruchtbaarheid</a><p>
+  <a href="#idElement3">Opvoeding</a><p>
+  <a href="#idElement4">Webshops</a><p><br>
+  
+    <div id="idElement1">    
+    <h1 class="info_knop">Vruchtbaarheid</h1><br>
+    Als je zwanger wil worden, is het belangrijk dat zowel jij als je partner vruchtbaar zijn.<br>
+    Als het na een jaar niet gelukt is om zwanger te raken, kun je laten onderzoeken wat hier de oorzaak van is en behandelingen ondergaan.<br>
+    </div>
+    
+    <div id="idElement2">
+    <h1 class="info_knop">Onvruchtbaarheid</h1>
     <p><br>
-     Op de hoofdpagina kunt u gelijk gemakkelijk zoeken naar geboortekaartjes, daarbij kunt u zoeken op naam, provincie, geboorte datum en geslacht.<p>
-     Als u naar de babykaartjes gaat kom u in het overzicht met alle geboortekaartjes. <p>
-     Al wilt u zelf geboortekaartjes uploaden moet u ingelogd zijn, daarna kunt u via de knop toevoegen zelf uw geboorte bekend maken. <p>
-     Ook kunt u hier oude geboortekaartjes aanpassen, geboortekaartjes verwijderen en uw inlog gegevens wijzigen. <p>
-     Verder is er nog een contact pagina waar u buggs kunt melden en vragen kunt stellen.<p><br>
-     
-    </div>  
+	Voor een verminderde vruchtbaarheid of onvruchtbaarheid zijn verschillende verklaringen.<br>
+    Bijvoorbeeld een ongezonde levensstijl of onvoldoende zaadcellen. <br>
+    Er bestaan een aantal behandelingen om desondanks toch zwanger te raken.</p>
+    <p>&nbsp;</p>
+    <p>De leeftijd van een vrouw is erg bepalend voor haar vruchtbaarheid. Hoe ouder, hoe minder vruchtbaar. Als je moeite hebt met zwanger worden is de kans 30% dat dit aan jou ligt en 30% dat het probleem bij je partner zit. </p>
+    <p>In 30% van de gevallen is zowel de vrouw als de man onvruchtbaar. Bij 10% van alle stellen wordt er geen oorzaak van de onvruchtbaarheid gevonden.</p>
+    <p>&nbsp;</p>
+    <p>Je levensstijl kan ervoor zorgen dat je minder gemakkelijk zwanger wordt. De volgende zaken hebben een negatieve invloed op de vruchtbaarheid van de vrouw: cafeïne, alcohol, roken, medicatie, drugs, onder- en overgewicht, soa&rsquo;s, te veel sporten, stress, werken met schadelijke stoffen of straling, verstoring van het dag- en nachtritme. De vruchtbaarheid van de man wordt negatief beïnvloed door: alcohol, roken, medicatie, drugs, koorts, soa&rsquo;s, te veel sporten, stress, werken met schadelijke stoffen of straling, verstoring van het dag- en nachtritme en lange deelname aan het verkeer.</p>
+    <p><br>
+      </ div>   
+    </p>
+    <div id="idElement3">
+    <h1 class="info_knop">Bevruchting</h1><br>
+    Om een eicel te kunnen bevruchten, moeten de spermacellen van de man deze eerst bereiken. <br>
+    Wanneer dit gebeurt, is er sprake van bevruchting, waarna de genen zich mengen en de cel gaat zich delen en innestelen.<br>
+    </ div> 
+    <div id="idElement4">
+      <h1 class="info_knop">Advies</h1><br>
+      <p>Als je zwanger wil worden, is het belangrijk om je lichaam goed te verzorgen. </p>
+      <p>Bijvoorbeeld door foliumzuur te slikken en gezond te eten.</p>
+      <p> Zo vergroot je de kans op een probleemloze zwangerschap en een gezond kindje.</p> </ div>  
+        <a class="toNav" href="#nav-list">Terug naar boven</a></p>
+    </div>
   
   </div>
   <footer id="footer">
