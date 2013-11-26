@@ -42,7 +42,7 @@
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
-		  <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
@@ -57,11 +57,11 @@
   <div class="blauwelijn"></div>
   <div id="tussen_balk"></div>
   <div id="titelbalk">Informatie</div>
-  <hr class="schaduw_lijn"></hr>
-  <div id="container_content">
-  <br/>
-  <br/>
-  <? 
+  <hr class="schaduw_lijn">
+  </hr>
+  <div id="container_content"> <br/>
+    <br/>
+    <? 
 	$naam = $_REQUEST['naam'];
 	$naam = htmlspecialchars($naam);
 	$provincie = $_REQUEST['provincie'];
@@ -70,48 +70,35 @@
 	$datum = htmlspecialchars($datum);
 	$geslacht = $_REQUEST['geslacht'];
 	$geslacht = htmlspecialchars($geslacht);
-  
-  	
-  $opdracht = "SELECT * FROM babykaartjes WHERE naam OR roepnaam = $naam AND provincie = $provincie AND geboortedatum = $datum AND geslacht = $geslacht"; 		
-  $result = mysql_query($opdracht);
-while ($Rij = mysql_fetch_array($result)){
+	
+	
+	$opdracht = "SELECT * FROM babykaartjes WHERE naam OR roepnaam = $naam AND provincie = $provincie AND geboortedatum = $datum AND geslacht = $geslacht"; 		
+	$result = mysql_query($opdracht);
+	while ($Rij = mysql_fetch_array($result)){
 	echo "";
 	
-}
-   ?>
+	}
+	?>
     <div class="tab">
-               <input type="radio" id="tab-1" name="tab-group-1" checked>
-               <label for="tab-1">Algemeen</label>
-               
-               <div class="content">
-                   Algemene info
-               </div> 
-           </div>
-           <div class="tab">
-               <input type="radio" id="tab-2" name="tab-group-1">
-               <label for="tab-2">Info</label>
-               
-               <div class="content">
-                   Informatie
-               </div> 
-           </div>
-            <div class="tab">
-               <input type="radio" id="tab-3" name="tab-group-1">
-               <label for="tab-3">Quote</label>
-             
-               <div class="content">
-                   Quote voor de baby
-               </div> 
-           </div>
+      <input type="radio" id="tab-1" name="tab-group-1" checked>
+      <label for="tab-1">Algemeen</label>
+      <div class="content"> Algemene info </div>
+    </div>
+    <div class="tab">
+      <input type="radio" id="tab-2" name="tab-group-1">
+      <label for="tab-2">Info</label>
+      <div class="content"> Informatie </div>
+    </div>
+    <div class="tab">
+      <input type="radio" id="tab-3" name="tab-group-1">
+      <label for="tab-3">Quote</label>
+      <div class="content"> Quote voor de baby </div>
+    </div>
   </div>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
-      <div id="footer_socialmedia_iconen">
-        <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp;
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp;
-        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a>
-      </div>
+      <div id="footer_socialmedia_iconen"> <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp; <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a> </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
       </div>

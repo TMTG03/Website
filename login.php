@@ -106,7 +106,7 @@
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
-		  <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
@@ -121,16 +121,19 @@
   <div class="blauwelijn"></div>
   <div id="tussen_balk"></div>
   <div id="titelbalk">Login</div>
-  <hr class="schaduw_lijn"></hr>
+  <hr class="schaduw_lijn">
+  </hr>
   <br/>
   <br/>
-  <div id="container_content">
+  <div id="container_content"> 
     <!-- filteren of er op uitloggen is geklikt-->
-	<? if (!empty($_GET['logout'])) { ?>
-    U bent sucessvol uitgelogd <br /><br />
+    <? if (!empty($_GET['logout'])) { ?>
+    U bent sucessvol uitgelogd <br />
+    <br />
     <!-- weergeven als er niet ingelogd kon worden -->
     <? } if ($fout == 1) { ?>
-    Incorrecte gebruikersnaam en / of wachtwoord! <br /><br />
+    Incorrecte gebruikersnaam en / of wachtwoord! <br />
+    <br />
     <!-- weergeven als de account nog niet is geactiveerd -->
     <? } else if ($active == 1) { ?>
     U hebt uw account nog niet geactiveerd<br />
@@ -151,11 +154,12 @@
           <input type="password" name="password" id="password" value="" class="requiredField password" required />
         </li>
         <li>
-          <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit">Inloggen</button>              </li>
-            </ul>
+          <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit">Inloggen</button>
+        </li>
+      </ul>
     </form>
-	</br>
-	</br>
+    </br>
+    </br>
     Nog geen inlog gegevens? <a href="registreren.php">Registreer nu!</a> </div>
   <footer id="footer">
     <div class="blauwelijn"></div>

@@ -54,7 +54,7 @@ $(document).ready(function() {
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
-		  <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
@@ -86,8 +86,9 @@ $(document).ready(function() {
           <div class="slide-desc">
             <h2>Baby 3</h2>
             <p>Beschrijving</p>
-          </div>              </li>
-            </ul>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="grijzelijn_dun"></div>
@@ -97,55 +98,54 @@ $(document).ready(function() {
       <h4 class="zoekbar_links_summary">Zoek een geboortekaartje</h4>
     </div>
     <div id="zoekbar_rechts">
-      <div id="zoekbar_rechts_header">
-        <div id="zoekbar_rechts_vak1">Naam:</div>
-        <div id="zoekbar_rechts_vak2">Provincie:</div>
-        <div id="zoekbar_rechts_vak3">Geboortedatum:</div>
-        <div id="zoekbar_rechts_vak4">M/V</div>
-      </div>
-      <div id="zoekbar_rechts_input">
-       <form id="form_zoek" class="form_zoek" method="post" action="zoeken.php">
-        <div id="zoekbar_rechts_vak1_onder">
-          <input type="text" name="naam" />
-        </div>
-        <div id="zoekbar_rechts_vak2_onder" class="dropdownpijl">
-          <select name="provincie">
-            <option style="color: #cccccc;">Selecteer provincie</option>
-            <optgroup label="Noord Nederland">
-            <option value="Groningen">Groningen</option>
-            <option value="Friesland">Friesland</option>
-            <option value="Drenthe">Drenthe</option>
-            <option value="Noord-Holland">Noord-Holland</option>
-            </optgroup>
-            <optgroup label="Midden Nederland">
-            <option value="Overijsel">Overijsel</option>
-            <option value="Gelderland">Gelderland</option>
-            <option value="Utrecht">Utrecht</option>
-            <option value="Zuid-Holland">Zuid-Holland</option>
-            <option value="Flevoland">Flevoland</option>
-            </optgroup>
-            <optgroup label="Zuid Nederland">
-            <option value="Zeeland">Zeeland</option>
-            <option value="Noord-Brabant">Noord-Brabant</option>
-            <option value="Limburg">Limburg</option>
-            </optgroup>
-          </select>
-        </div>
-        <div id="zoekbar_rechts_vak3_onder">
-          <input type="text" name="datum" class="dropdownkalender" placeholder="dd-mm-YYYY" />
-        </div>
-        <div id="zoekbar_rechts_vak4_onder">
-          <select id="MVselect" name="geslacht">
-            <option value="man">M</option>
-            <option value="vrouw">V</option>
-          </select>
-        </div>
-        <div id="zoekbar_rechts_vak5_onder">
-           <button class='buttonzoek' style="width: 125px; height: 36px; float: left; text-align: center; " type="submit">Zoeken</button>
-          
-        </div>
-      </div>
+    <div id="zoekbar_rechts_header">
+      <div id="zoekbar_rechts_vak1">Naam:</div>
+      <div id="zoekbar_rechts_vak2">Provincie:</div>
+      <div id="zoekbar_rechts_vak3">Geboortedatum:</div>
+      <div id="zoekbar_rechts_vak4">M/V</div>
     </div>
+    <div id="zoekbar_rechts_input">
+    <form id="form_zoek" class="form_zoek" method="post" action="zoeken.php">
+      <div id="zoekbar_rechts_vak1_onder">
+        <input type="text" name="naam" />
+      </div>
+      <div id="zoekbar_rechts_vak2_onder" class="dropdownpijl">
+        <select name="provincie">
+          <option style="color: #cccccc;">Selecteer provincie</option>
+          <optgroup label="Noord Nederland">
+          <option value="Groningen">Groningen</option>
+          <option value="Friesland">Friesland</option>
+          <option value="Drenthe">Drenthe</option>
+          <option value="Noord-Holland">Noord-Holland</option>
+          </optgroup>
+          <optgroup label="Midden Nederland">
+          <option value="Overijsel">Overijsel</option>
+          <option value="Gelderland">Gelderland</option>
+          <option value="Utrecht">Utrecht</option>
+          <option value="Zuid-Holland">Zuid-Holland</option>
+          <option value="Flevoland">Flevoland</option>
+          </optgroup>
+          <optgroup label="Zuid Nederland">
+          <option value="Zeeland">Zeeland</option>
+          <option value="Noord-Brabant">Noord-Brabant</option>
+          <option value="Limburg">Limburg</option>
+          </optgroup>
+        </select>
+      </div>
+      <div id="zoekbar_rechts_vak3_onder">
+        <input type="text" name="datum" class="dropdownkalender" placeholder="dd-mm-YYYY" />
+      </div>
+      <div id="zoekbar_rechts_vak4_onder">
+        <select id="MVselect" name="geslacht">
+          <option value="man">M</option>
+          <option value="vrouw">V</option>
+        </select>
+      </div>
+      <div id="zoekbar_rechts_vak5_onder">
+        <button class='buttonzoek' style="width: 125px; height: 36px; float: left; text-align: center; " type="submit">Zoeken</button>
+      </div>
+      </div>
+      </div>
     </form>
   </div>
   <div id="container_content">
@@ -171,11 +171,7 @@ $(document).ready(function() {
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
-      <div id="footer_socialmedia_iconen">
-        <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp;
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp;
-        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a>
-      </div>
+      <div id="footer_socialmedia_iconen"> <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp; <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a> </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
       </div>

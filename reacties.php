@@ -59,48 +59,45 @@ $(document).ready(function() {
   </div>
   <div class="blauwelijn"></div>
   <div id="container_content">
-  <?
-  if((isset($_POST["reageer"]))) {
-	  $reactie = $_REQUEST['bericht'];
-	  //datum ophalen
-	  $now = time();
-	  $num = date("w");
-	  if ($num == 0)
-   	  { $sub = 6; }
-	  else { $sub = ($num-1); }
-	  $WeekMon  = mktime(0, 0, 0, date("m", $now)  , date("d", $now)-$sub, date("Y", $now));
-	  $todayh = getdate($WeekMon); 
+    <?
+if((isset($_POST["reageer"]))) {
+$reactie = $_REQUEST['bericht'];
+//datum ophalen
+$now = time();
+$num = date("w");
+if ($num == 0)
+{ $sub = 6; }
+else { $sub = ($num-1); }
+$WeekMon  = mktime(0, 0, 0, date("m", $now)  , date("d", $now)-$sub, date("Y", $now));
+$todayh = getdate($WeekMon); 
 
-	  $d = $todayh[mday] + 1;
-	  $m = $todayh[mon];
-	  $y = $todayh[year];
-	  //eind datum ophalen
-	  $datumreactie = ("$d-$m-$y");
-	  $gebruikersnaam = $_SESSION['gebruikersession'];
-	  $idbabykaart;
-	  $opdracht = "SELECT * FROM babykaartjes WHERE id='$idbabykaart'";
-	  $opdracht2 = "INSERT INTO reacties (babyid, bericht, datumreactie, gebruikersnaam) VALUES ('$idbabykaart', '$reactie', '$datumreactie', '$gebruikersnaam')";
-	  if(mysql_error){
-		  echo mysql_error;
-		  }
-  }else{
-  ?>
-  <form action="info2.php" method="post">
-  Reactie: <textarea name="bericht" cols="" rows="">
-  </textarea>
-  <br>
-  <input name="reageer" value="Reageer" type="submit">
-  </form>
-  <? } ?>
-  </div>  
+$d = $todayh[mday] + 1;
+$m = $todayh[mon];
+$y = $todayh[year];
+//eind datum ophalen
+$datumreactie = ("$d-$m-$y");
+$gebruikersnaam = $_SESSION['gebruikersession'];
+$idbabykaart;
+$opdracht = "SELECT * FROM babykaartjes WHERE id='$idbabykaart'";
+$opdracht2 = "INSERT INTO reacties (babyid, bericht, datumreactie, gebruikersnaam) VALUES ('$idbabykaart', '$reactie', '$datumreactie', '$gebruikersnaam')";
+if(mysql_error){
+echo mysql_error;
+}
+}else{
+?>
+    <form action="info2.php" method="post">
+      Reactie:
+      <textarea name="bericht" cols="" rows="">
+</textarea>
+      <br>
+      <input name="reageer" value="Reageer" type="submit">
+    </form>
+    <? } ?>
+  </div>
   <div id="footer">
-  <div class="blauwelijn"></div>
+    <div class="blauwelijn"></div>
     <div id="footer_content">
-      <div id="footer_socialmedia_iconen">
-        <a href="http://www.google.nl" target="_blank"><img src="img/google.png" /></a>&nbsp;
-        <a href="http://www.facebook.com" target="_blank"><img src="img/facebook.png" /></a>&nbsp;
-        <a href="http://www.twitter.com" target="_blank"><img src="img/twitter.png" /></a>&nbsp;
-      </div>
+      <div id="footer_socialmedia_iconen"> <a href="http://www.google.nl" target="_blank"><img src="img/google.png" /></a>&nbsp; <a href="http://www.facebook.com" target="_blank"><img src="img/facebook.png" /></a>&nbsp; <a href="http://www.twitter.com" target="_blank"><img src="img/twitter.png" /></a>&nbsp; </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
       </div>

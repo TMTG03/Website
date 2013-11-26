@@ -91,9 +91,9 @@
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
-		  <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
-          <li class='last'><a href='#'><span>Contact</span></a></li>
+          <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
           <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
@@ -104,23 +104,30 @@
     </div>
   </div>
   <div class="blauwelijn"></div>
-  <div id="titel">Registreren</div>
-  <div id="container_content">
-	<? if ($verstuurd) { 
-         if (isset($_GET['registreren'])) {
-		  // terug linken naar registreren.php
-          header("Location: registreren.php?registreren=true"); 
-          die("doorlinken naar registreren.php");
-         }
+  <div id="tussen_balk"></div>
+  <div id="titelbalk">Registreren</div>
+  <hr class="schaduw_lijn">
+  </hr>
+  <br/>
+  <br/>
+  <div id="container_content"> 
+    <? if ($verstuurd) { 
+       if (isset($_GET['registreren'])) {
+		 // terug linken naar registreren.php
+         header("Location: registreren.php?registreren=true"); 
+         die("doorlinken naar registreren.php");
+       }
     ?>
-      <!-- weergeven als de activatie email nogmaals verstuurd is -->
-      De activatie email is succesvol opnieuw naar uw email adres verzonden<br /><br />
-      <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
+    <!-- weergeven als de activatie email nogmaals verstuurd is --> 
+    De activatie email is succesvol opnieuw naar uw email adres verzonden<br />
+    <br />
+    <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
     <? } else { ?>
-      <!-- weergeven als er wat verkeerds is gegaan -->
-      De activatie email kon niet worden verzonden<br />
-      probeer het later nog eens<br />
+    <!-- weergeven als er wat verkeerds is gegaan --> 
+    De activatie email kon niet worden verzonden<br />
+    probeer het later nog eens<br />
     <? } ?>
+  </div>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">

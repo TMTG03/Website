@@ -99,9 +99,9 @@ if ($row['active'] == 0) {
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
-		  <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
-          <li class='last'><a href='#'><span>Contact</span></a></li>
+          <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
           <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
@@ -112,20 +112,28 @@ if ($row['active'] == 0) {
     </div>
   </div>
   <div class="blauwelijn"></div>
-  <div id="titel">Inloggen</div>
-  <div id="container_content">
+  <div id="tussen_balk"></div>
+  <div id="titelbalk">Account activeren</div>
+  <hr class="schaduw_lijn">
+  </hr>
+  <br/>
+  <br/>
+  <div id="container_content"> 
     <!-- weergeven als de account al was geactiveerd-->
     <? if ($was_actief == true) { ?>
-       Uw account is al geactiveerd<br /><br />
-       <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
+    Uw account is al geactiveerd<br />
+    <br />
+    <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
     <!-- weergeven of de account is geactiveerd of niet -->
-	<? } else if ($active == "true") { ?>
-       Uw account is succesvol geactiveerd<br /><br />
-       <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
+    <? } else if ($active == "true") { ?>
+    Uw account is succesvol geactiveerd<br />
+    <br />
+    <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
     <? } else { ?>
-       Uw account kon niet worden geactiveerd<br />
-       Probeer het later nog eens<br />
+    Uw account kon niet worden geactiveerd<br />
+    Probeer het later nog eens<br />
     <? } ?>
+  </div>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
