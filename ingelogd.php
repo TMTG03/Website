@@ -1,62 +1,15 @@
-<? require_once("connection.php"); 
-
-$query = " 
-	SELECT
-		active
-	FROM 
-		users
-	WHERE 
-		gebruikersnaam = :username
-	AND
-		email = :email
-";
-$query_params = array(
-	':username' => $_GET['gebruiker'],
-	':email' => $_GET['email']
-); 
- 
-try {
-	$stmt = $db->prepare($query); 
-	$result = $stmt->execute($query_params);
-} catch(PDOException $ex) {
-	die("FOUT: " . $ex->getMessage()); 
-}
-
-$row = $stmt->fetch(); 
-
-if ($row['active'] == 0) {
-	$query = " 
-		UPDATE 
-			users
-		SET
-			active=1
-		WHERE 
-			gebruikersnaam = :username
-		AND
-			email = :email
-	";
-	$query_params = array(
-		':username' => $_GET['gebruiker'],
-		':email' => $_GET['email']
-	); 
-	 
-	try {
-		$stmt = $db->prepare($query); 
-		$result = $stmt->execute($query_params);
-		$active = "true";
-	} catch(PDOException $ex) {
-		die("FOUT: " . $ex->getMessage()); 
-	}
-} else {
-	$was_actief = true;
-}
-
-?>
+<? require_once('connection.php'); 
+if(empty($_SESSION['user'])) { 
+	header("Location: login.php"); 
+	die("Doorlinken naar login.php");
+} ?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
 <meta charset="utf-8">
-<title>.: Inloggen :.</title>
+<title>.: Profiel :.</title>
+<link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
 <link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
 <link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
@@ -94,8 +47,12 @@ if ($row['active'] == 0) {
           <? } else { ?>
 		  <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
+          <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <li class='last'><a href='#'><span>Contact</span></a></li>
+          <? } else { ?>
+		  <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <? } ?>
+          <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
           <div id="styleswitchvak1"><a href="#" onclick="setActiveStyleSheet('default'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
@@ -106,22 +63,22 @@ if ($row['active'] == 0) {
     </div>
   </div>
   <div class="blauwelijn"></div>
-  <div id="titel">Inloggen</div>
+  <div id="tussen_balk"></div>
+  <div id="titelbalk">Mijn profiel</div>
+  <hr class="schaduw_lijn"></hr>
   <div id="container_content">
-    <? if ($was_actief == true) { ?>
-       Uw account is al geactiveerd<br /><br />
-       <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
-	<? } else if ($active == "true") { ?>
-       Uw account is succesvol geactiveerd<br /><br />
-       <a href="login.php">Klik hier</a> om terug te gaan naar het inlog formulier<br />
-    <? } else { ?>
-       Uw account kon niet worden geactiveerd<br />
-       Probeer het later nog eens<br />
-    <? } ?>
+  <br/>
+  <br/>
+ 
+  </div>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
-      <div id="footer_socialmedia_iconen"> <a href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp; <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a> </div>
+      <div id="footer_socialmedia_iconen">
+        <a href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/google.png" alt="" /></a>&nbsp;
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/facebook.png" alt="" /></a>&nbsp;
+        <a href="http://twitter.com/home?status=http://tmtg03.ict-lab.nl/website" target="_blank"><img src="img/twitter.png" alt="" /></a>
+      </div>
       <div id="footer_copyright">
         <p class="copyright_tekst">&copy; 2013 www.babyberichten.nl</p>
       </div>

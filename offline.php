@@ -2,7 +2,7 @@
 <html manifest="thema.appcache">
 <head>
 <meta charset="utf-8">
-<title>.: Inloggen :.</title>
+<title>.: Offline :.</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
 <link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
 <link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
@@ -35,7 +35,11 @@
               </li>
             </ul>
           </li>
-          <li><a href='info.php'><span>Informatie</span></a></li>
+          <? if(empty($_SESSION['user'])) { ?>
+          <li><a href='login.php'><span>Inloggen</span></a></li>
+          <? } else { ?>
+		  <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <? } ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <li class='last'><a href='#'><span>Contact</span></a></li>
         </ul>

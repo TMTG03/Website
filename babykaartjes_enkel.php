@@ -1,65 +1,11 @@
-<? 
-    require_once("connection.php");
-    if(!empty($_SESSION['user'])) { 
-        header("Location: ingelogd.php"); 
-        die("Doorlinken naar ingelogd.php"); 
-	}
-    $submitted_username = '';
-	if(!empty($_POST)) {
-        $query = " 
-            SELECT 
-                *
-            FROM users 
-            WHERE 
-                gebruikersnaam = :username 
-        ";
-        $query_params = array( 
-            ':username' => $_POST['username'] 
-        ); 
-         
-        try {
-            $stmt = $db->prepare($query); 
-            $result = $stmt->execute($query_params); 
-        } catch(PDOException $ex) {
-            die("FOUT: " . $ex->getMessage()); 
-        }
-        $login_ok = false;
-        $row = $stmt->fetch(); 
-        if($row) {
-            $check_password = hash('sha256', $_POST['password'] . $row['salt']); 
-            for($round = 0; $round < 65536; $round++) { 
-                $check_password = hash('sha256', $check_password . $row['salt']); 
-            } 
-             
-            if($check_password === $row['wachtwoord']) {
-                $login_ok = true;
-				if ($row['active'] == "0") {
-					$active = 1;
-					$login_ok = false;
-				}
-            }
-        }
-        if($login_ok) {
-			
-            unset($row['salt']); 
-            unset($row['password']);
-            $_SESSION['user'] = $row;
-			header("Location: ingelogd.php"); 
-            die("Doorlinken naar: ingelogd.php");
-        } else {
-			if ($active != 1)
-            $fout = 1;
-            $submitted_username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8'); 
-        } 
-    } 
-?>
+<? require_once('connection.php') ?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
 <meta charset="utf-8">
-<title>.: Login :.</title>
-<link rel="icon" href="img/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<title>.: Babykaartjes :.</title>
+<link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
 <link rel="roze stylesheet" type="text/css" href="css/style_roze.css" title="roze" />
 <link rel="blauwroze stylesheet" type="text/css" href="css/style_blauw_roze.css" title="blauwroze" />
@@ -88,7 +34,7 @@
                 <ul>
                   <li><a href='#'><span>tekst</span></a></li>
                   <li class='last'><a href='#'><span>tekst</span></a></li>
-                </ul>
+                </ul>ß
               </li>
             </ul>
           </li>
@@ -110,40 +56,29 @@
   </div>
   <div class="blauwelijn"></div>
   <div id="tussen_balk"></div>
-  <div id="titelbalk">Login</div>
-  <hr class="schaduw_lijn"></hr>
-  <br/>
-  <br/>
-  <div id="container_content">
-	<? if (!empty($_GET['logout'])) { ?>
-    U bent sucessvol uitgelogd <br /><br />
-    <? } if ($fout == 1) { ?>
-    Incorrecte gebruikersnaam en / of wachtwoord! <br /><br />
-    <? } else if ($active == 1) { ?>
-    U hebt uw account nog niet geactiveerd<br />
-    Klik op de link in uw e-mail inbox om uw account te activeren <br />
-    <br />
-    <? $link = "activation_mail.php?gebruiker=" . htmlspecialchars($_POST['username']) . "&email=" . htmlspecialchars($row['email']) ?>
-    <a href=<? echo $link ?>>Klik hier</a> om de activatie e-mail nogmaals te versturen<br />
-    <? } ?>
-    <form id="form" class="form" method="post">
-      <ul>
-        <li>
-          <label for="username">Gebruikersnaam:</label>
-          <input type="text" name="username" id="username" value="<? echo $submitted_username; ?>" class="requiredField username" required />
-        </li>
-        <li>
-          <label for="password">Wachtwoord:</label>
-          <input type="password" name="password" id="password" value="" class="requiredField password" required />
-        </li>
-        <li>
-          <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit">Inloggen</button>
-        </li>
-      </ul>
-    </form>
-	</br>
-	</br>
-    Nog geen inlog gegevens? <a href="registreren.php">Registreer nu!</a> </div>
+  <div id="titelbalk">El babykaartjes</div>
+  <hr class="schaduw_lijn">
+  </hr>
+  <div id="container_content"> <br/>
+    <br/>
+    <div class="tabs">
+      <div class="tab">
+        <input type="radio" id="tab-1" name="tab-group-1" checked>
+        <label for="tab-1">Algemeen</label>
+        <div class="content"> Algemene info </div>
+      </div>
+      <div class="tab">
+        <input type="radio" id="tab-2" name="tab-group-1">
+        <label for="tab-2">Info</label>
+        <div class="content"> Informatie </div>
+      </div>
+      <div class="tab">
+        <input type="radio" id="tab-3" name="tab-group-1">
+        <label for="tab-3">Quote</label>
+        <div class="content"> Quote voor de baby </div>
+      </div>
+    </div>
+  </div>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">

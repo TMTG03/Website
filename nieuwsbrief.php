@@ -13,7 +13,12 @@
 				die("FOUT: " . $ex->getMessage()); 
 				$PDOException = true;
 			} 
-
+			while($rs=$stmt->fetch()){
+    $rs['qty']=$_SESSION['basket'][$rs['productid']];
+    $rs['total'] += $rs['qty']*$rs['price'];
+    $total += $rs['total'];
+    $a[] = $rs;
+}
 
 
 
