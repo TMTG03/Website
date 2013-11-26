@@ -142,6 +142,21 @@
 			minLength: 2
 		});
 	});
+	
+	$(document).ready(function() {
+    var elements = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].oninvalid = function(e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                e.target.setCustomValidity("Vul dit veld in");
+            }
+        };
+        elements[i].oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    }
+})
 	</script>
 </head>
 
@@ -170,7 +185,11 @@
             </ul>
           </li>
           <li><a href='info.php'><span>Informatie</span></a></li>
+          <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
+          <? } else { ?>
+          <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -188,7 +207,10 @@
   <br/>
   <br/>
   <div id="container_content">
-  	<? if (isset($_GET['uploaden'])) { ?>
+  	<? if (isset($_GET['uploaden'])) { 
+			include('resizeplaatje.php');
+			extensiecheck();
+	?>
        U heeft succesvol een babykaartje geupload!<br /><br />
     <? } else if (!$sucess) {
        if ($fout_naam) { ?>
@@ -306,6 +328,11 @@
         <li>
           <label for="moeder">Moeder:</label>
           <input type="text" name="moeder" id="moeder" class="moeder" value="<? echo htmlentities($_POST['moeder'], ENT_QUOTES, 'UTF-8'); ?>" />
+        </li>
+        <li>
+        	
+        	<label for="checkbox">Ik accepteer de algemene <a href="voorwaarden.php" target="_blank">voorwaarden</a></label>
+            <input name="checkbox" value="checkbox" type="checkbox" id="checkbox" style=" width: 22px; height: 22px" required x-moz-errormessage="Accepteer de voorwaarden." />
         </li>
         <li>
           <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit" name="uploaden">Uploaden</button>
