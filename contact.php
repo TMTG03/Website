@@ -44,12 +44,12 @@ jQuery(document).ready(function(){
               </li>
             </ul>
           </li>
+          <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
 		  <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
-          <li><a href='login.php'><span>Inloggen</span></a></li>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -151,9 +151,8 @@ jQuery(document).ready(function(){
                     <textarea id="bericht" name="bericht" rows="8" style="width: 400px;" required>' . (isset($_POST['bericht']) ? htmlspecialchars($_POST['bericht']) : '') . '</textarea>
                     </li>
 					<li>
-					<button name="submit" id="submit" class="buttonzoek" type="submit" style="width: 125px; line-height: 10px">Versturen</button>
-					</li>
-					</ul>
+					<button name="submit" id="submit" class="buttonzoek" type="submit" style="width: 125px; line-height: 10px">Versturen</button>              </li>
+            </ul>
                 </form>';
 		      // versturen naar
               } else {      

@@ -102,12 +102,12 @@
               </li>
             </ul>
           </li>
+          <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
 		  <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
-          <li><a href='login.php'><span>Inloggen</span></a></li>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -151,9 +151,8 @@
           <input type="password" name="password" id="password" value="" class="requiredField password" required />
         </li>
         <li>
-          <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit">Inloggen</button>
-        </li>
-      </ul>
+          <button class='buttonzoek' style="width: 125px; line-height: 10px; text-align: center;" type="submit">Inloggen</button>              </li>
+            </ul>
     </form>
 	</br>
 	</br>

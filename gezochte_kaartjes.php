@@ -38,12 +38,12 @@
               </li>
             </ul>
           </li>
+          <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
 		  <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
-          <li><a href='login.php'><span>Inloggen</span></a></li>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
