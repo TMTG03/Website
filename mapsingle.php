@@ -15,7 +15,7 @@
 $id = $_GET["id"];
 
 require_once("connection.php");
-$opdracht = "SELECT adres FROM babykaartjes WHERE id='$id'";
+$opdracht = "SELECT * FROM babykaartjes WHERE id='$id'";
 try {
         $stmt = $db->prepare($opdracht); 
         $result = $stmt->execute();
@@ -50,8 +50,8 @@ echo $url;
 function initialize() {
   var SchoolLatlng = new google.maps.LatLng(51.9274743,4.4782271);
   var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
-  var meisje = 'location of image';
-  var jongen = 'location of image';
+  var meisje = 'img/markerMeisje.png';
+  var jongen = 'img/markerJongen.png';
   var mapOptions = {
 	streetViewControl: false,
 	panControl: false,
@@ -66,6 +66,7 @@ function initialize() {
   var marker2 = new google.maps.Marker({
       position: getLatlng,
       map: map,
+	  icon: <? if($rij[geslacht] == "jongen"){ ?>jongen,<? }else{ ?>meisje,<? } ?>
       title: 'Hello World!'
 	  });
 }
