@@ -43,7 +43,7 @@ echo mysql_error();
 			zoomControl: false,
 			mapTypeControl: false,
 			overviewMapControl: false,
-			zoom: 14,
+			zoom: 9,
 			center: SchoolLatlng
 		}
 		
@@ -53,7 +53,7 @@ echo mysql_error();
 			position: SchoolLatlng,
 			map: map,
 			icon: school,
-			title: 'Hello World!'	
+			title: 'Grafisch Lyceum Rotterdam'	
 		});
 		
 		<?
@@ -65,22 +65,25 @@ echo mysql_error();
 			$obj = json_decode($source); 
 			$lat = $obj->results[0]->geometry->location->lat;
 			$long = $obj->results[0]->geometry->location->lng;
+			$idco = $rij[id];
 		?>
+		
 			var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
+						
 			
-			var infowindow = new google.maps.InfoWindow({
-				content: contentString
-			});
-			
-			var contentString = '<div id="content">'+
-			'<div id="siteNotice">'+
+			var mijnkaart<? echo $rij[id];?> = '<div id="content<? echo $rij[id];?>">'+
+			'<div id="siteNotice<? echo $rij[id];?>">'+
 			'</div>'+
-			'<h1 id="firstHeading" class="firstHeading"><? echo $rij["roepnaam"]; ?></h1>'+
-			'<div id="bodyContent">'+
+			'<h1 id="firstHeading<? echo $rij[id];?>" class="firstHeading<? echo $rij[id];?>"><? echo $rij["roepnaam"]; ?></h1>'+
+			'<div id="bodyContent<? echo $rij[id];?>">'+
 			'<p>Geboortedatum: <? echo $rij["geboortedatum"]; ?></p>'+
 			'<p>Quote: <? echo $rij["quote"]; ?></p>'+
 			'</div>'+
 			'</div>';
+			
+			var infowindow<? echo $rij[id];?> = new google.maps.InfoWindow({
+				content: mijnkaart<? echo $rij[id];?>
+			});
 			
 			var marker<? echo $rij[id];?> = new google.maps.Marker({
 				position: getLatlng,
@@ -89,11 +92,12 @@ echo mysql_error();
 				title: 'Baby Berichten'
 			});
 			
+			
 			google.maps.event.addListener(marker<? echo $rij[id];?>, 'click', function() {
-				infowindow.open(map,marker<? echo $rij[id];?>);
+				infowindow<? echo $rij[id];?>.open(map,marker<? echo $rij[id];?>);
 			});
 			
-		<? } ?>
+		<? } ?>	
 	
 	}
 	
