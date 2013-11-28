@@ -4,106 +4,120 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Babyberichten</title>
-</head>
-  <body>
-      <style>
+</head>	
+  <body> 
+  <!--Maps style -->     
+	<style>
       html, body, #map-canvas {
         height: 100%;
         margin: 0px;
         padding: 0px;
       }
     </style>
-<?
-require_once("connection.php");
-$opdracht = "SELECT * FROM babykaartjes";
-try {
-        $stmt = $db->prepare($opdracht); 
-        $result = $stmt->execute();
-} catch(PDOException $ex) {
-        // TODO: verwijder de 'die' op uiteindelijke website
-        die("FOUT: " . $ex->getMessage()); 
-}
-$rij = $stmt->fetch();
-echo mysql_error();
+	<?
+	require_once("connection.php"); //including connection
 
-?>
-
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-
-<script type="text/javascript">
-	function initialize() {
-		
-		var SchoolLatlng = new google.maps.LatLng(51.9274743,4.4782271);
-		var meisje = 'img/markerMeisje.png';
-		var jongen = 'img/markerJongen.png';
-		var school = 'img/markerGlr.png';
-		var mapOptions = {
-			streetViewControl: false,
-			panControl: false,
-			zoomControl: false,
-			mapTypeControl: false,
-			overviewMapControl: false,
-			zoom: 9,
-			center: SchoolLatlng
-		}
-		
-		var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		
-		var marker = new google.maps.Marker({
-			position: SchoolLatlng,
-			map: map,
-			icon: school,
-			title: 'Grafisch Lyceum Rotterdam'	
-		});
-		
-		<?
-		while ($rij = $stmt->fetch()){ 
-			$adres = "$rij[adres]";
-			$adres = str_replace(" ", "+", $adres);
-			$url='http://maps.googleapis.com/maps/api/geocode/json?address='.$adres.'+Netherlands+NL&sensor=false';
-			$source = file_get_contents($url);
-			$obj = json_decode($source); 
-			$lat = $obj->results[0]->geometry->location->lat;
-			$long = $obj->results[0]->geometry->location->lng;
-			$idco = $rij[id];
-		?>
-		
-			var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
-						
-			
-			var mijnkaart<? echo $rij[id];?> = '<div id="content<? echo $rij[id];?>">'+
-			'<div id="siteNotice<? echo $rij[id];?>">'+
-			'</div>'+
-			'<h1 id="firstHeading<? echo $rij[id];?>" class="firstHeading<? echo $rij[id];?>"><? echo $rij["roepnaam"]; ?></h1>'+
-			'<div id="bodyContent<? echo $rij[id];?>">'+
-			'<p>Geboortedatum: <? echo $rij["geboortedatum"]; ?></p>'+
-			'<p>Quote: <? echo $rij["quote"]; ?></p>'+
-			'</div>'+
-			'</div>';
-			
-			var infowindow<? echo $rij[id];?> = new google.maps.InfoWindow({
-				content: mijnkaart<? echo $rij[id];?>
-			});
-			
-			var marker<? echo $rij[id];?> = new google.maps.Marker({
-				position: getLatlng,
-				map: map,
-				icon: <? if($rij[geslacht] == "jongen"){ ?>jongen,<? }else{ ?>meisje,<? } ?>
-				title: 'Baby Berichten'
-			});
-			
-			
-			google.maps.event.addListener(marker<? echo $rij[id];?>, 'click', function() {
-				infowindow<? echo $rij[id];?>.open(map,marker<? echo $rij[id];?>);
-			});
-			
-		<? } ?>	
-	
+	//read database >
+	$opdracht = "SELECT * FROM babykaartjes"; 
+	try {
+       		$stmt = $db->prepare($opdracht); 
+      		$result = $stmt->execute();
+	} catch(PDOException $ex) {
+      		// TODO: verwijder de 'die' op uiteindelijke website
+        	die("FOUT: " . $ex->getMessage()); 
 	}
-	
-google.maps.event.addDomListener(window, 'load', initialize);
+	//fetch $rij
+	$rij = $stmt->fetch();
 
-</script>
+	//display error
+	echo mysql_error();
+
+	?>
+	<!--including google maps api-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+	<!--Maps script -->
+	<script type="text/javascript">
+		function initialize() {
+			//setting start lat/lng
+			var SchoolLatlng = new google.maps.LatLng(51.9274743,4.4782271);
+			//custom icons
+			var meisje = 'img/markerMeisje.png';
+			var jongen = 'img/markerJongen.png';
+			var school = 'img/markerGlr.png';
+			//map options
+			var mapOptions = {
+				streetViewControl: false,
+				panControl: false,
+				zoomControl: false,
+				mapTypeControl: false,
+				overviewMapControl: false,
+				zoom: 9,
+				center: SchoolLatlng
+			}
+			//map show
+			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+		
+			//add "main" marker
+			var marker = new google.maps.Marker({
+				position: SchoolLatlng,
+				map: map,
+				icon: school,
+				title: 'Grafisch Lyceum Rotterdam'	
+			});
+		
+			<?
+			//Marker script
+			while ($rij = $stmt->fetch()){ 
+			//convert adress to lat/lng
+				$adres = "$rij[adres]";
+				$adres = str_replace(" ", "+", $adres);
+				$url='http://maps.googleapis.com/maps/api/geocode/json?address='.$adres.'+Netherlands+NL&sensor=false';
+				$source = file_get_contents($url);
+				$obj = json_decode($source); 
+				$lat = $obj->results[0]->geometry->location->lat;
+				$long = $obj->results[0]->geometry->location->lng;
+				$idco = $rij[id];
+			?>
+				//set lat/long for each marker
+				var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
+							
+				//set content for infowindows in each marker
+				var mijnkaart<? echo $rij[id];?> = '<div id="content<? echo $rij[id];?>">'+
+				'<div id="siteNotice<? echo $rij[id];?>">'+
+				'</div>'+
+				'<h1 id="firstHeading<? echo $rij[id];?>" class="firstHeading<? echo $rij[id];?>"><? echo $rij["roepnaam"]; ?></h1>'+
+				'<div id="bodyContent<? echo $rij[id];?>">'+
+				'<p>Geboortedatum: <? echo $rij["geboortedatum"]; ?></p>'+
+				'<p>Quote: <? echo $rij["quote"]; ?></p>'+
+				'</div>'+
+				'</div>';
+				
+				//create infowindow
+				var infowindow<? echo $rij[id];?> = new google.maps.InfoWindow({
+					content: mijnkaart<? echo $rij[id];?>
+				});
+				
+				//create marker
+				var marker<? echo $rij[id];?> = new google.maps.Marker({
+					position: getLatlng,
+					map: map,
+					icon: <? if($rij[geslacht] == "jongen"){ ?>jongen,<? }else{ ?>meisje,<? } ?>
+					title: 'Baby Berichten'
+				});
+				
+				//event listener for infowindow
+				google.maps.event.addListener(marker<? echo $rij[id];?>, 'click', function() {
+					infowindow<? echo $rij[id];?>.open(map,marker<? echo $rij[id];?>);
+				});
+				
+			<? } //end marker script?>	
+		
+		}
+	//load the map	
+	google.maps.event.addDomListener(window, 'load', initialize);
+	
+	</script>
   <div id="map-canvas"></div>
   </body>
 </html>
