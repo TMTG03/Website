@@ -1,6 +1,6 @@
 <? require_once('connection.php') ?>
 <!doctype html>
-<html manifest="thema.appcache">
+<html manifest="thema.appcache" class="no-js" lang="en">
 <head>
 <meta charset="utf-8">
 <title>.: Info :.</title>
@@ -12,8 +12,8 @@
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="scripts/switcher.js"></script>
-<script src="scripts/jquery.scrollTo-1.4.3.1-min.js"></script>
 <script src="scripts/script.js"></script>
+
 </head>
 
 <body>
@@ -61,34 +61,57 @@
   <div id="titelbalk">Informatie</div>
   <hr class="schaduw_lijn"></hr>
   <div id="container_content">
-  <br/>
-  <br/>
-  <h1 class="info_knop">Welkom op de informatie pagina van babyberichten.nl!</h1>
-  Hier vind u de volgende informatie:<p>
-  <a href="info_zwangerschap.php">De zwangerschap</a><p>
-  <a href="info_opvoeding.php">Opvoeding</a><p>
-  <a href="info_webshops.php">Webshops</a><p><br>
-  <div id="idElement1">
-     <h1 class="info_knop">Over de website</h1>
-     <p>
+  		<div class="uitklappen vertical">
+		  <section id="vertabout">
+		      <h2><a href="#vertabout">Over de website</a></h2>
+     <br><p>
      Welkom op de website van babyberichten.nl, hier kunt u de volgende dingen doen:<p><br>
-     -	Informatie over de zwangerschap opzoeken.<p>
-     -	Geboortekaartjes zoeken die gefilterd kunnen worden per provincie.<p>
-     -	Zelf Geboortekaartjes uploaden.<p>
-     - 	Aanmelden voor de automatische nieuwsbrief.<p>
-     -	En een kaart bekijken met alle geboortekaartjes erop.<p><br>
+     -        Informatie over de zwangerschap opzoeken.<p>
+     -        Geboortekaartjes zoeken die gefilterd kunnen worden per provincie.<p>
+     -        Zelf Geboortekaartjes uploaden.<p>
+     -         Aanmelden voor de automatische nieuwsbrief.<p>
+     -        En een kaart bekijken met alle geboortekaartjes erop.<p><br>
      
-     <h1 class="info_knop">Werking van de site</h1>
-    <p><br>
+     <br>
      Op de hoofdpagina kunt u gelijk gemakkelijk zoeken naar geboortekaartjes, daarbij kunt u zoeken op naam, provincie, geboorte datum en geslacht.<p>
      Als u naar de babykaartjes gaat kom u in het overzicht met alle geboortekaartjes. <p>
      Al wilt u zelf geboortekaartjes uploaden moet u ingelogd zijn, daarna kunt u via de knop toevoegen zelf uw geboorte bekend maken. <p>
      Ook kunt u hier oude geboortekaartjes aanpassen, geboortekaartjes verwijderen en uw inlog gegevens wijzigen. <p>
      Verder is er nog een contact pagina waar u buggs kunt melden en vragen kunt stellen.<p><br>
-     
-    </div>  
-  
-  </div>
+
+		  </section>
+		  <section id="vertservices">
+	        <h2><a href="#vertservices">zwanger worden</a></h2><br>
+		   <p> Als je zwanger wil worden, is het belangrijk dat zowel jij als je partner vruchtbaar zijn.<br>
+    Als het na een jaar niet gelukt is om zwanger te raken, kun je laten onderzoeken wat hier de oorzaak van is en behandelingen ondergaan.<br>
+    
+    Voor een verminderde vruchtbaarheid of onvruchtbaarheid zijn verschillende verklaringen.
+    Bijvoorbeeld een ongezonde levensstijl of onvoldoende zaadcellen. 
+    Er bestaan een aantal behandelingen om desondanks toch zwanger te raken.
+    De leeftijd van een vrouw is erg bepalend voor haar vruchtbaarheid. Hoe ouder, hoe minder vruchtbaar. 
+    Als je moeite hebt met zwanger worden is de kans 30% dat dit aan jou ligt en 30% dat het probleem bij je partner zit. 
+    In 30% van de gevallen is zowel de vrouw als de man onvruchtbaar. Bij 10% van alle stellen wordt er geen oorzaak van de onvruchtbaarheid gevonden.
+    Je levensstijl kan ervoor zorgen dat je minder gemakkelijk zwanger wordt. De volgende zaken hebben een negatieve invloed op de vruchtbaarheid van de vrouw: cafeïne, alcohol, roken, medicatie,< drugs, onder- en overgewicht, soa's, te veel sporten, stress, werken met schadelijke stoffen of straling, verstoring van het dag- en nachtritme. 
+    De vruchtbaarheid van de man wordt negatief beïnvloed door: alcohol, roken, medicatie, drugs, koorts, soa's, te veel sporten, stress, werken met schadelijke stoffen of straling, verstoring van het dag- en nachtritme en lange deelname aan het verkeer.</p>
+		  </section>
+		 <section id="vertblog">
+		      <h2><a href="#vertblog">zwangerschap</a></h2>
+		      <p>In de baarmoeder verandert de bevruchte eicel in 9 maanden van een embryo in een foetus van zo'n 50cm. 
+              Hoewel het lichaam van de foetus zich in het 1ste trimester het meest ontwikkelt, groeit het in de maanden daarop nog flink door.<br><br>
+              Een zwangerschap is een belasting voor je lichaam. Daarom kan het zijn dat je tijdens deze periode last hebt van ongemakken. 
+              Ernstiger zijn complicaties; problemen die de gezondheid van jou en je kindje in gevaar kunnen brengen.<br><br>
+              Als je zwanger bent, moet je extra goed letten op je voeding. Zo weet je zeker dat je voldoende voedingstoffen binnenkrijgt. 
+              Het is niet nodig om voor 2 personen te eten, maar bewust afvallen kan erg schadelijk zijn.</p>
+		  </section>
+		  <section id="vertcontact">
+		      <h2><a href="#vertcontact">Webshops</a></h2>
+		      <p><a href="http://www.baby-walz.nl" target="_blank">Baby-walz</a><br><br>
+<a href="http://www.babyveilig.nl" target="_blank">Babyveiling</a><br><br>
+<a href="http://www.jutenjuul.nl" target="_blank">Jut en Juul</a><br><br>
+<a href="http://www.baby-dump.nl/" target="_blank">Baby-dump</a>
+              </p>
+		  </section>
+		</div>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
