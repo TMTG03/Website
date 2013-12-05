@@ -67,47 +67,53 @@
     <?
 	if((isset($_POST["zoekverzend"]))) 
 	{
+		
 		$naam = $_POST['naam'];
 		$provincie = $_POST['provincie'];
 		$geboortedatum = $_POST['datum'];
 		$geslacht = $_POST['geslacht'];
 		
-		
 		if (!$provincie == "")
 		{
-			$provinciecheck = " provincie LIKE '%".$provincie."%' OR " . "";
-		}		
+			$provinciecheck = " provincie LIKE '%".$provincie."%' OR " . "";		
+		}
+			
 		if (!$naam == "")
 		{
 			$naamcheck = " naam LIKE '%".$naam."%' OR " . "";	
 		}
+		
 		if (!$geboortedatum == "")
 		{
 			$dobcheck = " geboortedatum LIKE '%".$geboortedatum."%' OR " . "";	
 		}
+		
 		if (!$geslacht == "")
 		{
-			$geslachtcheck = " geslacht LIKE '%".$geslacht."%'";	
+			$geslachtcheck = " geslacht LIKE '%".$geslacht."%' OR " . "";	
 		}
 		
 		$opdracht = "SELECT * FROM babykaartjes WHERE" . $naamcheck . $provinciecheck . $dobcheck . $geslachtcheck;
+
+		$opdracht = substr($opdracht, 0, -4);
+		echo $opdracht = $opdracht.'';
 		
 		try {
-				$stmt = $db->prepare($opdracht); 
-				$stmt->execute();
+			$stmt = $db->prepare($opdracht); 
+			$result = $stmt->execute();
 		} catch(PDOException $ex) {
-				// TODO: verwijder de 'die' op uiteindelijke website
-				die("FOUT: " . $ex->getMessage()); 
+			// TODO: verwijder de 'die' op uiteindelijke website
+			die("FOUT: " . $ex->getMessage()); 
 		}
-		//fetch $rij
-		echo $opdracht;	
+		
 
-		while ($Rij = $stmt->fetchAll())
-		{
-			print_r($Rij[0]);
-	
+		$rij = $stmt->fetchAll();
+		
+		foreach($rij as $persoon){
+			echo $persoon['naam'];
+			echo $persoon['achternaam'];
 		}
-		echo $Rij['naam'];
+		
 	}
 	?> 
   </div>
