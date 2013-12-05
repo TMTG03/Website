@@ -86,7 +86,7 @@
 				var mijnkaart<? echo $marker['id'];?> = '<div id="content<? echo $marker['id'];?>">'+
 				'<div id="siteNotice<? echo $marker['id'];?>">'+
 				'</div>'+
-				'<h1 id="firstHeading<? echo $marker['id'];?>" class="firstHeading<? echo $marker['id'];?>"><? echo $rij["roepnaam"]; ?></h1>'+
+				'<h1 id="firstHeading<? echo $marker['id'];?>" class="firstHeading<? echo $marker['id'];?>"><? echo $marker["roepnaam"]; ?></h1>'+
 				'<div id="bodyContent<? echo $marker['id'];?>">'+
 				'<p>Geboortedatum: <? echo $marker['geboortedatum']; ?></p>'+
 				'<p>Quote: <? echo $marker['quote']; ?></p>'+
