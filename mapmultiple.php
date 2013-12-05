@@ -27,7 +27,7 @@
         	die("FOUT: " . $ex->getMessage()); 
 	}
 	//fetch $rij
-	$rij = $stmt->fetch();
+	$rij = $stmt->fetchAll();
 
 	//display error
 	echo mysql_error();
@@ -68,47 +68,47 @@
 		
 			<?
 			//Marker script
-			while ($rij = $stmt->fetch()){ 
+			foreach($rij as $marker){ 
 			//convert adress to lat/lng
-				$adres = "$rij[adres]";
+				$adres = "$marker[adres]";
 				$adres = str_replace(" ", "+", $adres);
 				$url='http://maps.googleapis.com/maps/api/geocode/json?address='.$adres.'+Netherlands+NL&sensor=false';
 				$source = file_get_contents($url);
 				$obj = json_decode($source); 
 				$lat = $obj->results[0]->geometry->location->lat;
 				$long = $obj->results[0]->geometry->location->lng;
-				$idco = $rij[id];
+				$idco = $marker['id'];
 			?>
 				//set lat/long for each marker
 				var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
 							
 				//set content for infowindows in each marker
-				var mijnkaart<? echo $rij[id];?> = '<div id="content<? echo $rij[id];?>">'+
-				'<div id="siteNotice<? echo $rij[id];?>">'+
+				var mijnkaart<? echo $marker['id'];?> = '<div id="content<? echo $marker['id'];?>">'+
+				'<div id="siteNotice<? echo $marker['id'];?>">'+
 				'</div>'+
-				'<h1 id="firstHeading<? echo $rij[id];?>" class="firstHeading<? echo $rij[id];?>"><? echo $rij["roepnaam"]; ?></h1>'+
-				'<div id="bodyContent<? echo $rij[id];?>">'+
-				'<p>Geboortedatum: <? echo $rij["geboortedatum"]; ?></p>'+
-				'<p>Quote: <? echo $rij["quote"]; ?></p>'+
+				'<h1 id="firstHeading<? echo $marker['id'];?>" class="firstHeading<? echo $marker['id'];?>"><? echo $rij["roepnaam"]; ?></h1>'+
+				'<div id="bodyContent<? echo $marker['id'];?>">'+
+				'<p>Geboortedatum: <? echo $marker['geboortedatum']; ?></p>'+
+				'<p>Quote: <? echo $marker['quote']; ?></p>'+
 				'</div>'+
 				'</div>';
 				
 				//create infowindow
-				var infowindow<? echo $rij[id];?> = new google.maps.InfoWindow({
-					content: mijnkaart<? echo $rij[id];?>
+				var infowindow<? echo $marker['id'];?> = new google.maps.InfoWindow({
+					content: mijnkaart<? echo $marker['id'];?>
 				});
 				
 				//create marker
-				var marker<? echo $rij[id];?> = new google.maps.Marker({
+				var marker<? echo $marker['id'];?> = new google.maps.Marker({
 					position: getLatlng,
 					map: map,
-					icon: <? if($rij[geslacht] == "jongen"){ ?>jongen,<? }else{ ?>meisje,<? } ?>
+					icon: <? if($marker[geslacht] == "jongen"){ ?>jongen,<? }else{ ?>meisje,<? } ?>
 					title: 'Baby Berichten'
 				});
 				
 				//event listener for infowindow
-				google.maps.event.addListener(marker<? echo $rij[id];?>, 'click', function() {
-					infowindow<? echo $rij[id];?>.open(map,marker<? echo $rij[id];?>);
+				google.maps.event.addListener(marker<? echo $marker['id'];?>, 'click', function() {
+					infowindow<? echo $marker['id'];?>.open(map,marker<? echo $marker['id'];?>);
 				});
 				
 			<? } //end marker script?>	
