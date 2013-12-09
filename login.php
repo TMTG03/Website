@@ -160,7 +160,11 @@
     </form>
     </br>
     </br>
-    Nog geen inlog gegevens? <a href="registreren.php">Registreer nu!</a> </div>
+    Nog geen inlog gegevens? <a href="registreren.php">Registreer nu!</a><br /><br />
+	<p>Heeft u moeite met het inloggen of uploaden van een babykaartje. Klik dan <a href="img/pdf/Handleiding_babyberichten.pdf">Hier!</a></p>
+    
+  	  
+  </div>
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
