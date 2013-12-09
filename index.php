@@ -1,4 +1,22 @@
-<? require_once('connection.php') ?>
+<? require_once('connection.php');
+
+$opdracht = "SELECT 
+			   	* 
+			 FROM 
+				babykaartjes 
+			 ORDER BY 
+				id 
+			 DESC LIMIT 
+				4";
+try {
+	$stmt = $db->prepare($opdracht); 
+	$result = $stmt->execute();
+} catch(PDOException $ex) {
+	// TODO: verwijder de 'die' op uiteindelijke website
+	die("FOUT: " . $ex->getMessage()); 
+}
+$rij = $stmt->fetch();
+?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
@@ -36,13 +54,13 @@ $(document).ready(function() {
           <li class='active'><a href='index.php'><span>Home</span></a></li>
           <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
             <ul>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
+              <li class='has-sub'><a href='babykaartjestoevoeg.php'><span>Babykaartjes</span></a>
                 <ul>
                   <li><a href='#'><span>tekst</span></a></li>
                   <li class='last'><a href='#'><span>tekst</span></a></li>
                 </ul>
               </li>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
+              <li class='has-sub'><a href='#'><span>Babykaartjes2</span></a>
                 <ul>
                   <li><a href='#'><span>tekst</span></a></li>
                   <li class='last'><a href='#'><span>tekst</span></a></li>
@@ -54,7 +72,7 @@ $(document).ready(function() {
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
           <? } else { ?>
-          <li><a href='ingelogd.php'><span>Account</span></a></li>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
@@ -102,7 +120,7 @@ $(document).ready(function() {
       <div id="zoekbar_rechts_vak1">Naam:</div>
       <div id="zoekbar_rechts_vak2">Provincie:</div>
       <div id="zoekbar_rechts_vak3">Geboortedatum:</div>
-      <div id="zoekbar_rechts_vak4">M/V</div>
+      <div id="zoekbar_rechts_vak4">J/M</div>
     </div>
     <div id="zoekbar_rechts_input">
     <form id="form_zoek" class="form_zoek" method="post" action="zoeken.php">
@@ -111,7 +129,7 @@ $(document).ready(function() {
       </div>
       <div id="zoekbar_rechts_vak2_onder" class="dropdownpijl">
         <select name="provincie">
-          <option style="color: #cccccc;">Selecteer provincie</option>
+          <option value="">Selecteer provincie</option>
           <optgroup label="Noord Nederland">
           <option value="Groningen">Groningen</option>
           <option value="Friesland">Friesland</option>
@@ -119,7 +137,7 @@ $(document).ready(function() {
           <option value="Noord-Holland">Noord-Holland</option>
           </optgroup>
           <optgroup label="Midden Nederland">
-          <option value="Overijsel">Overijsel</option>
+          <option value="Overijsel">Overijssel</option>
           <option value="Gelderland">Gelderland</option>
           <option value="Utrecht">Utrecht</option>
           <option value="Zuid-Holland">Zuid-Holland</option>
@@ -137,37 +155,41 @@ $(document).ready(function() {
       </div>
       <div id="zoekbar_rechts_vak4_onder">
         <select id="MVselect" name="geslacht">
-          <option value="man">M</option>
-          <option value="vrouw">V</option>
+		  <option value=""></option>
+          <option value="jongen">J</option>
+          <option value="meisje">M</option>
         </select>
       </div>
       <div id="zoekbar_rechts_vak5_onder">
-        <button class='buttonzoek' style="width: 125px; height: 36px; float: left; text-align: center; " type="submit">Zoeken</button>
+        <button name="zoekverzend" class='buttonzoek' style="width: 125px; height: 36px; float: left; text-align: center; " type="submit">Zoeken</button>
       </div>
       </div>
       </div>
     </form>
   </div>
-  <div id="container_content">
+  <div id="container_content" style="height: 700px">
     <div id="carousel_vak1"></div>
     <div id="carousel_vak2"></div>
     <div id="carousel_vak3"></div>
-    <div id="carousel_kop1">
-      <p class="carouselkoptekst">Baby 1</p>
-      <br/>
-      <p class="carouselonder_koptekst">Hier komt een quote</p>
-    </div>
-    <div id="carousel_kop2">
-      <p class="carouselkoptekst">Baby 2</p>
-      <br/>
-      <p class="carouselonder_koptekst">Hier komt een quote</p>
-    </div>
-    <div id="carousel_kop3">
-      <p class="carouselkoptekst">Baby 3</p>
-      <br/>
-      <p class="carouselonder_koptekst">Hier komt een quote</p>
-    </div>
-  </div>
+       <?
+	$rij = $stmt->fetchAll();	
+	?>
+        <ul>
+          <?php
+			foreach($rij as $caroussel) {
+		?>
+          <li>
+            <div id='carousel_kop1'>
+              <?php
+				echo "<p class='carouselkoptekst'>" . $caroussel['naam'] . "</p></br>";
+				echo "<p class='carouselonder_koptekst'>" . $caroussel['quote'] . "</p></br>";
+			?>
+            </div>
+          </li>
+          <?php
+			}
+          ?>
+	      
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">
