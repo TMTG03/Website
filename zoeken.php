@@ -1,4 +1,10 @@
-<? require_once('connection.php') ?>
+<? require_once('connection.php');
+
+if(empty($_SESSION['user'])) { 
+	header("Location: login.php"); 
+	die("Doorlinken naar login.php");
+}
+?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
@@ -14,7 +20,34 @@
 <script src="scripts/switcher.js"></script>
 <script src="scripts/jquery.scrollTo-1.4.3.1-min.js"></script>
 <script src="scripts/script.js"></script>
+<script>
+function initialize() {
+	var SchoolLatlng = new google.maps.LatLng(51.9274743,4.4782271);
+	var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
+    var meisje = 'img/markerMeisje.png';
+    var jongen = 'img/markerJongen.png';
+	var mapOptions = {
+		streetViewControl: false,
+		scrollwheel: false,
+		panControl: false,
+		zoomControl: false,
+		mapTypeControl: false,
+		overviewMapControl: false,
+		zoom: 13,
+		center: getLatlng
+	}
+	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	
+	var marker2 = new google.maps.Marker({
+		position: getLatlng,
+		map: map,
+	    icon: <? if($rij[geslacht] == "jongen"){ ?>jongen,<? }else{ ?>meisje,<? } ?>
+		title: 'marker'
+	});
+}
 
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 </head>
 
 <body>
@@ -96,7 +129,6 @@
 		$opdracht = "SELECT * FROM babykaartjes WHERE" . $naamcheck . $provinciecheck . $dobcheck . $geslachtcheck;
 
 		$opdracht = substr($opdracht, 0, -4);
-		echo $opdracht = $opdracht.'';
 		
 		try {
 			$stmt = $db->prepare($opdracht); 
@@ -109,13 +141,70 @@
 
 		$rij = $stmt->fetchAll();
 		
+			echo "<table border='1' width='700px'>";
+			echo "<tr>";
+			echo "<td style='font-family: OpenSans-Bold'>Naam</td>";
+			echo "<td style='font-family: OpenSans-Bold'>Achternaam</td>";
+			echo "<td style='font-family: OpenSans-Bold'>Provincie</td>";
+			echo "<td style='font-family: OpenSans-Bold'>Geslacht</td>";
+			echo "<td style='font-family: OpenSans-Bold'>Locatie</td>";
+			echo "</tr>";
+			echo "<tr>";
+			echo "<td>&nbsp;</td>";
+			echo "<td>&nbsp;</td>";
+			echo "<td>&nbsp;</td>";
+			echo "<td>&nbsp;</td>";
+			echo "</tr>";
+	
 		foreach($rij as $persoon){
-			echo $persoon['naam'];
-			echo $persoon['achternaam'];
+			
+			$hetid = $persoon['id'];
+			$hetgoedeid = $hetid.$persoon['id'];
+			echo "<tr>";
+			echo "<td height='20px'>" . $persoon['naam'] . "</td>";
+			echo "<td height='20px'>" . $persoon['achternaam'] . "</td>";
+			echo "<td height='20px'>" . $persoon['provincie'] . "</td>";
+			echo "<td height='20px'>" . $persoon['geslacht'] . "</td>";
+			echo "<td height='20px'>" ?><p><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src='img/map.png'/><? $idzoeken.$persoon['id'] = $persoon['id']; ?></a></p><? "</td>";
+			echo "</tr>";
 		}
+			echo "</table>";
 		
 	}
+	?>   
+        <div id="light" class="white_content">Maps.
+        <? 
+		$id = $idzoeken.$persoon['id'];
+		$opdracht = "SELECT
+						*
+					 FROM
+						babykaartjes
+					 WHERE
+						id='$id'";
+		try {
+			$stmt = $db->prepare($opdracht); 
+			$result = $stmt->execute();
+		} catch(PDOException $ex) {
+			// TODO: verwijder de 'die' op uiteindelijke website
+			die("FOUT: " . $ex->getMessage()); 
+		}
+		$rij = $stmt->fetch();
+		$adres = "$rij[adres]";
+		
+		$adres = str_replace(" ", "+", $adres);
+		
+		$url='http://maps.googleapis.com/maps/api/geocode/json?address='.$adres.'+Netherlands+NL&sensor=false';
+		echo $url;
+		$source = file_get_contents($url);
+		$obj = json_decode($source);
+		$lat = $obj->results[0]->geometry->location->lat;
+		$long = $obj->results[0]->geometry->location->lng; 
+		
 	?> 
+        <div id="map-canvas3"></div>
+        <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Sluiten</a></div>
+        <div id="fade" class="black_overlay"></div>
+    
   </div>
   <footer id="footer">
     <div class="blauwelijn"></div>
