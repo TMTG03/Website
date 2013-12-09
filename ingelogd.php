@@ -2,7 +2,11 @@
 if(empty($_SESSION['user'])) { 
 	header("Location: login.php"); 
 	die("Doorlinken naar login.php");
-} ?>
+} 
+if($headerto == true){
+header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");	
+}
+?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
@@ -64,6 +68,155 @@ if(empty($_SESSION['user'])) {
   <hr class="schaduw_lijn">
   </hr>
   <div id="container_content"> <br/>
+  	<div class="uitklappen vertical">
+    	  <section id="mijnprofiel">
+		      <h2><a href="#mijnprofiel">Profiel</a></h2>
+		      <p>
+              	<?
+				$id = $_GET["id"];
+			  	$opdracht = "SELECT * FROM users WHERE id='9'";;	
+				try {
+					$stmt = $db->prepare($opdracht); 
+					$result = $stmt->execute();
+				} catch(PDOException $ex) {
+					// TODO: verwijder de 'die' op uiteindelijke website
+					die("FOUT: " . $ex->getMessage()); 
+				}
+				
+				$rij = $stmt->fetch();
+				
+				$name = $rij['naam'];
+				$username = $rij['gebruikersnaam'];
+				$dob = $rij['geboortedatum'];
+				$provincie = $rij['provincie'];
+				$email = $rij['email'];
+
+				//leeftijd calc
+				$beginDate = $dob;
+			    $endDate = date("Y-m-d");
+              	$date_parts1 = explode("-", $beginDate);
+				$date_parts2 = explode("-", $endDate);
+				$start_date = gregoriantojd($date_parts1[1], $date_parts1[2], $date_parts1[0]);
+				$end_date = gregoriantojd($date_parts2[1], $date_parts2[2], $date_parts2[0]);
+				$diff = abs($end_date - $start_date);
+				$years = floor($diff / 365.25);
+				
+				
+				echo "<table border='1' width='700px'>";
+				echo "<tr>";
+				echo "<td style='font-family: OpenSans-Bold'>Naam</td>";
+				echo "<td style='font-family: OpenSans-Bold'>Gebruikersnaam</td>";
+				echo "<td style='font-family: OpenSans-Bold'>Provincie</td>";
+				echo "<td style='font-family: OpenSans-Bold'>Geboortedatum</td>";
+				echo "<td style='font-family: OpenSans-Bold'>Email</td>";
+				echo "</tr>";
+				echo "<tr>";
+				echo "<td>&nbsp;</td>";
+				echo "<td>&nbsp;</td>";
+				echo "<td>&nbsp;</td>";
+				echo "<td>&nbsp;</td>";
+				echo "<td>&nbsp;</td>";
+				echo "</tr>";
+				echo "<tr>";
+				echo "<td>" . $name . "</td>";
+				echo "<td>" . $username . "</td>";
+				echo "<td>" . $provincie . "</td>";
+				echo "<td>" . $dob . " (" . $years . ")" . "</td>";
+				echo "<td>" . $email . "</td>";
+				echo "</tr>";
+				echo "</table>";
+              	?>
+              </p>
+		  </section>
+    	  <section id="profielaanpas">
+		      <h2><a href="#profielaanpas">Profiel aanpassen</a></h2>
+		      <p><br />
+              	<?
+                $id = $_SESSION['user']['id'];
+                $opdracht = "SELECT * FROM users WHERE id='9'";	
+				try {
+					$stmt = $db->prepare($opdracht); 
+					$result = $stmt->execute();
+					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				} catch(PDOException $ex) {
+					// TODO: verwijder de 'die' op uiteindelijke website
+					die("FOUT: " . $ex->getMessage()); 
+				}
+				
+				$rij = $stmt->fetch();
+				
+				echo $rij['naam'];
+				
+              	?>
+	              <FORM name='aanpasform' method='post' action=''>
+					<table width="400" border="1">
+					  <tr>
+					  	<input type='hidden' name='pasveld' value='<? echo $rij['id']; ?>'/>
+					  	<td height="35px">Naam:</td>
+					    <td height="35px"><input type='text' name='nmveld' value='<? echo $rij['naam']; ?>'/></td>
+					  </tr>
+					  <tr>
+					    <td height="35px">Geboortedatum:</td>
+					    <td height="35px"><input type='text' name='dobveld' value='<? echo $rij['geboortedatum']; ?>'/></td>
+					  </tr>
+					  <tr>
+					    <td height="35px">Provincie:</td>
+					    <td height="35px"><input type='text' name='proveld' value='<? echo $rij['provincie']; ?>'/></td>
+					  </tr>
+					  <tr>
+					    <td height="35px">Email:</td>
+					    <td height="35px"><input type='text' name='emveld' value='<? echo $rij['email']; ?>'/></td>
+					  </tr>
+					  <tr>
+					  	<td height="1px"></td>
+					  	<td height="1px"></td>
+					  </tr>
+					  <tr>
+					    <td>&nbsp;</td>
+					    <td><input class='buttonzoek' style='margin-left: -2px' type='submit' name='aanpasknop' value='Aanpassen' /></td>
+					  </tr>
+					</table>
+				  </FORM>
+                <?
+				if(isset($_REQUEST["aanpasknop"]))
+				{
+					$mijnid = $_REQUEST["pasveld"];	
+					$mijnnaam = $_REQUEST["nmveld"];
+					$mijndob = $_REQUEST["dobveld"];
+					$mijnpro = $_REQUEST["proveld"];
+					$mijnem = $_REQUEST["emveld"];
+					
+					echo $mijndob;
+					
+					$opdracht2 = "UPDATE users SET naam='$mijnnaam', geboortedatum='$mijndob', provincie='$mijnpro', email='$mijnem' WHERE id='$id'";
+					try {
+						$stmt = $db->prepare($opdracht2); 
+						$result = $stmt->execute();
+						echo "hetwerkt";
+					} catch(PDOException $ex) {
+						// TODO: verwijder de 'die' op uiteindelijke website
+						die("FOUT: " . $ex->getMessage());
+					}
+					$headerto = true;
+				}
+				?>
+              </p>
+		  </section>
+		  <section id="babytoevoeg">
+		      <h2><a href="#babytoevoeg">Babykaartje toevoegen</a></h2>
+              <p><? require_once ('babykaartjestoevoeg_profiel.php'); ?></p>
+		  </section>
+		 <section id="babyzoek">
+		      <h2><a href="#babyzoek">Babykaartjes zoeken</a></h2>
+		      <p></p>
+		  </section>
+		  <section id="babykaartmaps">
+		      <h2><a href="#babykaartmaps">Baby Maps</a></h2>
+		      <p><? require_once('mapmultiple.php'); ?></p>
+              <div id="map-canvas2"></div>
+		  </section>
+		</div>
+		<a href="logout.php"><button class='buttonzoek' style="width: 125px; height: 36px; float: right; margin-right: 57px; text-align: center;">Uitloggen</button></a>
     <br/>
   </div>
   <footer id="footer">
