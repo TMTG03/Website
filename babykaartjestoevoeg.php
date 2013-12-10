@@ -1,12 +1,9 @@
 <?
-    require_once("connection.php");
+require_once("connection.php");
 
     if(!empty($_POST)) {
         if(empty($_POST['naam'])) {
             $fout_naam = true;
-			$sucess = false;
-		} if(empty($_POST['tussenvoegsel'])) {
-            $fout_tussen = true;
 			$sucess = false;
 		} if(empty($_POST['achternaam'])) {
             $fout_achternaam = true;
@@ -41,6 +38,69 @@
 		} if(empty($_POST['moeder'])) {
             $fout_moeder = true;
 			$sucess = false;
+		} if(empty($_FILES['plaatje'])) {
+            $fout_plaatje = true;
+			$sucess = false;
+		}
+		
+		function getExtension($str) {
+
+        	$i = strrpos($str,".");
+        	if (!$i) { return ""; } 
+        	$l = strlen($str) - $i;
+        	$ext = substr($str,$i+1,$l);
+        	return $ext;
+		}
+		
+		
+		$image        = $_FILES["plaatje"]["name"];
+    	$uploadedfile = $_FILES['plaatje']['tmp_name'];
+    
+	    if ($image) {
+	        $filename  = stripslashes($_FILES['plaatje']['name']);
+	        $extension = getExtension($filename);
+	        $extension = strtolower($extension);
+			$databasenaam = $_POST['naam'] . $_POST['achternaam'] . date('Y-m-d-H-i-s') . "." . $extension;
+	        if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif")) {
+	            $fout_plaatje_ext = true;
+				$sucess = false;
+	        } else {
+	            $size = filesize($_FILES['plaatje']['tmp_name']);
+            
+	            if ($extension == "jpg" || $extension == "jpeg") {
+	                $uploadedfile = $_FILES['plaatje']['tmp_name'];
+					$src          = imagecreatefromjpeg($uploadedfile);
+				} else if ($extension == "png") {
+					$uploadedfile = $_FILES['plaatje']['tmp_name'];
+					$src          = imagecreatefrompng($uploadedfile);
+				} else {
+					$src = imagecreatefromgif($uploadedfile);
+				}
+				
+				list($width, $height) = getimagesize($uploadedfile);
+				
+				$newwidth  = 300;
+				$newheight = 200;
+				$tmp       = imagecreatetruecolor($newwidth, $newheight);
+				
+				$newwidth1  = 200;
+				$newheight1 = 200;
+				$tmp1       = imagecreatetruecolor($newwidth1, $newheight1);
+				
+				imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+				
+				imagecopyresampled($tmp1, $src, 0, 0, 0, 0, $newwidth1, $newheight1, $width, $height);
+				
+				$filename  = "../database/plaatjes/groot/" . $databasenaam;
+				$filename1 = "../database/plaatjes/klein/" . $databasenaam;
+				
+				imagejpeg($tmp, $filename, 100);
+				imagejpeg($tmp1, $filename1, 100);
+				
+				imagedestroy($src);
+				imagedestroy($tmp);
+				imagedestroy($tmp1);
+			}
 		}
 			
 		if (!$sucess) {
@@ -48,6 +108,7 @@
 			$query = " 
 				INSERT INTO babykaartjes ( 
 					naam,
+					userid,
 					tussenvoegsel,
 					achternaam, 
 					roepnaam,
@@ -61,9 +122,11 @@
 					quote,
 					plaatje,
 					vader,
-					moeder
+					moeder,
+					datum
 				) VALUES ( 
 					:naam,
+					:userid,
 					:tussenvoegsel, 
 					:achternaam, 
 					:roepnaam,
@@ -77,7 +140,8 @@
 					:quote,
 					:plaatje,
 					:vader,
-					:moeder
+					:moeder,
+					:datum
 				) 
 			";
 			
@@ -85,6 +149,7 @@
 			 
 			$query_params = array(
 				':naam' => $_POST['naam'],
+				':userid' => $_SESSION['user']['id'],
 				':tussenvoegsel' => $_POST['tussenvoegsel'],
 				':achternaam' => $_POST['achternaam'],
 				':roepnaam' => $_POST['roepnaam'],
@@ -96,9 +161,10 @@
 				':geslacht' => $_POST['MVselect'],
 				':bericht' => $_POST['bericht'],
 				':quote' => $_POST['quote'],
-				':plaatje' => $_POST['plaatje'],
+				':plaatje' => $databasenaam,
 				':vader' => $_POST['vader'],
-				':moeder' => $_POST['moeder']
+				':moeder' => $_POST['moeder'],
+				':datum' => date("Y-m-d")
 			);
 			 
 			try {
@@ -207,12 +273,7 @@
   <br/>
   <br/>
   <div id="container_content">
-  	<? if (isset($_GET['uploaden'])) { 
-			include('resizeplaatje.php');
-			extensiecheck();
-	?>
-       U heeft succesvol een babykaartje geupload!<br /><br />
-    <? } else if (!$sucess) {
+  	<? if (!$sucess) {
        if ($fout_naam) { ?>
     U hebt geen naam in gevuld <br />
     <? } if ($fout_tussen) { ?>
@@ -241,10 +302,14 @@
     U hebt geen quote ingevoerd <br />
     <? } if ($fout_plaatje) { ?>
     U heeft geen plaatje geselecteerd om te uploaden <br />
+    <? } if ($fout_plaatje_ext) { ?>
+    U heeft waarschijnlijk een verkeerd bestand (geen plaatje) geselecteerd om te uploaden <br />
     <? } if (($fout_vader) || ($fout_moeder)) { ?>
     U hebt geen vader of moeder gekozen<br />
+    <? } if ($sucess) { ?>
+    Uw babykaartje is sucessvol geupload!<br />
     <? } ?>
-    <form id="form" class="form" method="post">
+    <form id="form" class="form" method="post" enctype="multipart/form-data">
       <ul>
         <li>
           <label for="naam">Naam:</label>
@@ -252,7 +317,7 @@
         </li>
         <li>
           <label for="tussenvoegsel">Tussenvoegsel:</label>
-          <input type="text" name="tussenvoegsel" id="tussenvoegsel" class="requiredField tussenvoegsel" value="<? echo htmlentities($_POST['tussenvoegsel'], ENT_QUOTES, 'UTF-8'); ?>" required />
+          <input type="text" name="tussenvoegsel" id="tussenvoegsel" class="tussenvoegsel" value="<? echo htmlentities($_POST['tussenvoegsel'], ENT_QUOTES, 'UTF-8'); ?>"/>
         </li>
                 <li>
           <label for="achternaam">Achternaam:</label>
@@ -319,7 +384,7 @@
         </li>
          <li>
           <label for="plaatje">Plaatje:</label>
-          <input type="file" name="plaatje" id="plaatje" class="requiredField plaatje" value="<? echo htmlentities($_POST['plaatje'], ENT_QUOTES, 'UTF-8'); ?>" required />
+          <input type="file" name="plaatje" id="plaatje" accept="image/*" class="requiredField plaatje" value="<? echo htmlentities($_POST['plaatje'], ENT_QUOTES, 'UTF-8'); ?>" required />
         </li>
         <li>
           <label for="vader">Vader:</label>

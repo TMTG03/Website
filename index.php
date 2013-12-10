@@ -54,18 +54,14 @@ $(document).ready(function() {
           <li class='active'><a href='index.php'><span>Home</span></a></li>
           <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
             <ul>
-              <li class='has-sub'><a href='babykaartjestoevoeg.php'><span>Babykaartjes</span></a>
+              <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
                 <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
+                  <li><a href='babykaartjestoevoeg.php'><span>Toevoegen</span></a></li>
+                  <li><a href='#'><span>Aanpassen</span></a></li>
+                  <li class='last'><a href='#'><span>Verwijderen</span></a></li>
                 </ul>
               </li>
-              <li class='has-sub'><a href='#'><span>Babykaartjes2</span></a>
-                <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
-                </ul>
-              </li>
+              <li class='has-sub'><a href='mapall.php'><span>Babymaps</span></a></li>
             </ul>
           </li>
           <li><a href='info.php'><span>Informatie</span></a></li>
@@ -168,12 +164,13 @@ $(document).ready(function() {
     </form>
   </div>
   <div id="container_content" style="height: 700px">
-    <div id="carousel_vak1"></div>
-    <div id="carousel_vak2"></div>
-    <div id="carousel_vak3"></div>
-       <?
-	$rij = $stmt->fetchAll();	
+         <?
+	$rij = $stmt->fetchAll();
 	?>
+    
+    <div id="carousel_vak1"><? echo"<img src='../database/plaatjes/groot/" .  $rij['0']['plaatje'] . "' />" ?></div>
+    <div id="carousel_vak2"><? echo"<img src='../database/plaatjes/groot/" .  $rij['1']['plaatje'] . "' />" ?></div>
+    <div id="carousel_vak3"><? echo"<img src='../database/plaatjes/groot/" .  $rij['2']['plaatje'] . "' />" ?></div>
         <ul>
           <?php
 			foreach($rij as $caroussel) {
