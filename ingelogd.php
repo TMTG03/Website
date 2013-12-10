@@ -209,12 +209,74 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
 		  </section>
 		 <section id="babyzoek">
 		      <h2><a href="#babyzoek">Babykaartjes zoeken</a></h2>
-		      <p></p>
+		      <p>
+				    <form id="form_zoek" class="form_zoek" method="post" action="zoeken.php">    
+    <table width="500" border="1">
+      <tr>
+        <td height="35px">Naam:</td>
+        <td height="35px"><input type="text" name="naam" /></td>
+      </tr>
+      <tr>
+        <td height="35px">Provincie:</td>
+        <td height="35px">
+        <span id="zoekbar_rechts_vak2_onder" class="dropdownpijl">
+        <select name="provincie">
+              <option value="">Selecteer provincie</option>
+              <optgroup label="Noord Nederland">
+              <option value="Groningen">Groningen</option>
+              <option value="Friesland">Friesland</option>
+              <option value="Drenthe">Drenthe</option>
+              <option value="Noord-Holland">Noord-Holland</option>
+              </optgroup>
+              <optgroup label="Midden Nederland">
+              <option value="Overijsel">Overijssel</option>
+              <option value="Gelderland">Gelderland</option>
+              <option value="Utrecht">Utrecht</option>
+              <option value="Zuid-Holland">Zuid-Holland</option>
+              <option value="Flevoland">Flevoland</option>
+              </optgroup>
+              <optgroup label="Zuid Nederland">
+              <option value="Zeeland">Zeeland</option>
+              <option value="Noord-Brabant">Noord-Brabant</option>
+              <option value="Limburg">Limburg</option>
+              </optgroup>
+        </select>
+        </span>
+        </td>
+      </tr>
+      <tr>
+        <td height="35px">Datum:</td>
+        <td height="35px"><input type="text" name="datum" class="dropdownkalender" placeholder="dd-mm-YYYY" /></td>
+      </tr>
+      <tr>
+        <td height="35px">Geslacht:</td>
+        <td height="35px">
+        <span id="zoekbar_rechts_vak4_onder">
+         <select id="MVselect" name="geslacht">
+              <option value=""></option>
+              <option value="jongen">J</option>
+              <option value="meisje">M</option>
+            </select>
+        </span>
+        </td>
+      </tr>
+      <tr>
+        <td height="35px">&nbsp;</td>
+        <td height="35px">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="35px">&nbsp;</td>
+        <td height="35px"><button name="zoekverzend" class='buttonzoek' style="width: 125px; height: 36px; float: left; text-align: center; " type="submit">Zoeken</button></td>
+      </tr>
+    </table>
+</form>
+
+              </p>
 		  </section>
 		  <section id="babykaartmaps">
 		      <h2><a href="#babykaartmaps">Baby Maps</a></h2>
 		      <p><? require_once('mapmultiple.php'); ?></p>
-              <div id="map-canvas2"></div>
+              <div id="map-canvas"></div>
 		  </section>
 		</div>
 		<a href="logout.php"><button class='buttonzoek' style="width: 125px; height: 36px; float: right; margin-right: 57px; text-align: center;">Uitloggen</button></a>
