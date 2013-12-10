@@ -69,12 +69,13 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
   </hr>
   <div id="container_content"> <br/>
   	<div class="uitklappen vertical">
+    
     	  <section id="mijnprofiel">
 		      <h2><a href="#mijnprofiel">Profiel</a></h2>
 		      <p>
               	<?
-				$id = $_GET["id"];
-			  	$opdracht = "SELECT * FROM users WHERE id='9'";;	
+				$id = $_SESSION['user']['id'];
+			  	$opdracht = "SELECT * FROM users WHERE id='$id'";;	
 				try {
 					$stmt = $db->prepare($opdracht); 
 					$result = $stmt->execute();
@@ -133,7 +134,7 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
 		      <p><br />
               	<?
                 $id = $_SESSION['user']['id'];
-                $opdracht = "SELECT * FROM users WHERE id='9'";	
+                $opdracht = "SELECT * FROM users WHERE id='$id'";	
 				try {
 					$stmt = $db->prepare($opdracht); 
 					$result = $stmt->execute();

@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Babyberichten</title>
-</head>	
-  <body> 
-  <!--Maps style -->     
-	<style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-      }
-    </style>
+
 	<?
 	require_once("connection.php"); //including connection
 
@@ -56,7 +41,7 @@
 				center: SchoolLatlng
 			}
 			//map show
-			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			var map = new google.maps.Map(document.getElementById('map-canvas2'), mapOptions);
 		
 			//add "main" marker
 			var marker = new google.maps.Marker({
@@ -118,6 +103,3 @@
 	google.maps.event.addDomListener(window, 'load', initialize);
 	
 	</script>
-  <div id="map-canvas"></div>
-  </body>
-</html>

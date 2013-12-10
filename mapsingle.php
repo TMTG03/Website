@@ -12,7 +12,7 @@
       }
     </style>
 <?
-$id = $_GET["id"];
+$id = $_SESSION['user']['id']; 
 
 require_once("connection.php");
 $opdracht = "SELECT * FROM babykaartjes WHERE id='$id'";
@@ -28,7 +28,7 @@ $adres = "$rij[adres]";
 
 echo mysql_error() . "<br />";
 echo $opdracht . "<br />";
-echo $rij . "<br />";
+echo $adres . "<br />";
 echo $result . "<br />";
 
 $adres = str_replace(" ", "+", $adres);
