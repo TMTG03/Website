@@ -248,8 +248,22 @@ body {
 	width: 960px;
 	overflow: hidden;
 	margin: 0 auto;
+}
+#container_content2 {
+	width: 960px;
+	overflow: hidden;
+	margin: 0 auto;
 	min-height: 80%;
 	padding-bottom: 60px;
+}
+#txt_content {
+	position:absolute;
+	float: left;
+	height: 100px;
+	width:960px;
+	margin:auto;
+	margin-top: 500px;
+	text-align:center;
 }
 #zoekbar {
 	width: 960px;
@@ -410,6 +424,64 @@ body {
 	border-top-right-radius: 8px;
 	border-bottom-right-radius: 8px;
 }
+
+/* ZOEK MINIMIZE */
+
+#zoek_minimize {
+	width: 900px;
+	height: 75px;
+	background-color: #ffffff;
+	margin: 0 auto;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	margin-top: 20px;
+}
+#zoek_links_minimize {
+	width: 200px;
+	height: 75px;
+	text-align: center;
+	font-size: 18px;
+	line-height: 80px;
+	font-family: OpenSans-Semibold;
+}
+
+#zoekbar_rechts_minimize {
+	width: 660px;
+	height: 75px;
+	text-align: left;
+	margin-left: 240px;
+	margin-top: -55px;
+	float: left;
+}
+
+#zoekbar_rechts_vak2_onder_minimize {
+	width: 500px;
+	height: 37px;
+	color: #999999;
+	text-align: left;
+	font-size: 17px;
+	float: left;
+	margin-left: 5px;
+}
+#zoekbar_rechts_vak2_onder_minimize select {
+	background: transparent;
+	width: 480px;
+	height: 36px;
+	border: 2px solid #E6E6E6;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-appearance: none;
+		-moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+.dropdownpijl_minimize {
+	background: url(../img/dropdownpijl_minimize.png) no-repeat left;
+	overflow: hidden;
+}
+
 #footer {
 	bottom: 0;
 	width: 100%;
