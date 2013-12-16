@@ -976,7 +976,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 .tabs {
   position: relative;   
-  min-height: 200px; /* This part sucks */
+  min-height: 200px;
   height: 650px;
   clear: both;
   margin: 25px 0;
@@ -1041,6 +1041,12 @@ input:focus, select:focus, textarea:focus, button:focus {
 	float: right;
 	margin-top: 230px;
 	margin-left: 260px
+}
+#tabs-delen {
+	position: absolute;
+	padding-left: 10px;
+	float: right;
+	margin-left: 658px;
 }
 #map-canvas {
 	width: 200px;
@@ -1167,4 +1173,12 @@ input:focus, select:focus, textarea:focus, button:focus {
 	background-color: white;
 	z-index:1002;
 	overflow: auto;
+}
+
+/* Omlijning BOX */
+
+#omlijningkleur {
+	padding-top: 0px;
+	width: 970px;
+	height: 690px;
 }

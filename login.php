@@ -2,8 +2,8 @@
     require_once("connection.php");
 	// als de sessie bestaat is er al ingelogd -> door verwijzen naar ingelogd.php
     if(!empty($_SESSION['user'])) { 
-        header("Location: ingelogd.php"); 
-        die("Doorlinken naar ingelogd.php"); 
+        header("location: " . $_SESSION['url']); 
+        die("Doorlinkennaar laatste pagina"); 
 	}
     $submitted_username = '';
 	// Selecteer alles van de gebruiker om in een sessie te plaatsen
@@ -52,8 +52,8 @@
             unset($row['password']);
             $_SESSION['user'] = $row;
 			// doorlinken naar ungelogd.php
-			header("Location: ingelogd.php"); 
-            die("Doorlinken naar: ingelogd.php");
+			header("location: " . $_SESSION['url']); 
+            die("Doorlinkennaar laatste pagina"); 
         } else {
 			// filteren voor geactiveerde account
 			if ($active != 1)
@@ -83,31 +83,40 @@
   <div id="headercolor">
     <div id="container_breedte">
       <header id="logo_plek"><a href="index.php" id="logo"><img width="333" src="img/logo.png" alt="" /></a></header>
-      <nav id="menu">
+       <nav id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
-          <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
+          <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
             <ul>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
+              <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
                 <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
+                  <li><a href='allebabykaartjes.php'><span>Alle babykaartjes</span></a></li>
+                  <li><a href='mijnbabykaartjes.php'><span>Mijn babykaartjes</span></a></li>
+                  <li class='last'><a href='babykaartjestoevoeg.php'><span>Nieuw babykaartje</span></a></li>
                 </ul>
               </li>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
-                <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
-                </ul>
-              </li>
+              <li class='has-sub'><a href='mapall.php'><span>Babymaps</span></a></li>
             </ul>
           </li>
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
+          <? } else { 
+		     if ($_SESSION['user']['admin'] == '1') { ?> 
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li><a href='admin.php'><span>Admin panel</span></a></li>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
           <? } else { ?>
-          <li><a href='ingelogd.php'><span>Account</span></a></li>
-          <? } ?>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
+          <? }
+		  } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">

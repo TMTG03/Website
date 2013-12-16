@@ -1,4 +1,4 @@
-<? require_once('connection.php') ?>
+<? require_once('connection.php'); ?>
 <!doctype html>
 <html manifest="thema.appcache" class="no-js" lang="en">
 <head>
@@ -126,7 +126,7 @@ $idbabykaart = $_SESSION['id'];
 		
     
 	}
-	/*$opdracht = "SELECT * FROM reacties";
+	$opdracht = "SELECT * FROM reacties";
 
 try {
 			$stmt = $db->prepare($opdracht); 
@@ -138,7 +138,7 @@ try {
 		
 
 		$rij = $stmt->fetchAll();
-		*/
+		
 		
 ?> 
 	<div id="reacties">

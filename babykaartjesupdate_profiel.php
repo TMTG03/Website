@@ -20,6 +20,46 @@ if(empty($_SESSION['user'])) {
 	}
 	
 	$rij = $stmt->fetch();
+
+	//gegevens opvragen uit formulier
+	if(isset($_POST["uploaden"])) {
+		$naam = $_POST["naam"];
+		$tussenvoegsel = $_POST["tussenvoegsel"];	
+		$achternaam = $_POST["achternaam"];	
+		$roepnaam = $_POST["roepnaam"];	
+		$dob = $_POST["geboortedatum"];	
+		$adres = $_POST["adres"];	
+		$postcode = $_POST["postcode"];	
+		$geb = $_POST["geboorteplaats"];
+		$provincie = $_POST["provincieSelect"];
+		$bericht = $_POST["bericht"];
+		$quote = $_POST["quote"];
+		
+		echo $mijndob;
+		//gegevens updaten/aanpassen
+		$opdracht2 = "UPDATE babykaartjes SET 
+		naam='$naam', 
+		tussenvoegsel='$tussenvoegsel', 
+		achternaam='$achternaam', 
+		roepnaam='$roepnaam', 
+		geboortedatum='$dob', 
+		adres='$adres', 
+		postcode='$postcode', 
+		geboorteplaats='$geb',
+		provincie='$provincie', 
+		bericht='$bericht', 
+		quote='$quote' 
+		WHERE id='$id'";
+		try {
+			$stmt = $db->prepare($opdracht2); 
+			$result = $stmt->execute();
+			header('Location: mijnbabykaartjes.php');
+		} catch(PDOException $ex) {
+			// TODO: verwijder de 'die' op uiteindelijke website
+			die("FOUT: " . $ex->getMessage());
+		}
+		
+	}
 ?>
 <!doctype html>
 <html manifest="thema.appcache">
@@ -73,14 +113,13 @@ if(empty($_SESSION['user'])) {
       <nav id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
-          <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
+          <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
             <ul>
-              <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
+              <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
                 <ul>
-                  <li><a href='mijnbabykaartjes.php'><span>Mijn Babykaartjes</span></a></li>
-                  <li><a href='babykaartjestoevoeg.php'><span>Toevoegen</span></a></li>
-                  <li><a href='overzichtaanpas.php'><span>Aanpassen</span></a></li>
-                  <li class='last'><a href='overzichtdelete.php'><span>Verwijderen</span></a></li>
+                  <li><a href='allebabykaartjes.php'><span>Alle babykaartjes</span></a></li>
+                  <li><a href='mijnbabykaartjes.php'><span>Mijn babykaartjes</span></a></li>
+                  <li class='last'><a href='babykaartjestoevoeg.php'><span>Nieuw babykaartje</span></a></li>
                 </ul>
               </li>
               <li class='has-sub'><a href='mapall.php'><span>Babymaps</span></a></li>
@@ -89,9 +128,22 @@ if(empty($_SESSION['user'])) {
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
+          <? } else { 
+		     if ($_SESSION['user']['admin'] == '1') { ?> 
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li><a href='admin.php'><span>Admin panel</span></a></li>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
           <? } else { ?>
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></li>
-          <? } ?>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
+          <? }
+		  } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -179,50 +231,6 @@ if(empty($_SESSION['user'])) {
         </li>
       </ul>
     </form>
-    <? 
-	 //gegevens opvragen uit formulier
-		if(isset($_POST["uploaden"]))
-		{
-			$naam = $_POST["naam"];
-			$tussenvoegsel = $_POST["tussenvoegsel"];	
-			$achternaam = $_POST["achternaam"];	
-			$roepnaam = $_POST["roepnaam"];	
-			$dob = $_POST["geboortedatum"];	
-			$adres = $_POST["adres"];	
-			$postcode = $_POST["postcode"];	
-			$geb = $_POST["geboorteplaats"];
-			$provincie = $_POST["provincieSelect"];
-			$bericht = $_POST["bericht"];
-			$quote = $_POST["quote"];
-			
-			echo $mijndob;
-			//gegevens updaten/aanpassen
-			$opdracht2 = "UPDATE babykaartjes SET 
-			naam='$naam', 
-			tussenvoegsel='$tussenvoegsel', 
-			achternaam='$achternaam', 
-			roepnaam='$roepnaam', 
-			geboortedatum='$dob', 
-			adres='$adres', 
-			postcode='$postcode', 
-			geboorteplaats='$geb',
-			provincie='$provincie', 
-			bericht='$bericht', 
-			quote='$quote' 
-			WHERE id='$id'";
-			echo $opdracht2;
-			try {
-				$stmt = $db->prepare($opdracht2); 
-				$result = $stmt->execute();
-				header('Location: http://tmtg03.ict-lab.nl/website/overzichtaanpas.php');
-			} catch(PDOException $ex) {
-				// TODO: verwijder de 'die' op uiteindelijke website
-				die("FOUT: " . $ex->getMessage());
-			}
-			
-		}
-		?>
-		</div>
   </div>
   <footer id="footer">
     <div class="blauwelijn"></div>

@@ -52,13 +52,13 @@ $(document).ready(function() {
       <nav id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
-          <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
+          <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
             <ul>
-              <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
+              <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
                 <ul>
-                  <li><a href='babykaartjestoevoeg.php'><span>Toevoegen</span></a></li>
-                  <li><a href='#'><span>Aanpassen</span></a></li>
-                  <li class='last'><a href='#'><span>Verwijderen</span></a></li>
+                  <li><a href='allebabykaartjes.php'><span>Alle babykaartjes</span></a></li>
+                  <li><a href='mijnbabykaartjes.php'><span>Mijn babykaartjes</span></a></li>
+                  <li class='last'><a href='babykaartjestoevoeg.php'><span>Nieuw babykaartje</span></a></li>
                 </ul>
               </li>
               <li class='has-sub'><a href='mapall.php'><span>Babymaps</span></a></li>
@@ -67,9 +67,22 @@ $(document).ready(function() {
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
+          <? } else { 
+		     if ($_SESSION['user']['admin'] == '1') { ?> 
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li><a href='admin.php'><span>Admin panel</span></a></li>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
           <? } else { ?>
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></li>
-          <? } ?>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
+          <? }
+		  } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -168,9 +181,9 @@ $(document).ready(function() {
 	$rij = $stmt->fetchAll();
 	?>
     
-    <div id="carousel_vak1"><? echo"<img src='../database/plaatjes/groot/" .  $rij['0']['plaatje'] . "' />" ?></div>
-    <div id="carousel_vak2"><? echo"<img src='../database/plaatjes/groot/" .  $rij['1']['plaatje'] . "' />" ?></div>
-    <div id="carousel_vak3"><? echo"<img src='../database/plaatjes/groot/" .  $rij['2']['plaatje'] . "' />" ?></div>
+    <div id="carousel_vak1"><? echo"<a href='babykaartjes_enkel.php?id=" . $rij['0']['id'] . "'><img src='../database/plaatjes/groot/" .  $rij['0']['plaatje'] . "' width='300' height='200' /></a>" ?></div>
+    <div id="carousel_vak2"><? echo"<a href='babykaartjes_enkel.php?id=" . $rij['1']['id'] . "'><img src='../database/plaatjes/groot/" .  $rij['1']['plaatje'] . "' width='300' height='200' /></a>" ?></div>
+    <div id="carousel_vak3"><? echo"<a href='babykaartjes_enkel.php?id=" . $rij['2']['id'] . "'><img src='../database/plaatjes/groot/" .  $rij['2']['plaatje'] . "' width='300' height='200' /></a>" ?></div>
         <ul>
           <?php
 			foreach($rij as $caroussel) {

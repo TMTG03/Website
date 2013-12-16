@@ -1,6 +1,7 @@
 (function() {
 
 	var $map = $('#map');
+	
 
 	if( $map.length ) {
 
@@ -8,7 +9,7 @@
 			address: 'Heer Bokelweg 255, 3032 AD Rotterdam',
 			zoom: 16,
 			markers: [
-				{ 'address' : 'Heer Bokelweg 255, 3032 AD Rotterdam' }
+				{ 'address' : 'Heer Bokelweg 255, 3032 AD Rotterdam'}
 			]
 		});
 

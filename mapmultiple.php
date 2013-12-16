@@ -3,7 +3,7 @@
 	require_once("connection.php"); //including connection
 
 	//read database >
-	$opdracht = "SELECT * FROM babykaartjes"; 
+	$opdracht = "SELECT * FROM babykaartjes WHERE id < 99999999"; 
 	try {
        		$stmt = $db->prepare($opdracht); 
       		$result = $stmt->execute();
@@ -41,7 +41,7 @@
 				center: SchoolLatlng
 			}
 			//map show
-			var map = new google.maps.Map(document.getElementById('map-canvas2'), mapOptions);
+			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 		
 			//add "main" marker
 			var marker = new google.maps.Marker({
@@ -68,19 +68,21 @@
 				var getLatlng = new google.maps.LatLng(<? echo $lat ?>,<? echo $long ?>);
 							
 				//set content for infowindows in each marker
-				var mijnkaart<? echo $marker['id'];?> = '<div id="content<? echo $marker['id'];?>">'+
+				var mijnkaart<? echo $marker['id'];?> = '<div id="content<? echo $marker['id'];?>" style="width: auto; overflow: hidden">'+
 				'<div id="siteNotice<? echo $marker['id'];?>">'+
 				'</div>'+
+				'<p>&nbsp;</p>'+
 				'<h1 id="firstHeading<? echo $marker['id'];?>" class="firstHeading<? echo $marker['id'];?>"><? echo $marker["roepnaam"]; ?></h1>'+
 				'<div id="bodyContent<? echo $marker['id'];?>">'+
 				'<p>Geboortedatum: <? echo $marker['geboortedatum']; ?></p>'+
 				'<p>Quote: <? echo $marker['quote']; ?></p>'+
+				'<p>&nbsp;</p>'+
 				'</div>'+
 				'</div>';
 				
 				//create infowindow
 				var infowindow<? echo $marker['id'];?> = new google.maps.InfoWindow({
-					content: mijnkaart<? echo $marker['id'];?>
+					content: mijnkaart<? echo $marker['id'];?>,
 				});
 				
 				//create marker

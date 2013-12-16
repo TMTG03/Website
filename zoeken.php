@@ -55,23 +55,20 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <div id="headercolor">
     <div id="container_breedte">
       <header id="logo_plek"><a href="index.php" id="logo"><img width="333" src="img/logo.png" alt="" /></a></header>
-      <nav id="menu">
+       <nav id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
           <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
             <ul>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
+              <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
                 <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
+                  <li><a href='mijnbabykaartjes.php'><span>Mijn Babykaartjes</span></a></li>
+                  <li><a href='babykaartjestoevoeg.php'><span>Toevoegen</span></a></li>
+                  <li><a href='overzichtaanpas.php'><span>Aanpassen</span></a></li>
+                  <li class='last'><a href='overzichtdelete.php'><span>Verwijderen</span></a></li>
                 </ul>
               </li>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
-                <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
-                </ul>
-              </li>
+              <li class='has-sub'><a href='mapall.php'><span>Babymaps</span></a></li>
             </ul>
           </li>
           <li><a href='info.php'><span>Informatie</span></a></li>
@@ -126,7 +123,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			$geslachtcheck = " geslacht LIKE '%".$geslacht."%' OR " . "";	
 		}
 		
-		$opdracht = "SELECT * FROM babykaartjes WHERE" . $naamcheck . $provinciecheck . $dobcheck . $geslachtcheck;
+		$opdracht = "SELECT * FROM babykaartjes WHERE" . $naamcheck . $provinciecheck . $dobcheck . $geslachtcheck . "id < 99999999";
 
 		$opdracht = substr($opdracht, 0, -4);
 		
@@ -141,7 +138,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 		$rij = $stmt->fetchAll();
 		
-			echo "<table border='1' width='700px'>";
+			echo "<table border='1' width='960px'>";
 			echo "<tr>";
 			echo "<td style='font-family: OpenSans-Bold'>Naam</td>";
 			echo "<td style='font-family: OpenSans-Bold'>T.V.</td>";

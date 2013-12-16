@@ -990,7 +990,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 .tabs {
   position: relative;   
-  min-height: 200px; /* This part sucks */
+  min-height: 200px;
   height: 650px;
   clear: both;
   margin: 25px 0;
@@ -1023,7 +1023,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 [type=radio]:checked ~ label {
   background: white;
-  border-bottom: 1px solid white;
   z-index: 2;
 }
 [type=radio]:checked ~ label ~ .content {
@@ -1056,17 +1055,11 @@ input:focus, select:focus, textarea:focus, button:focus {
 	margin-top: 230px;
 	margin-left: 260px
 }
-#map-canvas {
-	width: 200px;
-	height: 360px;
-}
-#map-canvas2 {
-	height: 300px;
-	width: 100%;
-}
-#map-canvas3 {
-	height: 100px;
-	width: 100px;
+#tabs-delen {
+	position: absolute;
+	padding-left: 10px;
+	float: right;
+	margin-left: 658px;
 }
 
 /* UITKLAP Menu voor info */
@@ -1183,6 +1176,15 @@ input:focus, select:focus, textarea:focus, button:focus {
 	background-color: white;
 	z-index:1002;
 	overflow: auto;
+}
+
+/* Omlijning BOX */
+
+#omlijningkleur {
+	padding-top: 0px;
+	width: 970px;
+	height: 690px;
+	background-color:#F00;
 }
 
 

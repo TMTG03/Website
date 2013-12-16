@@ -15,7 +15,7 @@ $sql = "DELETE FROM babykaartjes WHERE id =  $id";
 
 $stmt = $db->prepare($sql);  
 $stmt->execute();
-header('Location: http://tmtg03.ict-lab.nl/website/overzichtdelete.php');
+header('Location: mijnbabykaartjes.php');
 /*$opdracht = "SELECT plaatje FROM babykaartjes WHERE id = $id ";
 try {
 			$stmt2 = $db->prepare($opdracht); 

@@ -1,6 +1,11 @@
 <?
 require_once("connection.php");
 
+if(empty($_SESSION['user'])) { 
+	header("Location: login.php"); 
+	die("Doorlinken naar login.php");
+} 
+
     if(!empty($_POST)) {
         if(empty($_POST['naam'])) {
             $fout_naam = true;
@@ -37,6 +42,9 @@ require_once("connection.php");
 			$sucess = false;
 		} if(empty($_POST['moeder'])) {
             $fout_moeder = true;
+			$sucess = false;
+		} if(empty($_POST['kleurcode'])) {
+			$fout_kleurcode = true;
 			$sucess = false;
 		} if(empty($_FILES['plaatje'])) {
             $fout_plaatje = true;
@@ -123,6 +131,7 @@ require_once("connection.php");
 					plaatje,
 					vader,
 					moeder,
+					kleurcode,
 					datum
 				) VALUES ( 
 					:naam,
@@ -141,6 +150,7 @@ require_once("connection.php");
 					:plaatje,
 					:vader,
 					:moeder,
+					:kleurcode,
 					:datum
 				) 
 			";
@@ -164,6 +174,7 @@ require_once("connection.php");
 				':plaatje' => $databasenaam,
 				':vader' => $_POST['vader'],
 				':moeder' => $_POST['moeder'],
+				':kleurcode' => "#".$_POST['kleurcode'],
 				':datum' => date("Y-m-d")
 			);
 			 
@@ -196,6 +207,7 @@ require_once("connection.php");
 <script type="text/javascript" src="scripts/jquery-1.8.2.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui-1.9.0.custom.min.js"></script>
 <script src="scripts/switcher.js"></script>
+<script type="text/javascript" src="scripts/jscolor.js"></script>
 <script type="text/javascript">
 	// start deze jQuery code als het document geladen is ("document ready")
 	$(document).ready(function() 
@@ -231,31 +243,40 @@ require_once("connection.php");
   <div id="headercolor">
     <div id="container_breedte">
       <header id="logo_plek"><a href="index.php" id="logo"><img width="333" src="img/logo.png" alt="" /></a></header>
-      <nav id="menu">
+       <nav id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
-          <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
+          <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
             <ul>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
+              <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
                 <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
+                  <li><a href='allebabykaartjes.php'><span>Alle babykaartjes</span></a></li>
+                  <li><a href='mijnbabykaartjes.php'><span>Mijn babykaartjes</span></a></li>
+                  <li class='last'><a href='babykaartjestoevoeg.php'><span>Nieuw babykaartje</span></a></li>
                 </ul>
               </li>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
-                <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
-                </ul>
-              </li>
+              <li class='has-sub'><a href='mapall.php'><span>Babymaps</span></a></li>
             </ul>
           </li>
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
+          <? } else { 
+		     if ($_SESSION['user']['admin'] == '1') { ?> 
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li><a href='admin.php'><span>Admin panel</span></a></li>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
           <? } else { ?>
-          <li><a href='ingelogd.php'><span>Account</span></a></li>
-          <? } ?>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
+          <? }
+		  } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -306,6 +327,8 @@ require_once("connection.php");
     U heeft waarschijnlijk een verkeerd bestand (geen plaatje) geselecteerd om te uploaden <br />
     <? } if (($fout_vader) || ($fout_moeder)) { ?>
     U hebt geen vader of moeder gekozen<br />
+    <? } if ($fout_kleurcode) { ?>
+    U heeft geen kleurcode geselecteerd<br />
     <? } if ($sucess) { ?>
     Uw babykaartje is sucessvol geupload!<br />
     <? } ?>
@@ -393,6 +416,10 @@ require_once("connection.php");
         <li>
           <label for="moeder">Moeder:</label>
           <input type="text" name="moeder" id="moeder" class="moeder" value="<? echo htmlentities($_POST['moeder'], ENT_QUOTES, 'UTF-8'); ?>" />
+        </li>
+        <li>
+          <label for="color">Kaart kleur:</label>
+          <input type="text" name="kleurcode" id="color" class="color" value="<? echo htmlentities($_POST['kleurcode'], ENT_QUOTES, 'UTF-8'); ?>" />
         </li>
         <li>
         	

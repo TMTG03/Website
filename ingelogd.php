@@ -27,31 +27,40 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
   <div id="headercolor">
     <div id="container_breedte">
       <header id="logo_plek"><a href="index.php" id="logo"><img width="333" src="img/logo.png" alt="" /></a></header>
-      <nav id="menu">
+       <nav id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
-          <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
+          <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
             <ul>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
+              <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
                 <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
+                  <li><a href='allebabykaartjes.php'><span>Alle babykaartjes</span></a></li>
+                  <li><a href='mijnbabykaartjes.php'><span>Mijn babykaartjes</span></a></li>
+                  <li class='last'><a href='babykaartjestoevoeg.php'><span>Nieuw babykaartje</span></a></li>
                 </ul>
               </li>
-              <li class='has-sub'><a href='#'><span>tekst</span></a>
-                <ul>
-                  <li><a href='#'><span>tekst</span></a></li>
-                  <li class='last'><a href='#'><span>tekst</span></a></li>
-                </ul>
-              </li>
+              <li class='has-sub'><a href='mapall.php'><span>Babymaps</span></a></li>
             </ul>
           </li>
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
+          <? } else { 
+		     if ($_SESSION['user']['admin'] == '1') { ?> 
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li><a href='admin.php'><span>Admin panel</span></a></li>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
           <? } else { ?>
-          <li><a href='ingelogd.php'><span>Account</span></a></li>
-          <? } ?>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+            <ul>
+              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
+            </ul>
+          </li>
+          <? }
+		  } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -60,7 +69,6 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
           <div id="styleswitchvak3"><a href="#" onclick="setActiveStyleSheet('blauwroze'); return false;"><img src="img/clear.png" height="20" width="20" alt="" /></a></div>
         </div>
       </nav>
-    </div>
   </div>
   <div class="blauwelijn"></div>
   <div id="tussen_balk"></div>
@@ -275,6 +283,12 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
 		  </section>
 		  <section id="babykaartmaps">
 		      <h2><a href="#babykaartmaps">Baby Maps</a></h2>
+		      <style>
+              #map-canvas {
+              width: auto;
+              height: 300px;
+              }
+              </style>
 		      <p><? require_once('mapmultiple.php'); ?></p>
               <div id="map-canvas"></div>
 		  </section>
