@@ -3,7 +3,7 @@
 	require_once("connection.php"); //including connection
 
 	//read database >
-	$opdracht = "SELECT * FROM babykaartjes WHERE id < 99999999"; 
+	$opdracht = "SELECT * FROM babykaartjes"; 
 	try {
        		$stmt = $db->prepare($opdracht); 
       		$result = $stmt->execute();

@@ -74,7 +74,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <? } else { ?>
+          <? } else { ?> ?>
           <li><a href='ingelogd.php'><span>Account</span></a></li>
           <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
@@ -123,7 +123,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			$geslachtcheck = " geslacht LIKE '%".$geslacht."%' OR " . "";	
 		}
 		
-		$opdracht = "SELECT * FROM babykaartjes WHERE" . $naamcheck . $provinciecheck . $dobcheck . $geslachtcheck . "id < 99999999";
+		$opdracht = "SELECT * FROM babykaartjes WHERE" . $naamcheck . $provinciecheck . $dobcheck . $geslachtcheck;
 
 		$opdracht = substr($opdracht, 0, -4);
 		
