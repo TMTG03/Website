@@ -37,22 +37,13 @@
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <? } else { 
-		     if ($_SESSION['user']['admin'] == '1') { ?> 
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
-            <ul>
-              <li><a href='admin.php'><span>Admin panel</span></a></li>
-              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
-            </ul>
-          </li>
           <? } else { ?>
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a>
             <ul>
               <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
             </ul>
           </li>
-          <? }
-		  } ?>
+          <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">

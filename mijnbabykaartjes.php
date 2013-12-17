@@ -43,22 +43,13 @@ if(empty($_SESSION['user'])) {
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <? } else { 
-		     if ($_SESSION['user']['admin'] == '1') { ?> 
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
-            <ul>
-              <li><a href='admin.php'><span>Admin panel</span></a></li>
-              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
-            </ul>
-          </li>
           <? } else { ?>
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a>
             <ul>
               <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
             </ul>
           </li>
-          <? }
-		  } ?>
+          <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -101,8 +92,8 @@ if(empty($_SESSION['user'])) {
 			echo "<td style='font-family: OpenSans-Bold'>Achternaam</td>";
 			echo "<td style='font-family: OpenSans-Bold'>Roepnaam</td>";
 			echo "<td style='font-family: OpenSans-Bold'>Geboortedatum</td>";
-			echo "<td style='font-family: OpenSans-Bold'>Bewerken</td>";
-			echo "<td style='font-family: OpenSans-Bold'>Verwijderen</td>";
+			echo "<td align='center' style='font-family: OpenSans-Bold'>Bewerken</td>";
+			echo "<td align='center' style='font-family: OpenSans-Bold'>Verwijderen</td>";
 			echo "</tr>";
 			echo "<tr>";
 			echo "<td>&nbsp;</td>";
@@ -123,8 +114,8 @@ if(empty($_SESSION['user'])) {
 				echo "<td height='20px'>" . $persoon['achternaam'] . "</td>";
 				echo "<td height='20px'>" . $persoon['roepnaam'] . "</td>";
 				echo "<td height='20px'>" . $persoon['geboortedatum'] . "</td>";
-				echo "<td height='20px'><a href='babykaartjesupdate_profiel.php?id=" . $hetid . "'><img src='img/edit.png' alt='Bewerken' width='20%'/></a></td>";
-				echo "<td height='20px'><a href='babykaartjesdelete_profiel.php?id=" . $hetid . "'><img src='img/edit.png' alt='Verwijderen' width='20%'/></a></td>";
+				echo "<td height='20px' align='center'><a href='babykaartjesupdate_profiel.php?id=" . $hetid . "'><img src='img/edit.png' alt='Bewerken' width='20%'/></a></td>";
+				echo "<td height='20px' align='center'><a href='babykaartjesdelete_profiel.php?id=" . $hetid . "'><img src='img/del.png' alt='Verwijderen' width='17%'/></a></td>";
 				echo "</tr>";
 			}
 			echo "</table>";

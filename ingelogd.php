@@ -45,22 +45,13 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <? } else { 
-		     if ($_SESSION['user']['admin'] == '1') { ?> 
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
-            <ul>
-              <li><a href='admin.php'><span>Admin panel</span></a></li>
-              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
-            </ul>
-          </li>
           <? } else { ?>
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a>
             <ul>
               <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
             </ul>
           </li>
-          <? }
-		  } ?>
+          <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -70,12 +61,13 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
         </div>
       </nav>
   </div>
+</div>
   <div class="blauwelijn"></div>
   <div id="tussen_balk"></div>
   <div id="titelbalk">Mijn profiel</div>
   <hr class="schaduw_lijn">
   </hr>
-  <div id="container_content"> <br/>
+  <div id="container_content">
   	<div class="uitklappen vertical">
     
     	  <section id="mijnprofiel">
@@ -142,6 +134,28 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
 		      <p><br />
               	<?
                 $id = $_SESSION['user']['id'];
+				
+				if(isset($_REQUEST["aanpasknop"]))
+				{
+					$mijnid = $_REQUEST["pasveld"];	
+					$mijnnaam = $_REQUEST["nmveld"];
+					$mijndob = $_REQUEST["dobveld"];
+					$mijnpro = $_REQUEST["proveld"];
+					$mijnem = $_REQUEST["emveld"];
+					
+					$opdracht2 = "UPDATE users SET naam='$mijnnaam', geboortedatum='$mijndob', provincie='$mijnpro', email='$mijnem' WHERE id='$id'";
+					
+					
+					try {
+						$stmt = $db->prepare($opdracht2); 
+						$result = $stmt->execute();
+					} catch(PDOException $ex) {
+						// TODO: verwijder de 'die' op uiteindelijke website
+						die("FOUT: " . $ex->getMessage());
+					}
+					$headerto = true;
+				}
+				
                 $opdracht = "SELECT * FROM users WHERE id='$id'";	
 				try {
 					$stmt = $db->prepare($opdracht); 
@@ -182,33 +196,11 @@ header("Location: http://tmtg03.ict-lab.nl/website/ingelogd.php#profielaanpas");
 					  </tr>
 					  <tr>
 					    <td>&nbsp;</td>
-					    <td><input class='buttonzoek' style='margin-left: -2px' type='submit' name='aanpasknop' value='Aanpassen' /></td>
+					    <td><a href="ingelogd.php"><input class='buttonzoek' style='margin-left: -2px' type='submit' name='aanpasknop' value='Aanpassen' /></a></td>
 					  </tr>
 					</table>
 				  </FORM>
-                <?
-				if(isset($_REQUEST["aanpasknop"]))
-				{
-					$mijnid = $_REQUEST["pasveld"];	
-					$mijnnaam = $_REQUEST["nmveld"];
-					$mijndob = $_REQUEST["dobveld"];
-					$mijnpro = $_REQUEST["proveld"];
-					$mijnem = $_REQUEST["emveld"];
-					
-					echo $mijndob;
-					
-					$opdracht2 = "UPDATE users SET naam='$mijnnaam', geboortedatum='$mijndob', provincie='$mijnpro', email='$mijnem' WHERE id='$id'";
-					try {
-						$stmt = $db->prepare($opdracht2); 
-						$result = $stmt->execute();
-						echo "hetwerkt";
-					} catch(PDOException $ex) {
-						// TODO: verwijder de 'die' op uiteindelijke website
-						die("FOUT: " . $ex->getMessage());
-					}
-					$headerto = true;
-				}
-				?>
+
               </p>
 		  </section>
 		  <section id="babytoevoeg">

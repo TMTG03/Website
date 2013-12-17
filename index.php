@@ -49,7 +49,7 @@ $(document).ready(function() {
   <div id="headercolor">
     <div id="container_breedte">
       <header id="logo_plek"><a href="index.php" id="logo"><img width="333" src="img/logo.png" alt="" /></a></header>
-      <nav id="menu">
+       <nav id="menu">
         <ul>
           <li class='active'><a href='index.php'><span>Home</span></a></li>
           <li class='has-sub'><a href='allebabykaartjes.php'><span>Babykaartjes</span></a>
@@ -67,22 +67,13 @@ $(document).ready(function() {
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <? } else { 
-		     if ($_SESSION['user']['admin'] == '1') { ?> 
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
-            <ul>
-              <li><a href='admin.php'><span>Admin panel</span></a></li>
-              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
-            </ul>
-          </li>
           <? } else { ?>
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a>
             <ul>
               <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
             </ul>
           </li>
-          <? }
-		  } ?>
+          <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -99,20 +90,20 @@ $(document).ready(function() {
       <ul>
         <li> <img src="img/slides/1.jpg" alt="" />
           <div class="slide-desc">
-            <h2>Baby 1</h2>
-            <p>Beschrijving</p>
+            <h2>Henk</h2>
+            <p>Ik lach naar je!</p>
           </div>
         </li>
         <li><img src="img/slides/2.jpg" alt="" />
           <div class="slide-desc">
-            <h2>Baby 2</h2>
-            <p>Beschrijving</p>
+            <h2>Marloes</h2>
+            <p>Kijk mij hier zitten!</p>
           </div>
         </li>
         <li><img src="img/slides/3.jpg" alt="" />
           <div class="slide-desc">
-            <h2>Baby 3</h2>
-            <p>Beschrijving</p>
+            <h2>Tim</h2>
+            <p>Het is bijna kerst!</p>
           </div>
         </li>
       </ul>
@@ -176,7 +167,7 @@ $(document).ready(function() {
       </div>
     </form>
   </div>
-  <div id="container_content" style="height: 700px">
+  <div id="container_content" style="height: 750px">
          <?
 	$rij = $stmt->fetchAll();
 	?>
@@ -196,10 +187,21 @@ $(document).ready(function() {
 			?>
             </div>
           </li>
+          
           <?php
 			}
           ?>
-	      
+          </ul>        
+          <div id="txt_content">
+          <p>
+          Welkom op de website van babyberichten.nl<br/>
+Op deze website kunt u de volgende dingen in een hand omdraai vinden, namelijk alle babykaartjes bij u in de buurt maar ook van andere provincies. Door ons eenvoudige zoek systeem kunt u zoeken naar ondermeer de naam van de geboren baby, 
+geboortedatum, geslacht maar natuurlijk ook de provincie waar de baby in geboren is. Wilt u meer informatie over bepaalde zwangerschapsonderwerpen of webshops waar u van alles kunt kopen voor uw kleine poppetje! dan kunt u natuurlijk terecht op onze informatie pagina. Op onze website kunt u zich ook aanmelden voor de nieuwsbrief en ook registreren om zelf babykaartjes te uploaden!
+</p>
+          </div>
+          </div>
+
+
   <footer id="footer">
     <div class="blauwelijn"></div>
     <div id="footer_content">

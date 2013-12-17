@@ -1,9 +1,9 @@
 <? require_once('connection.php');
 
-if(empty($_SESSION['user'])) { 
-	header("Location: login.php"); 
-	die("Doorlinken naar login.php");
-}
+//if(empty($_SESSION['user'])) { 
+//	header("Location: login.php"); 
+//	die("Doorlinken naar login.php");
+//}
 
 $id = $_GET["id"];
 $opdracht = "SELECT
@@ -184,22 +184,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <? } else { 
-		     if ($_SESSION['user']['admin'] == '1') { ?> 
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
-            <ul>
-              <li><a href='admin.php'><span>Admin panel</span></a></li>
-              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
-            </ul>
-          </li>
           <? } else { ?>
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a>
             <ul>
               <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
             </ul>
           </li>
-          <? }
-		  } ?>
+          <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -215,7 +206,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <div id="titelbalk">Geboorte kaartje</div>
   <hr class="schaduw_lijn">
   </hr>
-  <div id="container_content"> <br/>
+  <div id="container_content2"> <br/>
     <br/>
     <div class="tabs">
       <div class="tab">
@@ -234,14 +225,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <div class="tab">
         <input type="radio" id="tab-2" name="tab-group-1">
         <label for="tab-2" style="border-top: 3px solid <? echo $rij['kleurcode'] ?>; border-bottom: 3px solid <? echo $rij['kleurcode'] ?>; border-left: 2px solid <? echo $rij['kleurcode'] ?>; border-right: 2px solid <? echo $rij['kleurcode'] ?>;"">Info</label>
-        <div class="content" style="border: 3px solid <? echo $rij['kleurcode'] ?>;"> Informatie
+        <div class="content" style="border: 3px solid <? echo $rij['kleurcode'] ?>;">
+        
           <div class="tabs-informatie-content"> test </div>
         </div>
       </div>
       <div class="tab">
         <input type="radio" id="tab-3" name="tab-group-1">
         <label for="tab-3" style="border-top: 3px solid <? echo $rij['kleurcode'] ?>; border-bottom: 3px solid <? echo $rij['kleurcode'] ?>; border-left: 2px solid <? echo $rij['kleurcode'] ?>; border-right: 3px solid <? echo $rij['kleurcode'] ?>;">Bericht</label>
-        <div class="content" style="border: 3px solid <? echo $rij['kleurcode'] ?>;"> Quote voor de baby </div>
+        <div class="content" style="border: 3px solid <? echo $rij['kleurcode'] ?>;"> 
+        <? require_once("reacties.php"); ?> 
+        
+        </div>
       </div>
     </div>
   </div>
