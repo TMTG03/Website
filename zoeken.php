@@ -1,10 +1,4 @@
-<? require_once('connection.php');
-
-if(empty($_SESSION['user'])) { 
-	header("Location: login.php"); 
-	die("Doorlinken naar login.php");
-}
-?>
+<? require_once('connection.php'); ?>
 <!doctype html>
 <html manifest="thema.appcache">
 <head>
