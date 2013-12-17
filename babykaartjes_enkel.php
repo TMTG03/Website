@@ -1,9 +1,9 @@
 <? require_once('connection.php');
 
-//if(empty($_SESSION['user'])) { 
-//	header("Location: login.php"); 
-//	die("Doorlinken naar login.php");
-//}
+if(empty($_SESSION['user'])) { 
+	header("Location: login.php"); 
+	die("Doorlinken naar login.php");
+}
 
 $id = $_GET["id"];
 $opdracht = "SELECT
@@ -227,7 +227,43 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <label for="tab-2" style="border-top: 3px solid <? echo $rij['kleurcode'] ?>; border-bottom: 3px solid <? echo $rij['kleurcode'] ?>; border-left: 2px solid <? echo $rij['kleurcode'] ?>; border-right: 2px solid <? echo $rij['kleurcode'] ?>;"">Info</label>
         <div class="content" style="border: 3px solid <? echo $rij['kleurcode'] ?>;">
         
-          <div class="tabs-informatie-content"> test </div>
+          <div class="tabs-informatie-content">
+           <table width="750" border="1">
+  <tr>
+    <td height="30px">Naam:</td>
+    <td height="30px"><? echo $rij['naam'] . " " . $rij['tussenvoegsel'] . " " . $rij['achternaam']; ?></td>
+  </tr>
+  <tr>
+    <td height="30px">Roepnaam:</td>
+    <td height="30px"><? echo $rij['roepnaam'] ?></td>
+  </tr>
+  <tr>
+    <td height="30px">Geboortedatum:</td>
+    <td height="30px"><? echo date("d-m-Y", strtotime($rij['geboortedatum'])) ?></td>
+  </tr>
+  <tr>
+    <td height="30px">Adres:</td>
+    <td height="30px"><? echo $rij['adres'] . " " . $rij['postcode'] ?></td>
+  </tr>
+  <tr>
+    <td height="30px">Geboorteplaats:</td>
+    <td height="30px"><? echo $rij['geboorteplaats'] ?></td>
+  </tr>
+  <tr>
+    <td height="30px">Geslacht:</td>
+    <td height="30px"><? echo $rij['geslacht'] ?></td>
+  </tr>
+   <tr>
+    <td height="30px">Vader:</td>
+    <td height="30px"><? echo $rij['vader'] ?></td>
+  </tr>
+   <tr>
+    <td height="30px">Moeder:</td>
+    <td height="30px"><? echo $rij['moeder'] ?></td>
+  </tr>
+</table>
+
+          </div>
         </div>
       </div>
       <div class="tab">
