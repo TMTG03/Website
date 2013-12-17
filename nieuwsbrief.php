@@ -1,92 +1,65 @@
 <?
-	require_once("connection.php");
-	//datum ophalen
-	$todayh = getdate(); 
-	$d = $todayh[mday];
-	$m = $todayh[mon];
-	$y = $todayh[year];
-	$datum = ("$y-$m-$d");
-	
-	
-	$opdracht = "SELECT email FROM users";
-	
+require_once("connection.php");
 
+$opdracht = "SELECT 
+				 naam, email, provincie
+			 FROM
+				 users
+			 WHERE
+				 nieuwsbrief='1'";
+
+try {
+	$stmt = $db->prepare($opdracht); 
+	$result = $stmt->execute();
+} catch(PDOException $ex) {
+	// TODO: verwijder de 'die' op uiteindelijke website
+	die("FOUT: " . $ex->getMessage()); 
+}
+
+$rij = $stmt->fetchAll();
+
+foreach($rij as $persoon) {
+	
+    $provincie = $persoon['provincie'];
+	$datum = date("Y-m-d");
+	$opdracht = "SELECT 
+					 *
+				 FROM
+					 babykaartjes
+				 WHERE
+					 provincie='$provincie'
+				 AND
+				     datum='$datum'";
 	
 	try {
-			$stmt = $db->prepare($opdracht); 
-			$result = $stmt->execute();
-		} catch(PDOException $ex) {
-			// TODO: verwijder de 'die' op uiteindelijke website
-			die("FOUT: " . $ex->getMessage()); 
-		}
-		$mail = $stmt->fetchAll();
-		
-	$opdracht2 = "SELECT * FROM babykaartjes WHERE datum='$datum'";
-	try {
-			$stmt2 = $db->prepare($opdracht2); 
-			$result = $stmt2->execute();
-		} catch(PDOException $ex) {
-			// TODO: verwijder de 'die' op uiteindelijke website
-			die("FOUT: " . $ex->getMessage()); 
-		}
-		$rij = $stmt2->fetchAll();
-
+		$stmt = $db->prepare($opdracht); 
+		$result = $stmt->execute();
+	} catch(PDOException $ex) {
+		// TODO: verwijder de 'die' op uiteindelijke website
+		die("FOUT: " . $ex->getMessage()); 
+	}
 	
-		
-		
-		
-		foreach($mail as $email)
-		{
-			$to = $email['email'];
-			$subject = "Nieuwsbrief";
-			$headers = "babyberichten@ict-lab.nl";
-			$inhoud_mail = "===================================================\n";
-			$inhoud_mail .= "De nieuwsbrief\n";
-			$inhoud_mail .= "===================================================\n\n";
-			  
-			$inhoud_mail .= "Geboorte kaarten van vandaag: \n";
-			
-			foreach($rij as $kaartje)
-			{
-				$inhoud_mail .= "===================================================\n";
-				$inhoud_mail .=	"Naam: ". $kaartje['naam'] . "\n";
-				$inhoud_mail .=	"Tussenvoegsel: ". $kaartje['tussenvoegsel'] . "\n";
-				$inhoud_mail .=	 "Achternaam: ". $kaartje['achternaam'] . "\n";
-				$inhoud_mail .=	 "Roepnaam: ". $kaartje['roepnaam'] . "\n";
-				$inhoud_mail .=	 "Geboortedatum: ". $kaartje['geboortedatum'] . "\n";
-				$inhoud_mail .=	 "Adres: ". $kaartje['adres'] . "\n";
-				$inhoud_mail .=	 "Postcode: ". $kaartje['postcode'] . "\n";
-				$inhoud_mail .=	 "Geboorteplaats: ". $kaartje['geboorteplaats'] . "\n";
-				$inhoud_mail .=	 "Geslacht: ". $kaartje['geslacht'] . "\n";
-				$inhoud_mail .=	 "Bericht: ". $kaartje['bericht'] . "\n";
-				$inhoud_mail .=	 "<a href=Klik hier om het kaartje te bekijken: ". $kaartje['bericht'] . "\n";
-				$inhoud_mail .= "===================================================\n";
-					
-			}
-				
-			
-				
-			
-	 
-		$headers = stripslashes($headers);
-		$headers = str_replace('\n', '', $headers); // Verwijder \n
-		$headers = str_replace("\"", "\\\"", str_replace("\\", "\\\\", $headers)); // Slashes van quotes
+	$rij2 = $stmt->fetchAll();
+	
+	if (count($rij2) > 0) {
+		$inhoud_mail = "Hallo " . htmlspecialchars($persoon['naam']) . "! \n\n";
+		$inhoud_mail .= "Er zijn vandaag " . count($rij2) . " nieuwe babykaartjes gepost in uw provincie \n";
+		$inhoud_mail .= "De volgende baby kaartjes zijn vandaag gepost,\n\n";
+		foreach($rij2 as $baby) {
+			$inhoud_mail .= $baby['vader'] . " en " . $baby['moeder'] . " hebben een baby kaartjes gepost voor " . $baby['naam'] . " die geboren is te " . $baby['geboorteplaats'] . "\n";
+		}
+		$inhoud_mail .= "\n";
+		$inhoud_mail .= "Dit bericht is automatisch gegenereerd door babyberichten.nl\n";
+		$inhoud_mail .= "U kunt zich afmelden voor deze berichten door de nieuwsbrief voorkeur in uw profiel te wijzigen \n";
 		  
-			mail($to,$subject,$inhoud_mail,$headers);
-		}
-		echo "$inhoud_mail <br>";
-		echo "$to <br>";
-		echo "$datum <br>";
+		$headers = 'From: babyberichten.nl <noreply@babyberichten.nl>';
 		
+		$inhoud_mail = str_replace("($provincie)", "", $inhoud_mail);
 		
-
-
-
-		
-
-  
+		print_r($inhoud_mail);
 	
-   
+		mail($persoon['email'], 'Nieuwe baby kaartjes gepost', $inhoud_mail, $headers);
+	}
 
-
-?>
+}
+?>  
