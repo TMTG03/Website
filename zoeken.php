@@ -56,10 +56,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
             <ul>
               <li class='has-sub'><a href='#'><span>Babykaartjes</span></a>
                 <ul>
-                  <li><a href='mijnbabykaartjes.php'><span>Mijn Babykaartjes</span></a></li>
-                  <li><a href='babykaartjestoevoeg.php'><span>Toevoegen</span></a></li>
-                  <li><a href='overzichtaanpas.php'><span>Aanpassen</span></a></li>
-                  <li class='last'><a href='overzichtdelete.php'><span>Verwijderen</span></a></li>
+                  <li><a href='allebabykaartjes.php'><span>Alle babykaartjes</span></a></li>
+                  <li><a href='mijnbabykaartjes.php'><span>Mijn babykaartjes</span></a></li>
+                  <li class='last'><a href='babykaartjestoevoeg.php'><span>Nieuw babykaartje</span></a></li>
                 </ul>
               </li>
               <li class='has-sub'><a href='mapall.php'><span>Babymaps</span></a></li>
@@ -132,16 +131,17 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 		$rij = $stmt->fetchAll();
 		
-			echo "<table border='1' width='960px'>";
+			echo "<table border='1' width='1100px'>";
 			echo "<tr>";
+			echo "<td style='font-family: OpenSans-Bold'>Plaatje</td>";
 			echo "<td style='font-family: OpenSans-Bold'>Naam</td>";
 			echo "<td style='font-family: OpenSans-Bold'>T.V.</td>";
 			echo "<td style='font-family: OpenSans-Bold'>Achternaam</td>";
-			echo "<td style='font-family: OpenSans-Bold'>Provincie</td>";
-			echo "<td style='font-family: OpenSans-Bold'>Geslacht</td>";
-			echo "<td style='font-family: OpenSans-Bold'>Locatie</td>";
+			echo "<td style='font-family: OpenSans-Bold'>Roepnaam</td>";
+			echo "<td style='font-family: OpenSans-Bold'>Geboortedatum</td>";
 			echo "</tr>";
 			echo "<tr>";
+			echo "<td>&nbsp;</td>";
 			echo "<td>&nbsp;</td>";
 			echo "<td>&nbsp;</td>";
 			echo "<td>&nbsp;</td>";
@@ -152,14 +152,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		foreach($rij as $persoon){
 			
 			$hetid = $persoon['id'];
-			$hetgoedeid = $hetid.$persoon['id'];
 			echo "<tr>";
-			echo "<td height='20px'>" . $persoon['naam'] . "</td>";
-			echo "<td height='20px'>" . $persoon['tussenvoegsel'] . "</td>";
-			echo "<td height='20px'>" . $persoon['achternaam'] . "</td>";
-			echo "<td height='20px'>" . $persoon['provincie'] . "</td>";
-			echo "<td height='20px'>" . $persoon['geslacht'] . "</td>";
-			echo "<td height='20px'>" ?><p><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src='img/map.png'/><? $idzoeken.$persoon['id'] = $persoon['id']; ?></a></p><? "</td>";
+			// hier worden alle eigenschappen van de persoon weergeven in een tabel
+			echo "<td height='20px'>" . "<a href='babykaartjes_enkel.php?id=" . $persoon['id'] . "'><img src='../database/plaatjes/klein/" .  $persoon['plaatje'] . "' width='100' height='100' /></a> </td>";
+			echo "<td height='10px'>" . $persoon['naam'] . "</td>";
+			echo "<td height='10px'>" . $persoon['tussenvoegsel'] . "</td>";
+			echo "<td height='10px'>" . $persoon['achternaam'] . "</td>";
+			echo "<td height='10px'>" . $persoon['roepnaam'] . "</td>";
+			echo "<td height='10px'>" . date("d-m-Y", strtotime($persoon['geboortedatum'])) . "</td>";
 			echo "</tr>";
 		}
 			echo "</table>";
