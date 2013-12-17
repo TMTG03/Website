@@ -60,62 +60,63 @@ if(!empty($_POST)) {
 		// filteren of de username al bestaat of niet
 		if($row) { 
 			$double_username = true;
-		}
-		// insert query
-		$query = " 
-			INSERT INTO users ( 
-				gebruikersnaam,
-				wachtwoord,
-				salt, 
-				naam,
-				geboortedatum,
-				provincie,
-				geslacht,
-				email
-			) VALUES ( 
-				:username,
-				:password, 
-				:salt, 
-				:name,
-				:dob,
-				:provincie,
-				:geslacht,
-				:email
-			) 
-		";
-		// random salt generen en password encrypten
-		$salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647)); 
-		$password = hash('sha256', $_POST['password'] . $salt);
-		for($round = 0; $round < 65536; $round++) { 
-			$password = hash('sha256', $password . $salt); 
-		}
-		// geboorte datum omgooien naar database formaat
-		$dob = date("Y-m-d", strtotime($_POST['dob']));
-		// PDO variable koppelen
-		$query_params = array(
-			':name' => $_POST['name'],
-			':username' => $_POST['username'], 
-			':password' => $password, 
-			':salt' => $salt,
-			':dob' => $dob,
-			':email' => $_POST['email'],
-			':provincie' => $_POST['provincieSelect'],
-			':geslacht' => $_POST['MVselect']
-		);
-		// query uitvoeren
-		try {
-			$stmt = $db->prepare($query); 
-			$result = $stmt->execute($query_params);
-		} catch(PDOException $ex) {
-			// TODO: verwijder de 'die' op uiteindelijke website
-			die("FOUT: " . $ex->getMessage()); 
-			$PDOException = true;
-		}
-		if (!$PDOException) {
-			$sucess = true;
-			// doorlinken naar het script dat de activatie email verstuurd
-			header("Location: activation_mail.php?registreren=true&gebruiker=" . htmlspecialchars($_POST['username']) . "&email=" . htmlspecialchars($_POST['email'])); 
-			die("doorlinken naar activation_mail.php");
+		} else {
+			// insert query
+			$query = " 
+				INSERT INTO users ( 
+					gebruikersnaam,
+					wachtwoord,
+					salt, 
+					naam,
+					geboortedatum,
+					provincie,
+					geslacht,
+					email
+				) VALUES ( 
+					:username,
+					:password, 
+					:salt, 
+					:name,
+					:dob,
+					:provincie,
+					:geslacht,
+					:email
+				) 
+			";
+			// random salt generen en password encrypten
+			$salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647)); 
+			$password = hash('sha256', $_POST['password'] . $salt);
+			for($round = 0; $round < 65536; $round++) { 
+				$password = hash('sha256', $password . $salt); 
+			}
+			// geboorte datum omgooien naar database formaat
+			$dob = date("Y-m-d", strtotime($_POST['dob']));
+			// PDO variable koppelen
+			$query_params = array(
+				':name' => $_POST['name'],
+				':username' => $_POST['username'], 
+				':password' => $password, 
+				':salt' => $salt,
+				':dob' => $dob,
+				':email' => $_POST['email'],
+				':provincie' => $_POST['provincieSelect'],
+				':geslacht' => $_POST['MVselect']
+			);
+			// query uitvoeren
+			try {
+				$stmt = $db->prepare($query); 
+				$result = $stmt->execute($query_params);
+			} catch(PDOException $ex) {
+				// TODO: verwijder de 'die' op uiteindelijke website
+				die("FOUT: " . $ex->getMessage()); 
+				$PDOException = true;
+			}
+			if (!$PDOException) {
+				$sucess = true;
+				// doorlinken naar het script dat de activatie email verstuurd
+				header("Location: activation_mail.php?registreren=true&gebruiker=" . htmlspecialchars($_POST['username']) . "&email=" . htmlspecialchars($_POST['email'])); 
+				die("doorlinken naar activation_mail.php");
+			}
 		}
 	}
 }
@@ -158,22 +159,13 @@ if(!empty($_POST)) {
           <li><a href='info.php'><span>Informatie</span></a></li>
           <? if(empty($_SESSION['user'])) { ?>
           <li><a href='login.php'><span>Inloggen</span></a></li>
-          <? } else { 
-		     if ($_SESSION['user']['admin'] == '1') { ?> 
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
-            <ul>
-              <li><a href='admin.php'><span>Admin panel</span></a></li>
-              <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
-            </ul>
-          </li>
           <? } else { ?>
-          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a></a>
+          <li class='has-sub'><a href='ingelogd.php'><span>Account</span></a>
             <ul>
               <li class='last'><a href='logout.php'><span>Uitloggen</span></a></li>
             </ul>
           </li>
-          <? }
-		  } ?>
+          <? } ?>
           <li class='last'><a href='contact.php'><span>Contact</span></a></li>
         </ul>
         <div id="styleswitchen">
@@ -191,7 +183,7 @@ if(!empty($_POST)) {
   </hr>
   <br/>
   <br/>
-  <div id="container_content">
+  <div id="container_content2">
     <? if (isset($_GET['registreren'])) { ?>
       U bent succesvol geregistreerd!<br />
       <br />
